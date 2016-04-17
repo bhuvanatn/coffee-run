@@ -1,0 +1,10 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+nav a {
+  display: inline-block;
+  font-size: 20px;
+}
+nav {
+  text-align: right;
+}
