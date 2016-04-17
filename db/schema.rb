@@ -16,6 +16,24 @@ ActiveRecord::Schema.define(version: 20160417074946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.integer  "phone_number"
+    t.money    "balance",      scale: 2
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.money    "price",       scale: 2
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "customer_location_id"
@@ -23,8 +41,8 @@ ActiveRecord::Schema.define(version: 20160417074946) do
     t.integer  "driver_location_id"
     t.integer  "store_id"
     t.money    "total_price",          scale: 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "users", force: :cascade do |t|

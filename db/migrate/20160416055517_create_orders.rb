@@ -1,4 +1,4 @@
-class Orders < ActiveRecord::Migration
+class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
       t.integer :customer_id
@@ -7,7 +7,7 @@ class Orders < ActiveRecord::Migration
       t.integer :driver_location_id
       t.integer :store_id
       t.money :total_price
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
