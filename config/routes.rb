@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :line_items
   root to: 'welcome#index'
-  
-  resources :users, :only => [:new, :create, :index, :update]
+
+  resources :users, :only => [:new, :create, :index, :update, :show]
 
   get '/users/edit' => 'users#edit', :as => 'edit_user'
   get '/signup' => 'users#new'
@@ -12,6 +12,5 @@ Rails.application.routes.draw do
 
   resources :items
   resources :orders
-  resources :customers
 
   end
