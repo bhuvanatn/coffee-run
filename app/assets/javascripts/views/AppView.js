@@ -9,9 +9,7 @@ app.AppView = Backbone.View.extend({
       render: function() {
         var appViewTemplate = $('#appViewTemplate').html();
         this.$el.html(appViewTemplate);
-        app.stores.fetch().done( function() {
-             console.log(app.Users.toJSON());
-        });
+        console.log(app.stores)
       },
 
       showCafes: function(){
