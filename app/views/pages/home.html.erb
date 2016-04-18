@@ -36,4 +36,30 @@
 <script type="text/template" id='MenuViewTemplate'>
         <h1>Menu List View</h1>
 
+        <h3>Store Name: <%%= name %></h3>
+        <h3>Address: <%%= address %></h3>
+
+        <ul id='items-list'></ul>
+
+</script>
+
+<script type="text/template" id='ItemViewTemplate'>
+
+    <li class="item">
+        <p>Name: <%%= name %></p>
+        <p>Price: <%%= price %></p>
+        <p>Description: <%%= description %></p>
+        <button class='change-qty' id='-<%%= id %>'>-</button>
+        <box class='item-qty' id='qty<%%= id %>'>0</box>
+        <button class='change-qty' id='+<%%= id %>'>+</button>
+        <p>Total Price: </p>
+        <ul id='item-submenu-<%%= id %>'></ul>
+    </li>
+
+
+</script>
+
+<script type="text/template" id='ItemSubmenuTemplate'>
+        <li class='submenu'>Sub Menu</li>
+
 </script>
