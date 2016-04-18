@@ -11,6 +11,8 @@ app.AppRouter = Backbone.Router.extend({
   showStoreList: function () {
     var storeView = new app.StoreView();
     storeView.render();
+
+    
   },
 
   showMenu: function (id) {
@@ -25,6 +27,11 @@ app.AppRouter = Backbone.Router.extend({
 
   showOrderList: function () {},
 
-  showOrder: function () {}
+  showOrder: function (id) {
+    app.Orders = new app.Orders({id: id});
+    Order.fetch().done(function(){
+      Order
+    })
+  }
 
 });
