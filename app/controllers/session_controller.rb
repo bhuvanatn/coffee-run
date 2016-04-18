@@ -21,7 +21,7 @@ class SessionController < ApplicationController
 
  def current_user
    @current_user = User.find_by :id => session[:user_id] if session[:user_id].present?
-   render :json => @current_user
+   render :json => @current_user.as_json(:methods => :type)
  end
 
 end

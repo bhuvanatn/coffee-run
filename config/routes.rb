@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :items
   resources :orders
+  resources :session
   resources :users, :only => [:new, :create, :index, :update, :show]
 
   get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
