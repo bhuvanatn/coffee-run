@@ -3,8 +3,14 @@
 
 nav a {
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
 }
 nav {
   text-align: right;
+}
+
+.container {
+  max-width: 960px;
+  margin :0 auto;
+  margin-right: 50px;
 }
