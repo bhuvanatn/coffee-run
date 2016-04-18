@@ -3,7 +3,7 @@ var app = app || {};
 app.AppRouter = Backbone.Router.extend({
   routes: {
     '': 'index',
-    'storelist' : 'showStoreList',
+    'stores' : 'showStoreList',
     'menu/:id' : 'showMenu',
     'orderlist' : 'showOrderList',
     'order/:id' : 'showOrder'
