@@ -61,6 +61,13 @@ class LineItemsController < ApplicationController
     end
   end
 
+#  get '/orderitems/:id' => 'line_items#order'
+  def order
+    @line_items = LineItem.where :order_id => params[:id]
+    render :json => @line_items
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
