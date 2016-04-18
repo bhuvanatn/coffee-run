@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :users, :only => [:new, :create, :index, :update, :show]
 
-  get '/users/edit' => 'users#edit', :as => 'edit_user'
+  get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
   get '/signup' => 'users#new'
   get '/login' => 'session#new'
   post '/login' => 'session#create'
