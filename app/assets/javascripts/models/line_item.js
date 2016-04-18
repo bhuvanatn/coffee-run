@@ -1,10 +1,10 @@
 var app = app || {};
 
-app.Order = Backbone.Model.extend({
+app.LineItem = Backbone.Model.extend({
   defaults: {
-    total_price: "-1"
+    quantity: "-1"
   },
-  urlRoot: "/orders"
+  urlRoot: "/lineitems"
   // parse: function () { make it happen in the server
   //   this.line_items = new app.Items();
   //   this.line_items.fetch();
