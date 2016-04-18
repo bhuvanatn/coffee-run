@@ -14,9 +14,14 @@ class SessionController < ApplicationController
    end
  end
 
-
  def destroy
   session[:user_id] = nil
   redirect_to root_path
  end
+
+ def current_user
+   @current_user = User.find_by :id => session[:user_id] if session[:user_id].present?
+   render :json => @current_user
+ end
+
 end
