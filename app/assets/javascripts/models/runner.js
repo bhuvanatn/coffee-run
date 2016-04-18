@@ -6,5 +6,5 @@ app.Runner = Backbone.Model.extend({
     address: "1 The Street, Heresville",
     name: "Runner McRunnerface"
   },
-  urlRoot: "/runners"
+  urlRoot: "/users"
 });
