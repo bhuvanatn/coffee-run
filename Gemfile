@@ -8,6 +8,7 @@ gem 'rails', '4.2.6'
 
 gem 'pry-rails'
 gem 'annotate'
+gem 'geocoder'
 
 gem 'pg'
 # Use SCSS for stylesheets

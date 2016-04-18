@@ -14,9 +14,9 @@ s3 = Store.create name: 'Mecca', email: 'mecca@ga.co', password: 'chicken', pass
 
 
 Order.destroy_all
-o1 = Order.create customer_id: 1, runner_id: 1, store_id: 1, total_price: 5.00
-o1 = Order.create customer_id: 2, runner_id: 2, store_id: 2, total_price: 5.00
-o1 = Order.create customer_id: 3, runner_id: 3, store_id: 3, total_price: 5.00
+o1 = Order.create total_price: 5.00
+o2 = Order.create total_price: 5.00
+o3 = Order.create total_price: 5.00
 
 LineItem.destroy_all
 l1 = LineItem.create quantity: 1

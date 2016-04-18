@@ -5,7 +5,8 @@ app.MenuView = Backbone.View.extend({
 
     events: {
         'click .change-qty': 'changeQuantity',
-        'click #submit-order-btn': 'sendOrder'
+        'click #submit-order-btn': 'sendOrder',
+        'click #cancel-order-btn': 'cancelOrder'
     },
 
     render: function() {
@@ -16,10 +17,10 @@ app.MenuView = Backbone.View.extend({
         this.$el.html(menuViewHTML(store));
 
         var order = new app.Order({store_id: store.id});
-        order.save().done(function() {
-            store.order_id = order.id;
-            app.orders.add (order);
-        });
+        app.orders.add (order);
+
+        store.order_id = order.id; //this is to get access to order.id in the event.currentTarget
+
         app.items = new app.Items();
         app.items.fetch().done( function() {
             var itemViewTemplate = $('#ItemViewTemplate').html();
@@ -54,16 +55,13 @@ app.MenuView = Backbone.View.extend({
         };
 
         if (sign === '+') {
+            qty += 1;
             lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: order.id, unit_price: item.price, notes: qty.toString() });
-            lineItem.save().done(function(lineItem) {
-                app.line_items.add( lineItem );
-            });
+            app.line_items.add( lineItem );
             subMenu = addSubMenu(id, qty);
             $('#item-submenu-' + id).append(subMenu);
-            qty += 1;
         } else {
-                lineItem = app.LineItem.findWhere({'item_id': id, "notes": qty});
-                lineItem.destroy();
+                lineItem = app.line_items.findWhere({'item_id': id, "notes": qty.toString()});
                 app.line_items.remove( lineItem );
                 qty -= 1;
                 $('#item-submenu-'+ id).children().last().remove();
@@ -84,21 +82,32 @@ app.MenuView = Backbone.View.extend({
     sendOrder: function() {
         var lineItems = app.line_items;
         var orderTotalPrice = 0;
+        var order = app.orders.findWhere({'total_price': '-1' });
+        order.save().done(function(){
+            var order = app.orders.findWhere({'total_price': '-1' });
+            for (var i = 0; i < lineItems.length; i++) {
+                var lineItem = lineItems.models[i].attributes;
+                var size = $('#size' + lineItem.item_id + lineItem.notes).val();
+                var sugar = $('#sugars' + lineItem.item_id + lineItem.notes).val();
+                var milk = $('#milk' + lineItem.item_id + lineItem.notes).val();
+                var note = 'size: ' + size + ', sugars: ' + sugar + ', milk: ' + milk;
 
-        for (var i = 0; i < lineItems.length; i++) {
-            var lineItem = lineItems.models[i].attributes;
-            var size = $('#size' + lineItem.item_id + lineItem.notes).val();
-            var sugar = $('#sugars' + lineItem.item_id + lineItem.notes).val();
-            var milk = $('#milk' + lineItem.item_id + lineItem.notes).val();
-            var note = 'size: ' + size + ', sugars: ' + sugar + ', milk: ' + milk;
-            lineItem.notes = note;
-            orderTotalPrice += lineItem.unit_price * lineItem.quantity;
-            app.line_items.findWhere({'id': lineItem.id}).save();
-        }
-        var order = app.orders.findWhere({'id': lineItems.models[0].attributes.order_id});
-        order.attributes.total_price = orderTotalPrice;
-        order.save();
+                var model = app.line_items.findWhere({'item_id': lineItem.item_id, 'notes': lineItem.notes});
 
+                lineItem.notes = note;
+                lineItem.order_id = order.id;
+                orderTotalPrice += lineItem.unit_price * lineItem.quantity;
+                model.save();
+            }
+            order.attributes.total_price = orderTotalPrice;
+            order.save();
+        });
+        //var order = app.orders.findWhere({'id': lineItems.models[0].attributes.order_id});
+    },
+    cancelOrder: function() {
+        var model = app.orders.findWhere({'total_price': '-1'});
+        app.orders.remove( model );
+        app.router.navigate('');
     }
 
 });

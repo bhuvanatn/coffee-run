@@ -45,7 +45,8 @@
         <p>Total Price: $<span id='menu-total-price'>0.0</span></p>
 
         <ul id='items-list'></ul>
-        <button id=submit-order-btn>Submit</button>
+        <button id='submit-order-btn'>Submit</button>
+        <button id='cancel-order-btn'>Cancel</button>
 
 </script>
 
@@ -67,7 +68,7 @@
 
 <script type="text/template" id='ItemSubmenuTemplate'>
         <li class='submenu'>
-            <%%= qty %>:
+            <span id='qty<%%= id %><%%= qty %>'><%%= qty %></span>:
             Specifications:
             Size:
             <select name="size" id='size<%%= id %><%%= qty %>'>
