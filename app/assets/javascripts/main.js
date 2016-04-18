@@ -2,7 +2,6 @@ var app = app || {};
 
 $(document).ready(function() {
 
-
     app.stores = new app.Stores();
     app.stores.fetch();
 
@@ -14,6 +13,7 @@ $(document).ready(function() {
     // app.items.fetch();
 
     app.router = new app.AppRouter();
+
     Backbone.history.start();
 
   });
