@@ -16,10 +16,7 @@ app.MenuView = Backbone.View.extend({
         var menuViewHTML = _.template(menuViewTemplate);
         this.$el.html(menuViewHTML(store));
 
-        var order = new app.Order({store_id: store.id});
-        app.orders.add (order);
-
-        store.order_id = order.id; //this is to get access to order.id in the event.currentTarget
+        app.order = new app.Order({store_id: store.id});
 
         app.items = new app.Items();
         app.items.fetch().done( function() {
@@ -42,7 +39,6 @@ app.MenuView = Backbone.View.extend({
         var id = parseInt(e.currentTarget.id.slice(1));
         var qty = parseInt($('#qty' + id).text());
         var item = app.items.findWhere({'id': id}).attributes;
-        var order = app.orders.models[0].attributes;  /// this needs to be fixed [0] - needs to select last element in orders array
         var lineItem;
         var subMenu;
 
@@ -56,7 +52,7 @@ app.MenuView = Backbone.View.extend({
 
         if (sign === '+') {
             qty += 1;
-            lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: order.id, unit_price: item.price, notes: qty.toString() });
+            lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: app.order.id, unit_price: item.price, notes: qty.toString() });
             app.line_items.add( lineItem );
             subMenu = addSubMenu(id, qty);
             $('#item-submenu-' + id).append(subMenu);
@@ -80,33 +76,27 @@ app.MenuView = Backbone.View.extend({
     },
 
     sendOrder: function() {
-        var lineItems = app.line_items;
         var orderTotalPrice = 0;
-        var order = app.orders.findWhere({'total_price': '-1' });
-        order.save().done(function(){
-            var order = app.orders.findWhere({'total_price': '-1' });
-            for (var i = 0; i < lineItems.length; i++) {
-                var lineItem = lineItems.models[i].attributes;
+        app.order.save().done(function(){
+            for (var i = 0; i < app.line_items.length; i++) {
+                var lineItem = app.line_items.models[i].attributes;
                 var size = $('#size' + lineItem.item_id + lineItem.notes).val();
                 var sugar = $('#sugars' + lineItem.item_id + lineItem.notes).val();
                 var milk = $('#milk' + lineItem.item_id + lineItem.notes).val();
                 var note = 'size: ' + size + ', sugars: ' + sugar + ', milk: ' + milk;
 
-                var model = app.line_items.findWhere({'item_id': lineItem.item_id, 'notes': lineItem.notes});
 
                 lineItem.notes = note;
-                lineItem.order_id = order.id;
+                lineItem.order_id = app.order.id;
                 orderTotalPrice += lineItem.unit_price * lineItem.quantity;
-                model.save();
+                app.line_items.models[i].save();
             }
-            order.attributes.total_price = orderTotalPrice;
-            order.save();
+            app.order.attributes.total_price = orderTotalPrice;
+            app.order.save();
         });
-        //var order = app.orders.findWhere({'id': lineItems.models[0].attributes.order_id});
     },
     cancelOrder: function() {
-        var model = app.orders.findWhere({'total_price': '-1'});
-        app.orders.remove( model );
+        app.order = undefined;
         app.router.navigate('');
     }
 
