@@ -9,12 +9,16 @@ app.AppRouter = Backbone.Router.extend({
     'order/:id' : 'showOrder'
   },
   index: function() {
-        var appView = new app.AppView();
-        appView.render();
-      },
+    var appView = new app.AppView();
+    appView.render();
+  },
+
   showStoreList: function () {
-    var storeListView = new app.StoreListView();
-    storeListView.render();
+    app.stores = new app.Stores();
+    app.stores.fetch().done( function () {
+      var storeListView = new app.StoreListView();
+      storeListView.render();
+    });
   },
 
   showMenu: function (id) {
