@@ -31,6 +31,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation, :image)
   end
   def authorise
-  redirect_to root_path unless (@current_user.present? && @current_user.admin?)
+  redirect_to root_path unless (@current_user.present?)
   end
 end
