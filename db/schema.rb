@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 20160417234248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.integer  "phone_number"
+    t.money    "balance",      scale: 2
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -46,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160417234248) do
   end
 
   create_table "users", force: :cascade do |t|
+<<<<<<< HEAD
     t.string   "type"
     t.string   "name"
     t.string   "email"
@@ -59,6 +70,14 @@ ActiveRecord::Schema.define(version: 20160417234248) do
     t.text     "description"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+=======
+    t.text     "email"
+    t.text     "password_digest"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",           default: false
+    t.text     "image"
+>>>>>>> b368b22e710f502f1af37719b4befeb1d5d528f2
   end
 
 end
