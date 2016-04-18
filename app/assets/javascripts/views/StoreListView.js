@@ -3,7 +3,7 @@ var app = app || {};
 app.StoreListView = Backbone.View.extend({
     el: '#main',
     events: {
-    'click': 'showMenu'
+    'click .store': 'showMenu'
     },
     render: function() {
 
@@ -19,7 +19,10 @@ app.StoreListView = Backbone.View.extend({
             var storeElement = storeViewHTML(store);
             this.$el.append(storeElement);
       }
-    }
+  },
+  showMenu: function(e) {
+      app.router.navigate('menu/' + e.currentTarget.id, true);
+  }
 
 
 
