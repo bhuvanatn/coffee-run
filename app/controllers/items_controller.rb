@@ -61,6 +61,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def store
+    @items = Item.where :store_id => params[:id]
+    render :json => @items
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

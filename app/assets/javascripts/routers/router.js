@@ -44,6 +44,8 @@ app.AppRouter = Backbone.Router.extend({
     app.order.fetch().done( function () {
       var orderView = new app.OrderView({model: app.order});
       orderView.render();
+    }).error( function () {
+      console.log('wtf');
     });
   }
 
