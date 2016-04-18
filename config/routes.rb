@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/stores' => 'users#stores'
   get '/store/:id' => 'users#store'
   get '/storeitems/:id' => 'items#store'
+  get '/orderitems/:id' => 'line_items#order'
 
   get '/current_user' => 'session#current_user'
 end
