@@ -25,10 +25,14 @@ class User < ActiveRecord::Base
 end
 
 class Customer < User
+  has_many :orders
 end
 
 class Store < User
+  has_many :orders
+  has_many :items
 end
 
 class Runner < User
+  has_many :orders
 end
