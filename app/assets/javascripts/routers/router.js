@@ -14,9 +14,6 @@ app.AppRouter = Backbone.Router.extend({
   },
 
   showStoreList: function () {
-    // var storeView = new app.StoreView();
-    // storeView.render();
-
     app.stores = new app.Stores();
     app.stores.fetch().done( function () {
       var storeListView = new app.StoreListView();
@@ -35,19 +32,20 @@ app.AppRouter = Backbone.Router.extend({
   },
 
   showOrderList: function () {
-    var orderListView = new app.OrderListView();
-    orderListView.render();
+    app.orders = new app.Orders();
+    app.orders.fetch().done( function () {
+      var orderListView = new app.OrderListView();
+      orderListView.render();
+    });
   },
 
   showOrder: function (id) {
-    app.Orders = new app.Orders({id: id});
-    Order.fetch().done(function(){
-      Order
-    })
     app.order = new app.Order({id: id});
     app.order.fetch().done( function () {
       var orderView = new app.OrderView({model: app.order});
       orderView.render();
+    }).error( function () {
+      console.log('wtf');
     });
   }
 
