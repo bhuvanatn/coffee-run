@@ -24,11 +24,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new user_params
-      if @user.save
-        redirect_to root_path
-      else
-        render :new
-      end
+
+    if @user.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def stores
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :image)
+    params.require(:user).permit(:email, :password, :password_confirmation, :image, :type)
   end
   def authorise
   redirect_to root_path unless (@current_user.present?)

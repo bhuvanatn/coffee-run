@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   resources :items
   resources :orders
+  resources :session
   resources :users, :only => [:new, :create, :index, :update, :show]
 
-  get '/users/edit' => 'users#edit', :as => 'edit_user'
+  get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
   get '/signup' => 'users#new'
   get '/login' => 'session#new'
   post '/login' => 'session#create'
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   get '/stores' => 'users#stores'
   get '/store/:id' => 'users#store'
   get '/storeitems/:id' => 'items#store'
+  get '/orderitems/:id' => 'line_items#order'
 
-
-
+  get '/current_user' => 'session#current_user'
 end

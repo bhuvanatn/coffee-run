@@ -12,7 +12,6 @@ app.AppRouter = Backbone.Router.extend({
     var appView = new app.AppView();
     appView.render();
   },
-
   showStoreList: function () {
     app.stores = new app.Stores();
     app.stores.fetch().done( function () {
