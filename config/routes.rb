@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :line_items
+
   root to: 'pages#home'
 
+
+  resources :items
+  resources :orders
   resources :users, :only => [:new, :create, :index, :update, :show]
 
   get '/users/edit' => 'users#edit', :as => 'edit_user'
@@ -10,7 +14,8 @@ Rails.application.routes.draw do
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
 
-  resources :items
-  resources :orders
+  get '/stores' => 'users#stores'
 
-  end
+
+
+end
