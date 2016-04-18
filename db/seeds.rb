@@ -23,6 +23,8 @@ i7 = Item.create name: 'Long Black', price: "2.5"
 i8 = Item.create name: 'Long Black', price: "2.6"
 i9 = Item.create name: 'Long Black', price: "2.7"
 
+
+
 s1.items << i1 << i4 << i7
 s2.items << i2 << i5 << i8
 s3.items << i3 << i6 << i9

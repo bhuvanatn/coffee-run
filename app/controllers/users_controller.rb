@@ -36,6 +36,11 @@ class UsersController < ApplicationController
     render :json => @stores
   end
 
+  def store
+    @store = User.find params[:id]
+    render :json => @store
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :image)
