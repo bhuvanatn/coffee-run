@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :line_items
-  root to: 'welcome#index'
+  root to: 'pages#home'
 
   resources :users, :only => [:new, :create, :index, :update, :show]
 
