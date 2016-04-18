@@ -14,12 +14,13 @@ s3 = Store.create name: 'Mecca', email: 'mecca@ga.co', password: 'chicken', pass
 
 LineItem.destroy_all
 l1 = LineItem.create quantity: 1
+l2 = LineItem.create quantity: 1
+l3 = LineItem.create quantity: 1
 
 Order.destroy_all
-o1 = Order.create total_price: 2.50 
-
-
-
+o1 = Order.create total_price: 2.50
+o2 = Order.create total_price: 2.50
+o3 = Order.create total_price: 2.50
 
 Item.destroy_all
 i1 = Item.create name: 'Flat White', price: "3.0", store_id: s1.id
@@ -44,3 +45,15 @@ o1.line_items << l1
 c1.orders << o1
 r1.orders << o1
 s1.orders << o1
+
+i1.line_items << l2
+o2.line_items << l2
+c2.orders << o2
+r2.orders << o2
+s2.orders << o2
+
+i1.line_items << l3
+o3.line_items << l3
+c3.orders << o3
+r3.orders << o3
+s3.orders << o3
