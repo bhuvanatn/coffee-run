@@ -5,14 +5,11 @@ app.OrderListView = Backbone.View.extend({
 
     render: function() {
         var orderListViewTemplate = $('#OrderListViewTemplate').html();
-        this.$el.html(orderListViewTemplate);
-        $('#main').html(orderListViewTemplate);
-
-        var orderViewTemplate = $('#OrderViewTemplate').html();
-        var orderViewHTML = _.template(orderViewTemplate);
+        var orderViewHTML = _.template(orderListViewTemplate);
 
         for (var i = 0; i < app.orders.length; i++){
           var order = app.orders.models[i].attributes;
+          console.log(i);
           var orderElement = orderViewHTML(order);
           this.$el.append(orderElement);
         }
