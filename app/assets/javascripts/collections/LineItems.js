@@ -1,6 +1,6 @@
 var app = app || {};
 
 app.LineItems = Backbone.Collection.extend({
-  url: '/lineitems',
+  url: '/line_items',
   model: app.LineItem
 });

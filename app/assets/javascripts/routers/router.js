@@ -15,7 +15,7 @@ app.AppRouter = Backbone.Router.extend({
 
   showMenu: function (id) {
     app.store = new app.Store({id: id});
-    store.fetch().done( function () {
+    app.store.fetch().done( function () {
       var menuView = new app.MenuView({model: app.store});
       menuView.render();
     }).error( function () {
@@ -23,8 +23,17 @@ app.AppRouter = Backbone.Router.extend({
     });
   },
 
-  showOrderList: function () {},
+  showOrderList: function () {
+    var orderListView = new app.OrderListView();
+    orderListView.render();
+  },
 
-  showOrder: function () {}
+  showOrder: function (id) {
+    app.order = new app.Order({id: id});
+    app.order.fetch().done( function () {
+      var orderView = new app.OrderView({model: app.order});
+      orderView.render();
+    });
+  }
 
 });
