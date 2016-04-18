@@ -1,16 +1,26 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
 nav a {
-  display: inline-block;
-  font-size: 15px;
+    display: inline-block;
+    font-size: 15px;
 }
 nav {
-  text-align: right;
+    text-align: right;
 }
-
+.nav > li:hover a:hover {
+    background-color: black;
+    color: red;
+}
+.loginClass > input {
+    display: block;
+}
+.new_user > input {
+    display: block;
+}
 .container {
-  max-width: 960px;
-  margin :0 auto;
-  margin-right: 50px;
+    max-width: 960px;
+    margin: 0 50px 0 auto;
+}
+.margin-right {
+    margin-right: 80px;
 }
