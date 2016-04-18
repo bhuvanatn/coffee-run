@@ -3,20 +3,29 @@ var app = app || {};
 app.AppRouter = Backbone.Router.extend({
   routes: {
     '': 'index',
-    'storelist' : 'showStoreList',
+    'stores' : 'showStoreList',
     'menu/:id' : 'showMenu',
     'orderlist' : 'showOrderList',
     'order/:id' : 'showOrder'
   },
   index: function() {
-        var appView = new app.AppView();
-        appView.render();
-      },
+    var appView = new app.AppView();
+    appView.render();
+  },
+
   showStoreList: function () {
+<<<<<<< HEAD
     var storeView = new app.StoreView();
     storeView.render();
 
 
+=======
+    app.stores = new app.Stores();
+    app.stores.fetch().done( function () {
+      var storeListView = new app.StoreListView();
+      storeListView.render();
+    });
+>>>>>>> dd47258e4e2be701856cba738ad81e228a23b486
   },
 
   showMenu: function (id) {
