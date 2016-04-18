@@ -1,6 +1,5 @@
-<h2>Login</h2>
 <div class="container">
-<%= form_tag login_path do %>
+<%= form_tag(login_path, :class => "loginClass") do %>
   <%= label_tag :email %>
   <%= text_field_tag :email %>
 
