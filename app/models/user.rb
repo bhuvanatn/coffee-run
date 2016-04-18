@@ -23,3 +23,12 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :email, :password_digest, :presence => true, :uniqueness => true
 end
+
+class Customer < User
+end
+
+class Store < User
+end
+
+class Runner < User
+end
