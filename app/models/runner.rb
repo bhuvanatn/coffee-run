@@ -18,7 +18,6 @@
 #  updated_at      :datetime         not null
 #
 
-class User < ActiveRecord::Base
-  has_secure_password
-  validates :email, :password_digest, :presence => true, :uniqueness => true
+class Runner < User
+  has_many :orders
 end

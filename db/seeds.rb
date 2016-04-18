@@ -12,7 +12,7 @@ s1 = Store.create name: 'metropole', email: 'metropole@ga.co', password: 'chicke
 s2 = Store.create name: 'Single Origin Coffee', email: 'SOC@ga.co', password: 'chicken', password_confirmation: 'chicken', address: '89 York st Sydney', balance: 1000
 s3 = Store.create name: 'Mecca', email: 'mecca@ga.co', password: 'chicken', password_confirmation: 'chicken', address: '67 King st Sydney', balance: 1000
 
-Items.destroy_all
+Item.destroy_all
 i1 = Item.create name: 'Flat White', price: "3.0"
 i2 = Item.create name: 'Flat White', price: "3.1"
 i3 = Item.create name: 'Flat White', price: "3.2"
