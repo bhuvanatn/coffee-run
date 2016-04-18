@@ -56,9 +56,8 @@ ActiveRecord::Schema.define(version: 20160418014739) do
     t.string   "phone_number"
     t.string   "image"
     t.text     "description"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.boolean  "admin",                     default: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end
