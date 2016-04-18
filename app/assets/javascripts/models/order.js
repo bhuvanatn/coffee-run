@@ -2,9 +2,11 @@ var app = app || {};
 
 app.Order = Backbone.Model.extend({
   defaults: {
-    email: "yep@ivegot.email",
-    address: "1 The Street, Heresville",
-    name: "Runner McRunnerface"
+    total_price: "-1"
+  },
+  urlRoot: "/orders",
+  parse: function () {
+    this.line_items = new app.Items();
+    this.line_items.fetch();
   }
-  urlRoot: "/runners",
 });
