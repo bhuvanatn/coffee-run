@@ -18,6 +18,5 @@ Rails.application.routes.draw do
   get '/store/:id' => 'users#store'
   get '/storeitems/:id' => 'items#store'
 
-
-
+  get '/current_user' => 'session#current_user'
 end
