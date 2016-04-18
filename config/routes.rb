@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :line_items
   root to: 'welcome#index'
   
   resources :users, :only => [:new, :create, :index, :update]
