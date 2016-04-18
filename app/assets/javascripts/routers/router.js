@@ -21,7 +21,10 @@ app.AppRouter = Backbone.Router.extend({
     }).error( function () {
       console.log("wtf")
     });
-  }
+  },
 
+  showOrderList: function () {},
+
+  showOrder: function () {}
 
 });
