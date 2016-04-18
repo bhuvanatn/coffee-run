@@ -2,8 +2,8 @@ var app = app || {};
 
 $(document).ready(function() {
 
-    app.users = new app.Users();
-    app.users.fetch();
+    app.stores = new app.Stores();
+    app.stores.fetch();
 
     app.items = new app.Items();
     app.items.fetch();

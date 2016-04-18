@@ -5,12 +5,21 @@
 <script type="text/template" id='appViewTemplate'>
 
     <button id='show-cafes-btn'>Show Cafes in my Area</button>
-    
+
 </script>
 
 <script type="text/template" id='StoreListViewTemplate'>
 
+    <ul id='store-list'></ul>
 
+</script>
+
+
+<script type="text/template" id='StoreViewTemplate'>
+    <li class='store'>
+    <p>Name: <%%= store.name %></p>
+    <p>Address: <%%= store.address %></p>
+    </li>
 
 </script>
 
