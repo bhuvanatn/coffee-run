@@ -14,5 +14,8 @@
 #
 
 class Order < ActiveRecord::Base
-  has_many :customer
+  belongs_to :customer
+  belongs_to :store
+  belongs_to :runner
+  has_many :line_items
 end
