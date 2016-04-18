@@ -19,7 +19,7 @@ app.AppRouter = Backbone.Router.extend({
       var menuView = new app.MenuView({model: app.store});
       menuView.render();
     }).error( function () {
-      console.log("wtf")
+      console.log("wtf");
     });
   }
 
