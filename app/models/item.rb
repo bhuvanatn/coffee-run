@@ -8,6 +8,7 @@
 #  price       :money
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  store_id    :integer
 #
 
 class Item < ActiveRecord::Base
