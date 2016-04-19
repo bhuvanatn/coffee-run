@@ -2,13 +2,13 @@ var app = app || {};
 
 app.AppRouter = Backbone.Router.extend({
   routes: {
-    '': 'index',
+    '': 'introduction',
     'stores' : 'showStoreList',
     'menu/:id' : 'showMenu',
     'orderlist' : 'showOrderList',
     'order/:id' : 'showOrder'
   },
-  index: function() {
+  introduction: function() {
     var appView = new app.AppView();
     appView.render();
   },

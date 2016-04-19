@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   get '/orderitems/:id' => 'line_items#order'
 
   get '/current_user' => 'session#current_user'
+
 end
