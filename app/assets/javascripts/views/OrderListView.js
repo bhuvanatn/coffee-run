@@ -48,12 +48,21 @@ app.OrderListView = Backbone.View.extend({
                 order.storeName = app.stores.models[j].attributes.name
               }
             }
+
             for (var k = 0; k < app.stores.length; k++){
               var customerId = app.customers.attributes[k].id;
               if (order.customer_id === customerId){
                 order.customerName = app.customers.attributes[k].name
               }
             }
+
+            for (var j = 0; j < app.lineitems.length; j++){
+              var lineitem = app.lineitems.attributes[j].order_id;
+              if (lineitem === app.orders.models[i].attributes.id){
+                console.log(app.lineitems.attributes[j].quantity);
+              }
+            }
+
               if (app.orders.models[i].attributes.runner_id === null){
                 var orderElement = orderViewHTML(order);
                 this.$el.append(orderElement);
@@ -62,5 +71,14 @@ app.OrderListView = Backbone.View.extend({
         } else {
         orderListViewTemplate = "";
       }
+      this.showOrderDetails();
+    },
+
+
+    showOrderDetails: function(){
+      $(".buttonJobDetails").on('click', function(){
+        $(this).closest('div').children('.showJobDetails').toggle();
+      });
     }
+
   });
