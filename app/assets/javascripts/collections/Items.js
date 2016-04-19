@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.Items = Backbone.Collection.extend({
-  url: function () {
+  url: function() {
     var url = '/storeitems/' + app.store.id;
     return url;
   },

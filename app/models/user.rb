@@ -21,4 +21,6 @@
 class User < ActiveRecord::Base
   has_secure_password
   validates :email, :password_digest, :presence => true, :uniqueness => true
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
 end

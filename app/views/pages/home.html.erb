@@ -2,11 +2,31 @@
 
 <div id="main"></div>
 
+
 <script type="text/template" id='appViewTemplate'>
 
-    <button id='show-cafes-btn'>Show Cafes in my Area</button>
+  <button id='customer-btn'>I am a Customer</button>
+  <button id='store-btn'>I am a Cafe</button>
+  <button id='runner-btn'>I Deliver Coffee</button>
 
 </script>
+
+
+
+<script type="text/template" id='customerViewTemplate'>
+
+  <p>Hello. We aim to help you get coffee delieved to you from cafes in your area.</p>
+
+  <p>To do this successfully we need to know where you are.</p>
+
+  <p></p>
+
+<!--
+    <button id='show-cafes-btn'>Show Cafes in my Area</button> -->
+
+</script>
+
+
 
 <script type="text/template" id='StoreListViewTemplate'>
 
@@ -43,7 +63,11 @@
         <h3>Store Name: <%%= name %></h3>
         <h3>Address: <%%= address %></h3>
 
+        <p>Total Price: $<span id='menu-total-price'>0.0</span></p>
+
         <ul id='items-list'></ul>
+        <button id='submit-order-btn'>Submit</button>
+        <button id='cancel-order-btn'>Cancel</button>
 
 </script>
 
@@ -51,12 +75,12 @@
 
     <li class="item">
         <p>Name: <%%= name %></p>
-        <p>Price: <%%= price %></p>
+        <p>Price: $<%%= price %></p>
         <p>Description: <%%= description %></p>
         <button class='change-qty' id='-<%%= id %>'>-</button>
         <box class='item-qty' id='qty<%%= id %>'>0</box>
         <button class='change-qty' id='+<%%= id %>'>+</button>
-        <p>Total Price: </p>
+        <p>Total Price: $<span id='<%%= id %>-total-price'>0.0</span></p>
         <ul id='item-submenu-<%%= id %>'></ul>
     </li>
 
@@ -64,6 +88,28 @@
 </script>
 
 <script type="text/template" id='ItemSubmenuTemplate'>
-        <li class='submenu'>Sub Menu</li>
+        <li class='submenu'>
+            <span id='qty<%%= id %><%%= qty %>'><%%= qty %></span>:
+            Specifications:
+            Size:
+            <select name="size" id='size<%%= id %><%%= qty %>'>
+                <option value="Small">Small</option>
+                <option value="Large">Large</option>
+            </select>
+            No. Sugars:
+            <select name="sugars" id='sugars<%%= id %><%%= qty %>'>
+                <option value='0'>0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+            </select>
+            Milk:
+            <select name="milk" id='milk<%%= id %><%%= qty %>'>
+                <option value="Full Cream">Full Cream</option>
+                <option value="Light">Light</option>
+                <option value="Soy">Soy</option>
+                <option value="Almond">Almond</option>
+            </select>
+        </li>
 
 </script>
