@@ -9,6 +9,9 @@ $(document).ready(function() {
 
     app.line_items = new app.LineItems();
 
+    app.current_user = new app.Current_User();
+    app.current_user.fetch();
+
 
     // app.users = new app.Users();
     // app.users.fetch();

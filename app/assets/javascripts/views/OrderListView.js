@@ -54,10 +54,15 @@ app.OrderListView = Backbone.View.extend({
                 order.customerName = app.customers.attributes[k].name
               }
             }
-            var orderElement = orderViewHTML(order);
-            this.$el.append(orderElement);
-        }
 
+            for (var j = 0; j < app.orders.models.length; j++){
+              if (app.orders.models[j].attributes.runner_id === null) {
+                var orderElement = orderViewHTML(order);
+                this.$el.append(orderElement);
+              }
+            }
+          }
+        }
       } else {
         orderListViewTemplate = "";
       }
