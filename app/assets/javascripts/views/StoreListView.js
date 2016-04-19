@@ -10,7 +10,7 @@ app.StoreListView = Backbone.View.extend({
       var storeListViewTemplate = $('#StoreListViewTemplate').html();
       this.$el.html(storeListViewTemplate);
       $('#main').html(storeListViewTemplate);
- 
+
       var storeViewTemplate = $('#StoreViewTemplate').html();
       var storeViewHTML = _.template(storeViewTemplate);
 

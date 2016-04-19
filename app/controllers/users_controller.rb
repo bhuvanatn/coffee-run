@@ -43,6 +43,11 @@ class UsersController < ApplicationController
     render :json => @store
   end
 
+  def customers
+    @customers = User.where :type => "Customer"
+    render :json => @customers
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :image, :type)
