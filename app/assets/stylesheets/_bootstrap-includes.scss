@@ -2,20 +2,32 @@
 @import "bootstrap";
 nav a {
     display: inline-block;
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: bold;
 }
 nav {
     text-align: right;
 }
+
 .nav > li:hover a:hover {
     background-color: black;
     color: red;
 }
+
+.navbar-brand a:hover {
+    text-decoration: none;
+    background-color: transparent;
+    color: #666;
+}
+
 .loginClass > input {
     display: block;
 }
 .new_user > input {
     display: block;
+}
+.edit_user > input {
+    display : block;
 }
 .container {
     max-width: 960px;
@@ -24,6 +36,9 @@ nav {
 .margin-right {
     margin-right: 80px;
 }
-.edit_user > input {
-    display : block;
+.form-control {
+    width: 30%;
+}
+.space{
+    padding-bottom: 20px;
 }
