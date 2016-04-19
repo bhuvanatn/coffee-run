@@ -36,7 +36,7 @@ app.AppRouter = Backbone.Router.extend({
   showOrderList: function () {
     app.orders = new app.Orders();
     app.stores = new app.Stores();
-    app.customers = new app.Customer();
+    app.customers = new app.Customer(); 
     app.current_user = new app.Current_User();
 
     app.orders.fetch().done( function () {
