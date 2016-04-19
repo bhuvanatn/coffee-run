@@ -40,7 +40,7 @@ app.AppView = Backbone.View.extend({
     app.currentUser = new app.User(app.currentUser);
     app.currentUser.set({type: "Customer"});
     app.currentUser.save();
-    customerPath();
+    this.customerPath();
   },
 
   customerPath: function () {
@@ -52,7 +52,7 @@ app.AppView = Backbone.View.extend({
     app.currentUser = new app.User(app.currentUser);
     app.currentUser.set({type: "Runner"});
     app.currentUser.save();
-    runnerPath();
+    this.runnerPath();
   },
 
   runnerPath: function () {
@@ -64,7 +64,7 @@ app.AppView = Backbone.View.extend({
     app.currentUser = new app.User(app.currentUser);
     app.currentUser.set({type: "Store"});
     app.currentUser.save();
-    storePath();
+    this.storePath();
   },
 
   storePath: function () {
