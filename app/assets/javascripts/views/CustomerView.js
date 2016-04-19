@@ -15,7 +15,7 @@ app.CustomerView = Backbone.View.extend({
       var button = $('<button>')
         .text('Find Cafes in my Area')
         .attr('id', 'show-cafes-btn');
-      this.$el.append(button)
+      this.$el.append(button);
     } else {
       var manualForm = $('#manualAddressTemplate').text();
       var autoForm = $('#automaticAddressTemplate').text();
