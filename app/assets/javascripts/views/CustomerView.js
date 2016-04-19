@@ -5,7 +5,7 @@ app.CustomerView = Backbone.View.extend({
   events: {
     'click #show-cafes-btn': 'showCafes',
     'click #address-btn': 'setAddress',
-    'click #auto-location-btn': 'geolocateUser'
+    'click #auto-location-btn': 'geolocateCustomer'
   },
 
   render: function() {
@@ -34,7 +34,18 @@ app.CustomerView = Backbone.View.extend({
     console.log("setAddress");
   },
 
-  geolocateUser: function () {
-    console.log("geolocateUser");
+  geolocateCustomer: function () {
+    if (!navigator.geolocation) {
+      alert("Sorry, your device doesn't support finding you automatically.");
+      var manualForm = $('#manualAddressTemplate').text();
+      $('#addressDiscoveryContainer')
+        .append(manualForm);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(function(position) {
+      app.currentUser.set({latitude: position.coords.latitude});
+      app.currentUser.set({longitude: position.coords.longitude});
+      app.currentUser.save();
+    });
   }
 });

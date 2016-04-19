@@ -16,7 +16,7 @@ app.AppView = Backbone.View.extend({
 
     $.get('/current_user').done( function (data) {
 
-      app.currentUser = data; //current user is a simple hash
+      app.currentUser = new app.User(data); //current user is a simple hash
       var type = data.type;
 
       if (type === "Customer") {
@@ -37,8 +37,7 @@ app.AppView = Backbone.View.extend({
   },
 
   typeSetCustomer: function () {
-    app.currentUser = new app.User(app.currentUser);
-    app.currentUser.set({type: "Customer"});
+    app.currentUser.set({'type': 'Customer'});
     app.currentUser.save();
     this.customerPath();
   },
@@ -49,7 +48,6 @@ app.AppView = Backbone.View.extend({
   },
 
   typeSetRunner: function () {
-    app.currentUser = new app.User(app.currentUser);
     app.currentUser.set({type: "Runner"});
     app.currentUser.save();
     this.runnerPath();
@@ -61,7 +59,6 @@ app.AppView = Backbone.View.extend({
   },
 
   typeSetStore: function () {
-    app.currentUser = new app.User(app.currentUser);
     app.currentUser.set({type: "Store"});
     app.currentUser.save();
     this.storePath();
