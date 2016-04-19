@@ -18,13 +18,13 @@ app.OrderListView = Backbone.View.extend({
             for (var j = 0; j < app.stores.length; j++){
               var storeId = app.stores.models[j].attributes.id;
               if (order.store_id === storeId){
-                order.storeName = app.stores.models[j].attributes.name
+                order.storeName = app.stores.models[j].attributes.name;
               }
             }
             for (var k = 0; k < app.stores.length; k++){
               var customerId = app.customers.attributes[k].id;
               if (order.customer_id === customerId){
-                order.customerName = app.customers.attributes[k].name
+                order.customerName = app.customers.attributes[k].name;
               }
             }
             var orderElement = orderViewHTML(order);
