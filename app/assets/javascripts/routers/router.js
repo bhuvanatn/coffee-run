@@ -6,10 +6,11 @@ app.AppRouter = Backbone.Router.extend({
     'stores' : 'showStoreList',
     'menu/:id' : 'showMenu',
     'orderlist' : 'showOrderList',
-    'order/:id' : 'showOrder'
+    'order/:id' : 'showOrder',
+    'map' : 'showMap'
   },
   index: function() {
-    
+
     var appView = new app.AppView();
     appView.render();
   },
@@ -47,6 +48,11 @@ app.AppRouter = Backbone.Router.extend({
     }).error( function () {
       console.log('wtf');
     });
+  },
+
+  showMap: function() {
+    var mapView = new app.MapView();
+    mapView.render();
   }
 
 });

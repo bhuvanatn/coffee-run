@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   # GET /orders/1.json
-  def show  
+  def show
   end
 
   # GET /orders/new
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params_dh)
+    @order = Order.new(order_params)
 
     respond_to do |format|
       if @order.save
@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
-      if @order.update(order_params_dh)
+      if @order.update(order_params)
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -68,11 +68,8 @@ class OrdersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.fetch(:order, {})
-    end
 
-    def order_params_dh
+    def order_params
       params.require(:order).permit(:customer_id, :runner_id, :store_id, :total_price)
     end
 end
