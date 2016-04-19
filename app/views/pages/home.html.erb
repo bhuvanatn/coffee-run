@@ -49,11 +49,22 @@
 
 </script>
 
-<script type="text/template" id='OrderListViewTemplate'>
+<script type="text/template" id='StoreOrderListViewTemplate'>
   <div class="order-view-list-item" id="<%%= id %>">
     <p>Store Name: <%%= storeName %></p>
+    <p>Store ID: <%%= store_id %></p>
     <p>Customer Name: <%%= customerName %></p>
     <p>Total Price: $<%%= total_price %></p>
+    <button>Confirm Orders</button>
+  </div>
+</script>
+
+<script type="text/template" id='RunnerOrderListViewTemplate'>
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Store ID: <%%= store_id %></p>
+    <p>Customer ID: <%%= customer_id %></p>
+    <p>Total Price: $<%%= total_price %></p>
+    <button>Take Job</button>
   </div>
 </script>
 
