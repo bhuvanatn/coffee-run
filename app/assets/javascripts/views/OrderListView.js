@@ -6,9 +6,9 @@ app.OrderListView = Backbone.View.extend({
     render: function() {
       $('#main').html('');
 
-      var currentUser = app.current_user.attributes.type;
+      var userType = app.currentUser.attributes.type;
 
-      if (currentUser === "Store"){
+      if (userType === "Store"){
         orderListViewTemplate = $('#StoreOrderListViewTemplate').html();
 
         var orderViewHTML = _.template(orderListViewTemplate);
@@ -35,7 +35,7 @@ app.OrderListView = Backbone.View.extend({
 
 
 
-      } else if (currentUser === "Runner") {
+      } else if (userType === "Runner") {
         orderListViewTemplate = $('#RunnerOrderListViewTemplate').html();
 
         var orderViewHTML = _.template(orderListViewTemplate);
