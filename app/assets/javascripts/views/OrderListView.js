@@ -12,7 +12,7 @@ app.OrderListView = Backbone.View.extend({
     render: function() {
       $('#main').html('');
 
-      var userType = app.currentUser.attributes.type;
+      var userType = app.current_user.attributes.type;
 
       if (userType === 'Runner') {
           //clear #main
@@ -89,7 +89,9 @@ app.OrderListView = Backbone.View.extend({
                 orderListViewTemplate = "";
             }
         }
+
       },
+
       showListView: function() {
           $('#list-view').removeClass('hide');
           $('#map-view').addClass('hide');
@@ -104,6 +106,13 @@ app.OrderListView = Backbone.View.extend({
       takeJob: function(e) {
         console.log('takeJob');
         console.log(e);
+        this.showOrderDetails();
+      },
+
+      showOrderDetails: function(){
+        $(".buttonJobDetails").on('click', function(){
+          $(this).closest('div').children('.showJobDetails').toggle();
+        });
       }
 
 
