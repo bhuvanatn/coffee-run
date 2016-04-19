@@ -2,6 +2,7 @@
 
 <div id="main"></div>
 
+<!--  introduction to the site stuff below -->
 
 <script type="text/template" id='appViewTemplate'>
 
@@ -11,22 +12,31 @@
 
 </script>
 
-
-
 <script type="text/template" id='customerViewTemplate'>
 
-  <p>Hello. We aim to help you get coffee delieved to you from cafes in your area.</p>
+  <p>Hello. We aim to help you get coffee delivered to you from cafes in your area.</p>
 
-  <p>To do this successfully we need to know where you are.</p>
-
-  <p></p>
-
-<!--
-    <button id='show-cafes-btn'>Show Cafes in my Area</button> -->
+  <div id="addressDiscoveryContainer"></div>
 
 </script>
 
 
+<script type="text/template" id='manualAddressTemplate'>
+  <div class="manual">
+    <p>Manually enter your address</p>
+    <input id="address-input" type="text" placeholder="address">
+    <button id="address-btn">Submit</button>
+  </div>
+</script>
+
+<script type="text/template" id='automaticAddressTemplate'>
+  <div id="automatic">
+    <button id='auto-location-btn'>Auto Discover Location</button>
+  </div>
+</script>
+
+
+<!-- store list view stuff -->
 
 <script type="text/template" id='StoreListViewTemplate'>
 
@@ -44,8 +54,9 @@
 
 </script>
 
-<script type="text/template" id='OrderViewTemplate'>
+<!--  -->
 
+<script type="text/template" id='OrderViewTemplate'>
 
 </script>
 
@@ -68,9 +79,10 @@
   </div>
 </script>
 
+<!-- menu view templates -->
+
 <script type="text/template" id='MenuViewTemplate'>
         <h1>Menu List View</h1>
-
         <h3>Store Name: <%%= name %></h3>
         <h3>Address: <%%= address %></h3>
 
