@@ -8,8 +8,6 @@ app.StoreListView = Backbone.View.extend({
     'click #toggleMapBtn': 'showMapView'
     },
     render: function() {
-        var testUser = {'longitude': 151.2061558, 'latitude': -33.8698442  };
-
       // prepare main div
 
       $('#main').empty();
@@ -57,7 +55,7 @@ app.StoreListView = Backbone.View.extend({
               mapDiv.setAttribute('id', 'map');
               $('#map-view').append(mapDiv);
               var storeMap = new app.MapView();
-              storeMap.render(testUser, app.stores);
+              storeMap.render(app.currentUser, app.stores);
            });
   },
   showListView: function() {
