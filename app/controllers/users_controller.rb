@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def update
     user = @current_user
     user.update user_params
-    redirect_to root_path
+    render :json => {}
   end
 
   def index
@@ -50,7 +50,20 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :image, :type)
+    params.require(:user).permit(
+      :email,
+      :password,
+      :password_confirmation,
+      :image,
+      :type,
+      :address,
+      :longitude,
+      :latitude,
+      :balance,
+      :phone_number,
+      :description,
+      :admin
+    )
   end
   def authorise
   redirect_to root_path unless (@current_user.present?)
