@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
 
     if @user.save
+      session[:user_id] = @user.id
       redirect_to root_path
     else
       render :new
@@ -40,6 +41,11 @@ class UsersController < ApplicationController
   def store
     @store = User.find params[:id]
     render :json => @store
+  end
+
+  def customers
+    @customers = User.where :type => "Customer"
+    render :json => @customers
   end
 
   private
