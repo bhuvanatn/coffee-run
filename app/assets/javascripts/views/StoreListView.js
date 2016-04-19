@@ -55,8 +55,11 @@ app.StoreListView = Backbone.View.extend({
               mapDiv.setAttribute('id', 'map');
               $('#map-view').append(mapDiv);
               var storeMap = new app.MapView();
-              storeMap.render(app.currentUser, app.stores);
+              storeMap.render(app.currentUser.attributes, app.stores.models);
            });
+  },
+  showMenu: function(e) {
+       app.router.navigate('menu/' + e.currentTarget.id, true);
   },
   showListView: function() {
       $('#list-view').removeClass('hide');

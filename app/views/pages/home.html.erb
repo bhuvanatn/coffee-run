@@ -58,7 +58,7 @@
 <!--  -->
 
 <script type="text/template" id='OrderViewTemplate'>
-
+    <h2>This is the Order View</h2>
 </script>
 
 <script type="text/template" id='StoreOrderListViewTemplate'>
@@ -76,7 +76,8 @@
     <p>Store ID: <%%= store_id %></p>
     <p>Customer ID: <%%= customer_id %></p>
     <p>Total Price: $<%%= total_price %></p>
-    <button>Take Job</button>
+    <button class='job-btn' id='job<%%= id %>'>Take Job</button>
+    <button class = 'order-btn' id='order<%%= id %>'>View Order</button>
   </div>
 </script>
 
