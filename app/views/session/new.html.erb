@@ -1,11 +1,15 @@
 <div class="container">
-<%= form_tag(login_path, :class => "loginClass") do %>
-  <%= label_tag :email %>
-  <%= text_field_tag :email %>
-
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-
-  <%= submit_tag "Login"%>
-<% end %>
-<div>
+    <%= form_tag(login_path, :class => "loginClass") do %>
+    <p class = "space">
+        <%= label_tag :email %>
+        <%= text_field_tag :email, nil, class: 'form-control' %>
+    </p>
+    <p class = "space">
+        <%= label_tag :password %>
+        <%= password_field_tag :password, nil, class: 'form-control' %>
+    </p>
+    <p class = "space">
+        <%= submit_tag "Login", :class => "btn btn-info" %>
+    </p>
+    <% end %>
+</div>
