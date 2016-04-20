@@ -8,18 +8,20 @@ app.OrderLiveMapView = Backbone.View.extend({
 
         // set data for map
 
-        var runnerModel = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8698442, longitude: 151.2061558};
-        var storeModel = {name:"metropole", latitude: -33.8717618, longitude: 151.2067029, id:152};
-        var customerModel = {name: "customer_1", latitude: -33.8699165, longitude: 151.2062495, id: 146};
-        var userModel = '';
-        var targetModel = '';
+        var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8698442, longitude: 151.2061558};
+        var storeAttributes = {name:"metropole", latitude: -33.8717618, longitude: 151.2067029, id:152};
+        var customerAttributes = {name: "customer_1", latitude: -33.8699165, longitude: 151.2062495, id: 146};
+        var userAttributes = '';
+        var targetAttributes = '';
         if (app.currentUser.attributes.type === 'Runner') {
-            userModel = runnerModel;
-            targetModel = customerModel;
+            userAttributes = runnerAttributes;
+            targetAttributes = customerAttributes;
         }
         if (app.currentUser.attributes.type === 'Customer') {
-            userModel = customerModel;
-            targetModel = runnerModel;
+            userAttributes = customerAttributes;
+            targetAttributes = runnerAttributes;
+            var runnerLiveLocation = [];
+            var runnerModel
         }
 
         $('#main').empty();
@@ -32,9 +34,9 @@ app.OrderLiveMapView = Backbone.View.extend({
          var directionsService = new google.maps.DirectionsService();
          var directionsDisplay = new google.maps.DirectionsRenderer();
 
-        var userlatlng = new google.maps.LatLng(userModel.latitude, userModel.longitude);
-        var targetlatlng = new google.maps.LatLng(targetModel.latitude, targetModel.longitude);
-        var storelatlng = new google.maps.LatLng(storeModel.latitude, storeModel.longitude);
+        var userlatlng = new google.maps.LatLng(userAttributes.latitude, userAttributes.longitude);
+        var targetlatlng = new google.maps.LatLng(targetAttributes.latitude, targetAttributes.longitude);
+        var storelatlng = new google.maps.LatLng(storeAttribtues.latitude, storeAttributes.longitude);
 
         var mapOptions = {
             center: storelatlng,
@@ -69,9 +71,9 @@ app.OrderLiveMapView = Backbone.View.extend({
             //  });
          };
 
-        addMarker(targetModel);
-        addMarker(userModel);
-        addMarker(storeModel);
+        addMarker(targetAttributes);
+        addMarker(userAttributes);
+        addMarker(storeAttributes);
 
         directionsDisplay.setMap(map);
 
@@ -89,7 +91,7 @@ app.OrderLiveMapView = Backbone.View.extend({
           }
         });
 
-        
+
 
 
       }
