@@ -45,6 +45,10 @@ app.MapView = Backbone.View.extend({
 
        var targets = targetObjectArray;
 
+       if (!targets) {
+         targets = [];
+       }
+
        for (var i = 0; i < targets.length; i++) {
            var result = targets[i].attributes;
            var label = markerLabels[i];
