@@ -5,7 +5,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
     render: function() {
         app.getCurrentUser(this);
-        
+
         // set data for map
 
         var runnerModel = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8698442, longitude: 151.2061558};
@@ -89,22 +89,9 @@ app.OrderLiveMapView = Backbone.View.extend({
           }
         });
 
+        
 
-         // add your location
-    //      var addUserMarker = function(object) {
-    //          var marker = new google.maps.Marker({
-    //              id: object.id,
-    //              title: object.name,
-    //              position: new google.maps.LatLng(object.latitude, object.longitude),
-    //              cursor: 'pointer',
-    //              flat: false,
-    //              label: object.name,
-    //              map: map,
-    //           });
-    //       };
-      //
-      //
-    //      addUserMarker(userModel);  //for the user home location
+
       }
 
 
