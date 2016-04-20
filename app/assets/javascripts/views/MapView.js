@@ -3,11 +3,11 @@ var app = app || {};
 app.MapView = Backbone.View.extend({
     el: '#main',
 
-    render: function(userModel, targetObjectArray) {
+    render: function(userAttributes, targetObjectArray) {
       app.getCurrentUser(this);
-      
+
       // set data for map
-      var latlng = new google.maps.LatLng(userModel.latitude, userModel.longitude);
+      var latlng = new google.maps.LatLng(userAttributes.latitude, userAttributes.longitude);
 
       var mapOptions = {
           center: latlng,
@@ -77,7 +77,7 @@ app.MapView = Backbone.View.extend({
         };
 
 
-       addUserMarker(userModel);  //for the user home location
+       addUserMarker(userAttributes);  //for the user home location
     }
 
 });
