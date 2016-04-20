@@ -57,7 +57,8 @@ app.RunnerView = Backbone.View.extend({
   },
 
   showOrders: function () {
-    app.router.navigate('orders', true);
+    console.log("wat")
+    app.router.navigate('orderlist', true);
   },
 
   resetType: function () {
