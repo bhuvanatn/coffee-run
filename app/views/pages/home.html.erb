@@ -73,14 +73,14 @@
 
 <script type="text/template" id='RunnerOrderListViewTemplate'>
   <div class="order-view-list-item" id="<%%= id %>">
-    <p>Store ID: <%%= store_id %></p>
-    <p>Customer ID: <%%= customer_id %></p>
+    <p>Store ID: <%%= storeName %></p>
+    <p>Customer ID: <%%= customerName %></p>
     <p>Total Price: $<%%= total_price %></p>
     <button class="buttonJobDetails">Show Job Details</button>
     <button class="takeJob">Take Job</button>
 
     <div class="showJobDetails">
-      <p>Test</p>
+      <p><%%= typeof lineItemId !== 'undefined' ? lineItemId : '' %><p>
     </div>
   </div>
 </script>
