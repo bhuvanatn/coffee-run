@@ -57,6 +57,7 @@ app.AppRouter = Backbone.Router.extend({
     app.customers = new app.Customer();
     app.current_user = new app.Current_User();
     app.lineitems = new app.LineItem();
+    app.items = new app.LineItem  ();
 
     app.orders.fetch().done( function () {
       app.stores.fetch().done( function () {
