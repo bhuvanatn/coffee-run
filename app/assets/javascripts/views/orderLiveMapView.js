@@ -8,7 +8,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
         // set data for map
         //this is test data
-        var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8705876749324, longitude: 151.206173915557};
+        var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 14, balance: "1000.0", latitude: -33.8705876749324, longitude: 151.206173915557};
         app.runner = new app.Runner({id: runnerAttributes.id});
         var storeAttributes = {name:"metropole", latitude: -33.8697396777886, longitude: 151.206305511437, id:152};
         var customerAttributes = {name: "customer_1", latitude: -33.8692285493332, longitude: 151.205858336902, id: 146};
