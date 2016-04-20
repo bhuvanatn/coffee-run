@@ -31,7 +31,7 @@ app.RunnerView = Backbone.View.extend({
         },
         null,
         {
-          maximumAge: 30000,
+          maximumAge: 15000,
           enableHighAccuracy: true,
           timeout: 27000
         });
