@@ -31,9 +31,6 @@ app.MenuView = Backbone.View.extend({
                 $('#items-list').append(itemElement);
             }
 
-        }).error(function(f){
-
-                console.log('error');
         });
     },
 
@@ -43,24 +40,16 @@ app.MenuView = Backbone.View.extend({
         var qty = parseInt($('#qty' + id).text());
         var item = app.items.findWhere({'id': id}).attributes;
         var orderTotal = parseFloat($('#menu-total-price').text());
-        var itemPrice = parseFloat(app.items.findWhere({'id': id}).attributes.price);
+        var itemPrice = parseFloat(item.price);
 
         var lineItem;
         var subMenu;
 
-        var addSubMenu = function(itemID, itemQty) {
-            var itemSubmenuTemplate = $('#ItemSubmenuTemplate').html();
-            var menuViewHTML = _.template(itemSubmenuTemplate);
-            var itemInfo = {id: itemID, qty: itemQty};
-            var itemSubmenu = menuViewHTML(itemInfo);
-            $('#item-submenu-' + itemID).append(itemSubmenu);
-        };
-
         if (sign === '+') {
           qty += 1;
-          lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: app.order.id, unit_price: app.showPrice(item.price), notes: qty.toString() });
+          lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: app.order.id, unit_price: item.price, notes: qty.toString() });
           app.line_items.add( lineItem );
-          subMenu = addSubMenu(id, qty);
+          subMenu = this.addSubMenu(id, qty);
           $('#item-submenu-' + id).append(subMenu);
           orderTotal = orderTotal + itemPrice;
         } else if(qty > 0) {
@@ -74,11 +63,19 @@ app.MenuView = Backbone.View.extend({
         ///update quantity
         lineItem = app.line_items.findWhere({'item_id': id});
         $('#qty' + id).text(qty);
-        var newItemTotal = app.showPrice(itemPrice * qty);
-        $("#" +id+ "-total-price").text(newItemTotal);
+        $("#" +id+ "-total-price").text(app.showPrice(itemPrice * qty));
         $('#menu-total-price').text(app.showPrice(orderTotal));
 
     },
+
+    addSubMenu: function(itemID, itemQty) {
+        var itemSubmenuTemplate = $('#ItemSubmenuTemplate').html();
+        var menuViewHTML = _.template(itemSubmenuTemplate);
+        var itemInfo = {id: itemID, qty: itemQty};
+        var itemSubmenu = menuViewHTML(itemInfo);
+        $('#item-submenu-' + itemID).append(itemSubmenu);
+    },
+
 
     sendOrder: function() {
         var orderTotalPrice = 0;
