@@ -7,10 +7,11 @@ app.OrderLiveMapView = Backbone.View.extend({
         app.getCurrentUser(this);
 
         // set data for map
-
-        var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8732, longitude: 151.2066};
-        var storeAttributes = {name:"metropole", latitude: -33.8717618, longitude: 151.2067029, id:152};
-        var customerAttributes = {name: "customer_1", latitude: -33.8699165, longitude: 151.2062495, id: 146};
+        //this is test data
+        var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8705876749324, longitude: 151.206173915557};
+        app.runner = new app.Runner({id: runnerAttributes.id});
+        var storeAttributes = {name:"metropole", latitude: -33.8697396777886, longitude: 151.206305511437, id:152};
+        var customerAttributes = {name: "customer_1", latitude: -33.8692285493332, longitude: 151.205858336902, id: 146};
 
         $('#main').empty();
 
@@ -80,6 +81,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
 
         /// this is for live views of the runner
+    app.runner.fetch().done(function(){  ///delete this once not using test data
         if (app.currentUser.attributes.type === 'Customer') {
 
             var locationNum = 0;
@@ -95,6 +97,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
             var getRunnerLocation = window.setInterval(runnerFetch, 15000);
         }
+    }); /// delete this once not using test data
 
 
 
