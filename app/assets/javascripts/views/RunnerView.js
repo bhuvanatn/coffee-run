@@ -27,7 +27,7 @@ app.RunnerView = Backbone.View.extend({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           });
-          app.currentUser.save();
+          app.saveLocation();  
         },
         null,
         {
