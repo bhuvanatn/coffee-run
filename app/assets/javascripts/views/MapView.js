@@ -22,8 +22,10 @@ app.MapView = Backbone.View.extend({
       //loop through targets to add markers for each
       var markerLabels = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W'];
 
+      iconsURL = {store: 'assets/coffee.png'};
+
       //add the markers for the targets
-      var addTargetMarker = function(object, label, urlPath) {
+      var addTargetMarker = function(object, label, urlPath, iconURL) {
           var marker = new google.maps.Marker({
               id: object.id,
               title: object.name,
@@ -33,7 +35,7 @@ app.MapView = Backbone.View.extend({
               map: map,
               label: label,
               url: urlPath,
-              icon: new google.maps.MarkerImage('/assets/coffee.png',
+              icon: new google.maps.MarkerImage(iconURL,
                                         new google.maps.Size(32, 35),
                                         new google.maps.Point(0, 0),
                                         new google.maps.Point(32 / 2, 35),
@@ -60,7 +62,7 @@ app.MapView = Backbone.View.extend({
                urlPath = '#order/' + result.order_id; //order_id was added on orderListView page
            }
 
-           addTargetMarker(result, label, urlPath);
+           addTargetMarker(result, label, urlPath, iconsURL.store);
        }
 
        // add your location
