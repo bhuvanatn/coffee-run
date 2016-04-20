@@ -86,7 +86,7 @@ app.OrderLiveMapView = Backbone.View.extend({
         /// this is for live views of the runner
     app.runner.fetch().done(function(){  ///delete this once not using test data
 
-        if (app.currentUser.attributes.type === 'Runner') {
+        if (app.currentUser.attributes.type === 'Customer') {
 
             var locationNum = 0;
             var runnerLiveLocation = [{'num': locationNum, 'longitude': runnerAttributes.longitude, 'latitude': runnerAttributes.latitude}];
@@ -100,7 +100,7 @@ app.OrderLiveMapView = Backbone.View.extend({
                 });
             };
 
-            var getRunnerLocation = window.setInterval(runnerFetch, 1500);
+            var getRunnerLocation = window.setInterval(runnerFetch, 15000);
         }
     }); /// delete this once not using test data
 
