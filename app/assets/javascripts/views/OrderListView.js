@@ -6,7 +6,7 @@ app.OrderListView = Backbone.View.extend({
   'click #toggleListBtn': 'showListView',
   'click #toggleMapBtn': 'showMapView',
   'click .job-btn': 'takeJob',
-  'click .order-btn': 'viewOrder'
+  'click .buttonJobDetails': 'viewOrder'
   },
 
     render: function() {
@@ -84,16 +84,29 @@ app.OrderListView = Backbone.View.extend({
             var lineIds = _(app.lineitems.attributes).map(function (i) { return i.order_id; });
             lineIds = _(lineIds).compact();
 
-            for (var l = 0; l < lineIds.length; l++){
-              var lineItemIds = lineIds[l];
+
+            var orderItemArr = [];
+            var orderItemNameArr = [];
+            var orderItemQuantityArr = [];
+            for (var m = 0; m < lineIds.length; m++){
+              var lineItemIds = lineIds[m];
               if (lineItemIds === app.orders.models[i].attributes.id){
-                  order.lineItemId = app.lineitems.attributes[l].order_id
+                  orderItemArr.push(app.lineitems.attributes[m].item_id)
+                  orderItemNameArr.push(app.lineitems.attributes[m].name);
+                  orderItemQuantityArr.push(app.lineitems.attributes[m].quantity);
               }
             }
+
+            var lines = '';
+            for (var n = 0; n < orderItemArr.length; n++ ){
+              lines += '<p>' + orderItemNameArr[n] + ' x  ' + orderItemQuantityArr[n] + ' ' +'</p>';
+            }
+            order.allLines = lines;
 
             var orderElement = orderViewHTML(order);
             if (app.orders.models[i].attributes.runner_id === null){
                 $('#list-view').append(orderElement);
+
             }
             else if (app.current_user.attributes.id === order.store_id){
                 $('#main').append(orderElement);

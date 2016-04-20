@@ -125,11 +125,15 @@
     <p>Customer ID: <%%= customerName %></p>
     <p>Total Price: $<%%= total_price %></p>
 
+    <p><%%= allLines %></p>
+
+    <p>Order Quantity<p>
+
     <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
     <button class='order-btn buttonJobDetails' id='order<%%= id %>'>Show Job Details</button>
 
     <div class="showJobDetails">
-      <p><%%= typeof lineItemId !== 'undefined' ? lineItemId : '' %><p>
+
     </div>
 
   </div>
