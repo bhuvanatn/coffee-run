@@ -26,29 +26,39 @@ app.RunnerView = Backbone.View.extend({
           app.currentUser.set({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
-          },
-          null,
-          {
-            maximumAge: 30000,
-            enableHighAccuracy: true,
-            timeout: 27000
           });
-          app.currentUser.save();
-      });
-      view.$el.find('#nav-buttons')
-        .html(resetTypeButton)
-        .append(getOrdersButton);
+          app.saveLocation();  
+        },
+        null,
+        {
+          maximumAge: 15000,
+          enableHighAccuracy: true,
+          timeout: 27000
+        });
+        var mapView = new app.MapView();
+        console.log(app.currentUser.attributes);
+        mapView.render(app.currentUser.attributes);
+        app.currentUser.save();
+        view.$el.find('#nav-buttons')
+          .html(resetTypeButton)
+          .append(getOrdersButton);
     },
     function () { // failure - you can't be a runner
+      view.$el.find('#map').addClass("hide");
+
       var runnerLocationFailure = $('#runnerLocationFailure').html();
-      this.$el.find('#message').append(runnerLocationFailure);
+      view.$el.find('#message').append(runnerLocationFailure);
       view.$el.find('#nav-buttons')
         .html(resetTypeButton);
+    },{
+      enableHighAccuracy: true,
+      timeout: 27000
     });
   },
 
   showOrders: function () {
-    app.router.navigate('orders', true);
+    console.log("wat")
+    app.router.navigate('orderlist', true);
   },
 
   resetType: function () {

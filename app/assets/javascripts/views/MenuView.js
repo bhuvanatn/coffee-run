@@ -26,13 +26,11 @@ app.MenuView = Backbone.View.extend({
             var itemViewHTML = _.template(itemViewTemplate);
             for (var i = 0; i < app.items.length; i++) {
                 var item = app.items.models[i].attributes;
+                item.price = app.showPrice(item.price);
                 var itemElement = itemViewHTML(item);
                 $('#items-list').append(itemElement);
             }
 
-        }).error(function(f){
-
-                console.log('error');
         });
     },
 
@@ -41,41 +39,43 @@ app.MenuView = Backbone.View.extend({
         var id = parseInt(e.currentTarget.id.slice(1));
         var qty = parseInt($('#qty' + id).text());
         var item = app.items.findWhere({'id': id}).attributes;
+        var orderTotal = parseFloat($('#menu-total-price').text());
+        var itemPrice = parseFloat(item.price);
+
         var lineItem;
         var subMenu;
 
-        var addSubMenu = function(itemID, itemQty) {
-            var itemSubmenuTemplate = $('#ItemSubmenuTemplate').html();
-            var menuViewHTML = _.template(itemSubmenuTemplate);
-            var itemInfo = {id: itemID, qty: itemQty};
-            var itemSubmenu = menuViewHTML(itemInfo);
-            $('#item-submenu-' + itemID).append(itemSubmenu);
-        };
-
         if (sign === '+') {
-            qty += 1;
-            lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: app.order.id, unit_price: item.price, notes: qty.toString() });
-            app.line_items.add( lineItem );
-            subMenu = addSubMenu(id, qty);
-            $('#item-submenu-' + id).append(subMenu);
-        } else {
-                lineItem = app.line_items.findWhere({'item_id': id, "notes": qty.toString()});
-                app.line_items.remove( lineItem );
-                qty -= 1;
-                $('#item-submenu-'+ id).children().last().remove();
+          qty += 1;
+          lineItem = new app.LineItem({item_id: item.id, quantity: 1, order_id: app.order.id, unit_price: item.price, notes: qty.toString() });
+          app.line_items.add( lineItem );
+          subMenu = this.addSubMenu(id, qty);
+          $('#item-submenu-' + id).append(subMenu);
+          orderTotal = orderTotal + itemPrice;
+        } else if(qty > 0) {
+          lineItem = app.line_items.findWhere({'item_id': id, "notes": qty.toString()});
+          app.line_items.remove( lineItem );
+          qty -= 1;
+          $('#item-submenu-'+ id).children().last().remove();
+          orderTotal = orderTotal - itemPrice;
         }
 
         ///update quantity
         lineItem = app.line_items.findWhere({'item_id': id});
         $('#qty' + id).text(qty);
-        var itemPrice = parseFloat(app.items.findWhere({'id': id}).attributes.price);
-        var newItemTotal = itemPrice * qty;
-        $("#" +id+ "-total-price").text(newItemTotal);
-        var orderTotal = parseFloat($('#menu-total-price').text());
-        var newOrderTotal = orderTotal + itemPrice;
-        $('#menu-total-price').text(newOrderTotal);
+        $("#" +id+ "-total-price").text(app.showPrice(itemPrice * qty));
+        $('#menu-total-price').text(app.showPrice(orderTotal));
 
     },
+
+    addSubMenu: function(itemID, itemQty) {
+        var itemSubmenuTemplate = $('#ItemSubmenuTemplate').html();
+        var menuViewHTML = _.template(itemSubmenuTemplate);
+        var itemInfo = {id: itemID, qty: itemQty};
+        var itemSubmenu = menuViewHTML(itemInfo);
+        $('#item-submenu-' + itemID).append(itemSubmenu);
+    },
+
 
     sendOrder: function() {
         var orderTotalPrice = 0;
@@ -101,5 +101,4 @@ app.MenuView = Backbone.View.extend({
         app.order = undefined;
         app.router.navigate('');
     }
-
 });
