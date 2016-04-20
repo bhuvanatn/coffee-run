@@ -3,6 +3,9 @@ var app = app || {};
 app.AppRouter = Backbone.Router.extend({
   routes: {
     '': 'introduction',
+    'customer': 'customerPath',
+    'runner': 'runnerPath',
+    'store': 'storePath',
     'stores' : 'showStoreList',
     'menu/:id' : 'showMenu',
     'orderlist' : 'showOrderList',
@@ -13,7 +16,22 @@ app.AppRouter = Backbone.Router.extend({
     var appView = new app.AppView();
     appView.render();
   },
-  
+
+  customerPath: function () {
+    var customerView = new app.CustomerView();
+    customerView.render();
+  },
+
+  runnerPath: function () {
+    var runnerView = new app.RunnerView();
+    runnerView.render();
+  },
+
+  storePath: function () {
+    var storeView = new app.StoreView();
+    storeView.render();
+  },
+
   showStoreList: function () {
     app.stores = new app.Stores();
     app.stores.fetch().done( function () {

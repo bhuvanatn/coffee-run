@@ -1,5 +1,14 @@
 var app = app || {};
 
+app.getCurrentUser = function (view) {
+  if (!app.currentUser) {
+    $.get('/current_user').done( function (data) {
+      app.currentUser = new app.User(data); //current user is a simple hash
+      view.render();
+    });
+  }
+}
+
 $(document).ready(function() {
 
     app.stores = new app.Stores();
