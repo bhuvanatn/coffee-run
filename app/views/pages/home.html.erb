@@ -114,6 +114,7 @@
     <p>Store Name: <%%= storeName %></p>
     <p>Store ID: <%%= store_id %></p>
     <p>Customer Name: <%%= customerName %></p>
+    <p><%%= allLines %></p>
     <p>Total Price: $<%%= total_price %></p>
     <button>Confirm Orders</button>
   </div>
@@ -123,11 +124,8 @@
   <div class="order-view-list-item" id="<%%= id %>">
     <p>Store ID: <%%= storeName %></p>
     <p>Customer ID: <%%= customerName %></p>
-    <p>Total Price: $<%%= total_price %></p>
-
     <p><%%= allLines %></p>
-
-    <p>Order Quantity<p>
+    <p>Total Price: $<%%= total_price %></p>
 
     <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
     <button class='order-btn buttonJobDetails' id='order<%%= id %>'>Show Job Details</button>
