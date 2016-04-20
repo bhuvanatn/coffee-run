@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     app.line_items = new app.LineItems();
 
-
+    
     // app.users = new app.Users();
     // app.users.fetch();
 

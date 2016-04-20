@@ -89,6 +89,7 @@ app.CustomerView = Backbone.View.extend({
     window.navigator.geolocation.getCurrentPosition(function(position) {
       app.currentUser.set({latitude: position.coords.latitude});
       app.currentUser.set({longitude: position.coords.longitude});
+      console.log(app.currentUser);
       app.currentUser.save();
       view.render();
     },

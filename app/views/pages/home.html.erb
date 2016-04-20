@@ -1,6 +1,7 @@
 <h1>Welcome to Coffee Run</h1>
 
-<div id="main"></div>
+<div id="main">
+</div>
 
 <!--  introduction to the site stuff below -->
 
@@ -117,21 +118,32 @@
 <!--  -->
 
 <script type="text/template" id='OrderViewTemplate'>
-
+    <h2>This is the Order View</h2>
 </script>
 
-<script type="text/template" id='OrderListViewTemplate'>
-    <h3>Order List</h3>
-    <p>Store ID: <%%= store_id %></p>
-    <p>Customer ID: <%%= customer_id %></p>
-    <p>Runner ID: <%%= runner_id %></p>
-    <p>Total Price: <%%= total_price %></p>
-
-
+<script type="text/template" id='StoreOrderListViewTemplate'>
   <div class="order-view-list-item" id="<%%= id %>">
     <p>Store Name: <%%= storeName %></p>
+    <p>Store ID: <%%= store_id %></p>
     <p>Customer Name: <%%= customerName %></p>
     <p>Total Price: $<%%= total_price %></p>
+    <button>Confirm Orders</button>
+  </div>
+</script>
+
+<script type="text/template" id='RunnerOrderListViewTemplate'>
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Store ID: <%%= store_id %></p>
+    <p>Customer ID: <%%= customer_id %></p>
+    <p>Total Price: $<%%= total_price %></p>
+
+    <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
+    <button class='order-btn buttonJobDetails' id='order<%%= id %>'>Show Job Details</button>
+
+    <div class="showJobDetails">
+      <p>Test</p>
+    </div>
+
   </div>
 </script>
 
