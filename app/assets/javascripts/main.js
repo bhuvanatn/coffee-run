@@ -20,6 +20,11 @@ app.showPrice = function (price) {
   return priceDollars +'.'+ centsString;
 }
 
+var saveLocation = function () {
+  app.currentUser.save();
+}
+
+app.saveLocation = _.throttle(saveLocation, 15000);
 
 $(document).ready(function() {
 
