@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = @current_user
+    respond_to do |format|
+      @user = @current_user
+      format.html {}
+      format.json { render :json => User.find(params[:id]) }
+    end
   end
 
   def edit
