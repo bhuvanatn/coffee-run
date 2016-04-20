@@ -40,7 +40,11 @@ app.OrderLiveMapView = Backbone.View.extend({
         //loop through targets to add markers for each
         var markerLabels = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W'];
 
-        iconsURL = {store: 'assets/coffee.png', runner: 'assets/runner.png',customer: 'assets/finish.png', live: 'assets/footsteps.png'};
+        iconsURL = {store: 'http://4.bp.blogspot.com/_zjNFt9tN264/S_x6IrY3MGI/AAAAAAAAAxk/QuKnBvZxd1M/s400/htbyocupcoflidwh1c.png',
+                    runner: 'https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/running.png',
+                    customer: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Checkered_flags-fr.svg/2000px-Checkered_flags-fr.svg.png',
+                    live: 'http://www.wihsradio.org/images/clipart/footsteps.png'
+                };
 
         //add the markers for the targets
         var addMarker = function(object, iconURL) {
