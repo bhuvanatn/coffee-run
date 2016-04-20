@@ -10,6 +10,8 @@ app.MenuView = Backbone.View.extend({
     },
 
     render: function() {
+        app.getCurrentUser(this);
+
         var store = app.store.attributes;
 
         var menuViewTemplate = $('#MenuViewTemplate').html();

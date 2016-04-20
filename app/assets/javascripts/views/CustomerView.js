@@ -35,7 +35,8 @@ app.CustomerView = Backbone.View.extend({
         .text('Change Location')
         .attr('id', 'change-location-btn');
       this.$el.find('#nav-buttons').append(button);
-      var button = $('<button>')
+
+      button = $('<button>')
         .text('Find Cafes in my Area')
         .attr('id', 'show-cafes-btn');
       this.$el.find('#nav-buttons').append(button);
@@ -58,7 +59,7 @@ app.CustomerView = Backbone.View.extend({
     this.$el.find('#nav-buttons').html('');
     var manualForm = $('#manualAddressTemplate').text();
     this.$el.find('#address-form')
-      .html(manualForm)
+      .html(manualForm);
     if (NoAuto) {
       this.$el.find('#address-form')
         .append($('<p/>').text("Automatic address finder unavailable"));

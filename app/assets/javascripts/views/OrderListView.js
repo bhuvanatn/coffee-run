@@ -10,9 +10,12 @@ app.OrderListView = Backbone.View.extend({
   },
 
     render: function() {
+      app.getCurrentUser(this);
       $('#main').html('');
 
       var userType = app.current_user.attributes.type;
+
+      orderListViewTemplate = $('#' + userType + 'OrderListViewTemplate').html();
 
       if (userType === 'Runner') {
           //clear #main
@@ -68,7 +71,6 @@ app.OrderListView = Backbone.View.extend({
             for (var j = 0; j < app.stores.length; j++){
                 var storeId = app.stores.models[j].attributes.id;
                 if (order.store_id === storeId){
-
                     order.storeName = app.stores.models[j].attributes.name;
                 }
             }
@@ -78,6 +80,17 @@ app.OrderListView = Backbone.View.extend({
                     order.customerName = app.customers.attributes[k].name;
                 }
             }
+
+            var lineIds = _(app.lineitems.attributes).map(function (i) { return i.order_id; });
+            lineIds = _(lineIds).compact();
+
+            for (var l = 0; l < lineIds.length; l++){
+              var lineItemIds = lineIds[l];
+              if (lineItemIds === app.orders.models[i].attributes.id){
+                  order.lineItemId = app.lineitems.attributes[l].order_id
+              }
+            }
+
             var orderElement = orderViewHTML(order);
             if (app.orders.models[i].attributes.runner_id === null){
                 $('#list-view').append(orderElement);
