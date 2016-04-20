@@ -9,6 +9,7 @@ gem 'rails', '4.2.6'
 gem 'pry-rails'
 gem 'annotate'
 gem 'geocoder'
+gem 'rails_12factor'
 
 gem 'pg'
 # Use SCSS for stylesheets
