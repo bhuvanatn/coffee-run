@@ -14,8 +14,17 @@ app.OrderView = Backbone.View.extend({
     // Price: Total price of the items
     // )
     render: function() {
-        $('#main').html('');
+
+
+        app.getCurrentUser(this);
+        for (var i = 0; i < app.order.length; i++){
+            var x = app.orders.models[0].attributes.store_id;
+            if (x === )
+        }
         orderViewTemplate = $('#OrderViewTemplate').html();
         var orderViewHTML = _.template(orderViewTemplate);
+        var orderElement = orderViewHTML(order);
+        $('#main').append(orderElement);
+        //need to show store details, customer details and order details
     }
 });
