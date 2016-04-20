@@ -65,7 +65,7 @@ app.AppRouter = Backbone.Router.extend({
   },
 
   showMap: function() {
-    var mapView = new app.MapView();
+    var mapView = new app.OrderLiveMapView();
     mapView.render();
   }
 

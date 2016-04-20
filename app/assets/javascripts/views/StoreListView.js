@@ -8,6 +8,8 @@ app.StoreListView = Backbone.View.extend({
     'click #toggleMapBtn': 'showMapView'
     },
     render: function() {
+
+      app.getCurrentUser(this);
       // prepare main div
 
       $('#main').empty();

@@ -10,6 +10,7 @@ app.OrderListView = Backbone.View.extend({
   },
 
     render: function() {
+      app.getCurrentUser(this);
       $('#main').html('');
 
       var userType = app.current_user.attributes.type;

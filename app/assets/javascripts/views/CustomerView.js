@@ -9,6 +9,7 @@ app.CustomerView = Backbone.View.extend({
   },
 
   render: function() {
+    app.getCurrentUser(this);
     var customerViewTemplate = $('#customerViewTemplate').html();
     this.$el.html(customerViewTemplate);
     if (app.currentUser.latitude) {

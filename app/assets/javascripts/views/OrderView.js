@@ -4,6 +4,7 @@ app.OrderView = Backbone.View.extend({
     el: '#main',
 
     render: function() {
+        app.getCurrentUser(this);
         var order = app.order.attributes;
         orderViewTemplate = $('#OrderViewTemplate').html();
         var orderViewHTML = _.template(orderViewTemplate);

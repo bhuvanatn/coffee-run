@@ -12,6 +12,8 @@ app.AppView = Backbone.View.extend({
 
   render: function() {
 
+    app.getCurrentUser(this);
+
     var view = this;
 
     $.get('/current_user').done( function (data) {
