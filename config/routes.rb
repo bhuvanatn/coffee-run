@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   get '/stores_within' => 'users#stores_within'
   get '/orders_information' => 'orders#information'
 
+
 end

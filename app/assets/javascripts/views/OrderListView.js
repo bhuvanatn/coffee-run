@@ -94,7 +94,7 @@ app.OrderListView = Backbone.View.extend({
             for (var m = 0; m < lineIds.length; m++){
               var lineItemIds = lineIds[m];
               if (lineItemIds === app.orders.models[i].attributes.id){
-                  orderItemArr.push(app.lineitems.attributes[m].item_id)
+                  orderItemArr.push(app.lineitems.attributes[m].item_id);
                   orderItemNameArr.push(app.lineitems.attributes[m].name);
                   orderItemQuantityArr.push(app.lineitems.attributes[m].quantity);
               }

@@ -72,11 +72,17 @@ class OrdersController < ApplicationController
         @orders += s.orders
       end
       @orders = @orders.select {|o| o[:status] == "pending"}
+    elsif @current_user.type == 'Customer'
+      @orders = Order.where :customer_id => @current_user.id
+      @stores = []
+      @orders.each do |o|
+         @stores.push(o.store)
+      end
     end
 
     @line_items = @orders.map {|o| o.line_items}.flatten
-    @items = @line_items.map {|l| l.item}
-    @customers = @orders.map {|o| o.customer}
+    @items = @line_items.map {|l| l.item}.uniq
+    @customers = @orders.map {|o| o.customer}.uniq
 
     render :json => {
       :orders => @orders,

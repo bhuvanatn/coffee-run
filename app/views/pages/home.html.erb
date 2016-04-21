@@ -115,8 +115,8 @@
 
     <p>Customer Name: <%%= CustomerName %></p>
     <p>Customer Address:  <%%= CustomerAddress  %></p>
-    
-    <p> Total Price: <%%= TotalPrice %></p>
+
+    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
 </script>
 
 <script type="text/template" id='OrderListViewTemplate'>
