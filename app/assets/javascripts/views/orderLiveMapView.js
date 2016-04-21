@@ -51,7 +51,8 @@ app.OrderLiveMapView = Backbone.View.extend({
         iconsURL = {store: 'http://4.bp.blogspot.com/_zjNFt9tN264/S_x6IrY3MGI/AAAAAAAAAxk/QuKnBvZxd1M/s400/htbyocupcoflidwh1c.png',
                     runner: 'https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/running.png',
                     customer: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Checkered_flags-fr.svg/2000px-Checkered_flags-fr.svg.png',
-                    live: 'http://www.wihsradio.org/images/clipart/footsteps.png'
+                    left: 'http://cdn.mysitemyway.com/icons-watermarks/simple-black/classica/classica_left-foot/classica_left-foot_simple-black_128x128.png',
+                    right: 'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-people-things/062532-glossy-black-icon-people-things-foot-right-ps.png'
                 };
 
         //add the markers for the targets
@@ -101,7 +102,12 @@ app.OrderLiveMapView = Backbone.View.extend({
                 runnerModel.fetch().done(function(){
                     locationNum += 1;
                     runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
-                    addMarker(runnerLiveLocation[0], iconsURL.live);
+                    if (locationNum % 2 === 0) {
+                        addMarker(runnerLiveLocation[0], iconsURL.right);
+                    }
+                    else if (locationNum % 2 !== 0) {
+                        addMarker(runnerLiveLocation[0], iconsURL.left);
+                    }
                     app.orders.fetch().done(function(){
                         if (app.order.attributes.status === 'delivered') {
                             window.clearInterval(getRunnerLocation);
