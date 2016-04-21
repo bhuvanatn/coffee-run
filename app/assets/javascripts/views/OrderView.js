@@ -20,30 +20,20 @@ app.OrderView = Backbone.View.extend({
             $('#awaitingConfirmation').html('Awaiting Confirmation');
         }
 
-        // var id = this.getId.get('id'); //gets order id
-
-        // var store_id = this.getId.get("store_id"); // gets store id from order table
-        var storeName = app.store.get('name');
-        var storeAddress = app.store.get('address');
-        var total_price = app.order.get('total_price');
-        var status = app.order.get('status');
-
-        var customerName = app.customer.get('name');
-        var customerAddress = app.customer.get('address');
-
         // var line_item = app.lineitems.get()
 
-        orderViewTemplate = $('#' + userType + 'OrderViewTemplate').html();
+        orderViewTemplate = $('#OrderViewTemplate').html();
         var orderViewHTML = _.template(orderViewTemplate);
 
+
         var orderElement = orderViewHTML({
-          StoreName: storeName,
-          StoreAddress: storeAddress,
-          CustomerName: customerName,
-          CustomerAddress: customerAddress,
-          TotalPrice: total_price,
+          StoreName: app.store.get('name'),
+          StoreAddress: app.store.get('name'),
+          CustomerName: app.customer.get('name'),
+          CustomerAddress: app.customer.get('address'),
+          TotalPrice: app.order.get('total_price'),
           Status: app.order.get("status"),
-          id: app.order.get('id')
+          id: app.order.get('id'),
         });
 
         var orderViewDiv = document.createElement('div');
@@ -51,6 +41,18 @@ app.OrderView = Backbone.View.extend({
         $('#main').append(orderViewDiv);
 
         $('#orderView').html(orderElement);
+
+        var itemOrderView = $('#itemOrderViewTemplate').html();
+        var itemOrderViewHTML = _.template(itemOrderView);
+
+
+        for (var i = 0; i < app.line_items.length; i++) {
+            var itemId = app.line_items.models[i].attributes.item_id;
+            var item = app.items.findWhere({id: itemId});
+            var itemName = item.attributes.name;
+            app.line_items.models[i].set({item_name: itemName});
+            $('#itemOrderView').append(itemOrderViewHTML(app.line_items.models[i].attributes));
+        }
 
         if (app.currentUser.attributes.type === 'Runner' && app.order.attributes.status === 'pending') {
             var takeJobButton = document.createElement('button');

@@ -155,11 +155,8 @@
 
 </script>
 
+
 <script type="text/template" id='OrderViewTemplate'>
-  <div class="container"></div>
-  </script>
-
-<script type="text/template" id='CustomerOrderViewTemplate'>
     <p> Store Name: <%%= StoreName %></p>
     <p>Store Address: <%%= StoreAddress %></p>
     <p>Status: <%%= Status %></p>
@@ -167,27 +164,17 @@
     <p>Customer Address:  <%%= CustomerAddress  %></p>
 
     <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
-</script>
 
-<script type="text/template" id='RunnerOrderViewTemplate'>
-    <p> Store Name: <%%= StoreName %></p>
-    <p>Store Address: <%%= StoreAddress %></p>
-    <p>Status: <%%= Status %></p>
-    <p>Customer Name: <%%= CustomerName %></p>
-    <p>Customer Address:  <%%= CustomerAddress  %></p>
-
-    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
+    <ul id='itemOrderView'></ul>
 
 </script>
 
-<script type="text/template" id='StoreOrderViewTemplate'>
-    <p> Store Name: <%%= StoreName %></p>
-    <p>Store Address: <%%= StoreAddress %></p>
-    <p>Status: <%%= Status %></p>
-    <p>Customer Name: <%%= CustomerName %></p>
-    <p>Customer Address:  <%%= CustomerAddress  %></p>
-    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
-  </div>
+<script type="text/template" id='itemOrderViewTemplate'>
+      <li>
+        <p><%%= item_name %></p>
+        <p><%%= notes %></p>
+        <p><%%= unit_price %></p>
+      </li>
 </script>
 
 <script type="text/template" id='OrderListViewTemplate'>
@@ -272,7 +259,7 @@
         <p>Description: <%%= description %></p>
         <button class='quantity-button' class='change-qty' id='-<%%= id %>'>-</button>
         <box class='item-qty' id='qty<%%= id %>'>0</box>
-        <button class='quantity-button' class='change-qty' id='+<%%= id %>'>+</button>
+        <button class='quantity-button change-qty' id='+<%%= id %>'>+</button>
         <p>Total Price: $<span id='<%%= id %>-total-price'>0.00</span></p>
         <ul id='item-submenu-<%%= id %>'></ul>
     </li>
