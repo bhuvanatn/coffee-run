@@ -73,7 +73,6 @@ app.AppRouter = Backbone.Router.extend({
         // if (app.currentUser === 'Customer') {
             id = parseInt(id);
             $.get('/orders_information').done (function (data) {
-              console.log(data);
               app.orders = new app.Orders(data.orders);
               app.stores = new app.Stores(data.stores);
               app.customers = new app.Customers(data.customers);
