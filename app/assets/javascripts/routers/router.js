@@ -78,7 +78,7 @@ app.AppRouter = Backbone.Router.extend({
         app.customer = new app.Customer(data.customer);
         app.orderlineitems = new app.LineItems(data.lineItems);
         app.orderitems = new app.Items(data.items);
-        var orderView = new OrderView();
+        var orderView = new app.OrderView();
         orderView.render();
       });
     },

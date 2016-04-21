@@ -35,7 +35,14 @@ app.OrderView = Backbone.View.extend({
         orderViewTemplate = $('#OrderViewTemplate').html();
         var orderViewHTML = _.template(orderViewTemplate);
 
-        var orderElement = orderViewHTML({StoreName: storeName, StoreAddress: storeAddress, CustomerName: customerName, CustomerAddress: customerAddress, TotalPrice: total_price });
+        var orderElement = orderViewHTML({
+          StoreName: storeName,
+          StoreAddress: storeAddress,
+          CustomerName: customerName,
+          CustomerAddress: customerAddress,
+          TotalPrice: total_price,
+          Status: app.order.get("status");
+        });
         this.$el.html(orderElement);
 
         if (app.currentUser.attributes.type === 'Customer') {
