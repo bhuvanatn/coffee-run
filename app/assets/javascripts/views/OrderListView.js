@@ -15,7 +15,7 @@ app.OrderListView = Backbone.View.extend({
       app.getCurrentUser(this);
       $('#main').html('');
 
-      var userType = app.current_user.attributes.type;
+      var userType = app.currentUser.attributes.type;
 
       orderListViewTemplate = $('#' + userType + 'OrderListViewTemplate').html();
 
@@ -65,25 +65,24 @@ app.OrderListView = Backbone.View.extend({
 
       }
 
-      orderListViewTemplate = $('#' + userType + 'OrderListViewTemplate').html(); //changes according to usertype ie. runner or store
+
 
       var orderViewHTML = _.template(orderListViewTemplate);
+      console.log(app.orders);
         for (var i = 0; i < app.orders.length; i++){
             var order = app.orders.models[i].attributes;
 
             for (var j = 0; j < app.stores.length; j++){
+
                 var storeId = app.stores.models[j].attributes.id;
                 if (order.store_id === storeId){
                     order.storeName = app.stores.models[j].attributes.name;
                 }
             }
-            for (var k = 0; k < app.stores.length; k++){
-                var customerId = app.customers.attributes[k].id;
-                if (order.customer_id === customerId){
-                    order.customerName = app.customers.attributes[k].name;
-                }
-            }
 
+
+            var customerName = app.customers.findWhere({id: order.customer_id}).get('name');
+            order.customerName = customerName;
 
             // Loops through the lineItems and pulls out and stores the ID, Name and Quantity of each item
             var lineIds = _(app.lineitems.attributes).map(function (i) { return i.order_id; });
@@ -101,7 +100,6 @@ app.OrderListView = Backbone.View.extend({
               }
             }
 
-
             // Loops through all the line items and prints out a new line.
             var lines = '';
             for (var n = 0; n < orderItemArr.length; n++ ){
@@ -110,17 +108,16 @@ app.OrderListView = Backbone.View.extend({
             order.allLines = lines;
 
 
+
             var orderElement = orderViewHTML(order);
-            if (app.orders.models[i].attributes.runner_id === null && userType !== 'Store'){
+            if ( userType === 'Runner' && app.orders.models[i].attributes.runner_id === null){
                 $('#list-view').append(orderElement);
-
             }
-            else if (app.current_user.attributes.id === order.store_id && app.orders.models[i].attributes.runner_id !== null){
+            else if ( userType === 'Store' && app.orders.models[i].attributes.store_id === app.currentUser.id){
                 $('#main').append(orderElement);
             }
-            else if (app.current_user.attributes.id === order.customer_id){
+            else if (app.currentUser.attributes.id === order.customer_id){
                 $('#main').append(orderElement);
-
             }
         }
 
@@ -141,13 +138,14 @@ app.OrderListView = Backbone.View.extend({
         this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
+          console.log(currentUserId)
             for (var i = 0; i < app.orders.length; i++){
               if (app.orders.models[i].attributes.id === orderID){
                 if (app.orders.models[i].attributes.status === null){
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
-                    app.orders.models[i].save({'status': null})
-                    app.orders.models[i].save({'runner': null})
+                    app.orders.models[i].set({'status': null})
+                    app.orders.models[i].set({'runner': null})
                     app.router.navigate('order/' + orderID, true);
                   }
                 }
