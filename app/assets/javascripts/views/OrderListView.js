@@ -123,6 +123,8 @@ app.OrderListView = Backbone.View.extend({
             }
         }
 
+      this.polling();
+
       },
 
       showListView: function() {
@@ -191,7 +193,21 @@ app.OrderListView = Backbone.View.extend({
         $(".buttonJobDetails").on('click', function(){
           $(this).closest('div').children('.showJobDetails').toggle();
         });
+      },
+
+
+    polling: function () {
+      if (!app.ordersPolling) {
+        app.ordersPolling = setInterval(function(){
+          $.get('/orders_information').done( function (data){
+            app.orders = new app.Orders(data.orders);
+            app.stores = new app.Stores(data.stores);
+            app.customers = new app.Customers(data.customers);
+            app.lineitems = new app.LineItems(data.line_items);
+            app.items = new app.Items(data.items);
+            app.view.render();
+          });
+        }), 15000);
       }
-
-
-  });
+    }
+});
