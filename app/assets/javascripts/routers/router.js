@@ -79,6 +79,13 @@ app.AppRouter = Backbone.Router.extend({
               app.lineitems = new app.LineItems(data.lineitems);
               app.items = new app.Items(data.items);
 
+              for (var i = 0; i < app.orders.length; i++) {
+                if  (app.orders[i].id === id) {
+                  app.order = app.orders[i];
+                }
+              }
+              console.log(app.order);
+
               app.order = app.orders.findWhere({'id': id});
               app.store = new app.Store(app.stores.findWhere({'id': app.order.store_id}));
               app.customer = new app.Customer(app.customers.findWhere({'id': app.order.customer_id}));
