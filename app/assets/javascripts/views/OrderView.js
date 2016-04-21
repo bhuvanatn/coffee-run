@@ -112,6 +112,7 @@ app.OrderView = Backbone.View.extend({
             for (var i = 0; i < app.orders.length; i++){
               if (app.orders.models[i].attributes.id === orderID){
                 if (app.orders.models[i].attributes.status === 'pending'){
+                    console.log('test');
                     console.log('1', app.orders.models[i]);
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
