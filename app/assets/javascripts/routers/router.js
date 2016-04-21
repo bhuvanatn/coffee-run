@@ -70,45 +70,17 @@ app.AppRouter = Backbone.Router.extend({
     },
 
     showOrder: function(id) {
-        if (app.currentUser === 'Customer') {
-            id = parseInt(id);
-            $.get('/orders_information').done (function (data) {
-              console.log(data);
-              app.orders = new app.Orders(data.orders);
-              app.stores = new app.Stores(data.stores);
-              app.customers = new app.Customers(data.customers);
-              app.lineitems = new app.LineItems(data.line_items);
-              app.items = new app.Items(data.items);
+      id = parseInt(id)
 
-              app.order = new app.Order(app.orders.findWhere({'id': id}).attributes);
-              app.store = new app.Store(app.stores.findWhere({'id': app.order.attributes.store_id}).attributes);
-              app.customer = new app.Customer(app.customers.findWhere({'id': app.order.attributes.customer_id}).attributes);
-              app.orderlineitems = new app.LineItems(app.lineitems.where({'order_id': id}));
-              app.orderitems = new app.Items();
-              for (var i = 0; i < app.orderlineitems.length; i++) {
-                  app.orderitems.push(app.items.findWhere({'id': app.orderlineitems.models[i].attributes.item_id}));
-              }
-
-              var orderView = new app.OrderView();
-              orderView.render();
-            });
-        }
-        else {
-          var orderView = new app.OrderView();
-                app.order = new app.Order(app.orders.findWhere({'id': id}));
-                app.store = new app.Store(app.stores.findWhere({'id': app.order.store_id}));
-                app.customer = new app.Customer(app.customers.findWhere({'id': app.order.customer_id}));
-                app.orderlineitems = new app.LineItems(app.lineitems.where({'id': id}));
-                app.orderitems = new app.Items();
-                for (var i = 0; i < app.orderlineitems.length; i++) {
-                    app.orderitems += app.items.findWhere({'id': app.orderlineitems[i].item_id});
-                }
-
-          orderView.render();
-        }
-
-
-
+      $.get('/order_associations/'+id).done (function (data) {
+        app.order = new app.Order(data.order);
+        app.store = new app.Store(data.store);
+        app.customer = new app.Customer(data.customer);
+        app.orderlineitems = new app.LineItems(data.lineItems);
+        app.orderitems = new app.Items(data.items);
+        var orderView = new app.OrderView();
+        orderView.render();
+      });
     },
 
     // showOrder: function(id) {

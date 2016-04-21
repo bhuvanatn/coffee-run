@@ -93,6 +93,23 @@ class OrdersController < ApplicationController
     }
   end
 
+  def associations
+    @order = Order.find params[:id]
+    @store = @order.store
+    @customer = @order.customer
+    @runner = @order.runner
+    @line_items = @order.line_items
+    @items = @line_items.map {|li| li.item}
+    render :json => {
+      :order => @order,
+      :store => @store,
+      :customer => @customer,
+      :lineItems => @line_items,
+      :items => @items
+    }
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

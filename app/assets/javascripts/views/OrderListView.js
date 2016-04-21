@@ -56,8 +56,10 @@ app.OrderListView = Backbone.View.extend({
 
                   var availableOrders = app.orders.where({'runner_id': null });
                   var availableOrderStores = [];
+
                   for (var i = 0; i < availableOrders.length; i++) {
                       var store = app.stores.findWhere({'id': availableOrders[i].attributes.store_id});
+
                       store.attributes.order_id = availableOrders[i].attributes.id;
                       availableOrderStores.push(store);
                   }
@@ -71,7 +73,6 @@ app.OrderListView = Backbone.View.extend({
       //Loop to show all the orders and add in necessary information like
       // Storename, Customer name etc
       var orderViewHTML = _.template(orderListViewTemplate);
-      console.log(app.orders);
         for (var i = 0; i < app.orders.length; i++){
             var order = app.orders.models[i].attributes;
 
@@ -149,7 +150,15 @@ app.OrderListView = Backbone.View.extend({
                   if (confirmButton === true){
                     app.orders.models[i].save({'status': 'confirmed'});
                     app.orders.models[i].save({'runner': currentUserId});
-                    app.router.navigate('order/' + orderID, true);
+
+                    var liveMap = new app.OrderLiveMapView();
+                    var order = app.orders.findWhere({id: orderID});
+                    liveMap.render(app.customers.findWhere({id: order.attributes.customer_id}).attributes,
+                                    app.currentUser.attributes,
+                                    app.stores.findWhere({id: order.attributes.store_id}).attributes
+                                  );
+                    // app.router.navigate('order/' + orderID, true);
+
                   } else {
                     break;
                   }

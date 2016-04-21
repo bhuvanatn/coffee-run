@@ -47,7 +47,7 @@ app.StoreListView = Backbone.View.extend({
              app.closeStores = true;
 
              app.stores.fetch().done(function(){
-                console.log(app.stores);
+  
                 var mapDiv = document.createElement('div');
                 mapDiv.setAttribute('id', 'map');
                 $('#map-view').append(mapDiv);
