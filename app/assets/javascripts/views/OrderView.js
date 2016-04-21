@@ -112,12 +112,13 @@ app.OrderView = Backbone.View.extend({
             for (var i = 0; i < app.orders.length; i++){
               if (app.orders.models[i].attributes.id === orderID){
                 if (app.orders.models[i].attributes.status === 'pending'){
-
+                    console.log('1', app.orders.models[i]);
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
                     app.orders.models[i].set({status: 'confirmed'});
+                    console.log('2', app.orders.models[i]);
                     app.orders.models[i].set({runner_id: app.currentUser.id});
-                    console.log(app.orders.models[i]);
+                    console.log('3', app.orders.models[i]);
                     app.order = app.orders.models[i];
 
                     app.order.save().done(function(){
@@ -129,9 +130,6 @@ app.OrderView = Backbone.View.extend({
                                     app.currentUser.attributes,
                                     app.stores.findWhere({id: app.order.attributes.store_id}).attributes
                                   );
-
-
-
                   } else {
                     break;
                   }
