@@ -70,7 +70,7 @@ app.AppRouter = Backbone.Router.extend({
     },
 
     showOrder: function(id) {
-        // if (app.currentUser === 'Customer') {
+        if (app.currentUser === 'Customer') {
             id = parseInt(id);
             $.get('/orders_information').done (function (data) {
               app.orders = new app.Orders(data.orders);
@@ -91,17 +91,21 @@ app.AppRouter = Backbone.Router.extend({
               var orderView = new app.OrderView();
               orderView.render();
             });
-        // }
-        // else {
-        //       app.order = new app.Order(app.orders.findWhere({'id': id}));
-        //       app.store = new app.Store(app.stores.findWhere({'id': app.order.store_id}));
-        //       app.customer = new app.Customer(app.customers.findWhere({'id': app.order.customer_id}));
-        //       app.orderlineitems = new app.LineItems(app.lineitems.where({'id': id}));
-        //       app.orderitems = new app.Items();
-        //       for (var i = 0; i < orderlineitems.length; i++) {
-        //           app.orderitems += app.items.findWhere({'id': app.orderlineitems[i].item_id});
-        //       }
-        // }
+        }
+        else {
+          var orderView = new app.OrderView();
+                app.order = new app.Order(app.orders.findWhere({'id': id}));
+                app.store = new app.Store(app.stores.findWhere({'id': app.order.store_id}));
+                app.customer = new app.Customer(app.customers.findWhere({'id': app.order.customer_id}));
+                app.orderlineitems = new app.LineItems(app.lineitems.where({'id': id}));
+                app.orderitems = new app.Items();
+                for (var i = 0; i < app.orderlineitems.length; i++) {
+                    app.orderitems += app.items.findWhere({'id': app.orderlineitems[i].item_id});
+                }
+
+          orderView.render();
+        }
+
 
 
     },
