@@ -75,9 +75,10 @@ app.AppRouter = Backbone.Router.extend({
       $.get('/order_associations/'+id).done (function (data) {
         app.order = new app.Order(data.order);
         app.store = new app.Store(data.store);
-        app.customer = new app.customer(data.customer);
+        app.customer = new app.Customer(data.customer);
         app.orderlineitems = new app.LineItems(data.lineItems);
         app.orderitems = new app.Items(data.items);
+        var orderView = new app.OrderView();
         orderView.render();
       });
     },
