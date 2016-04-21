@@ -9,7 +9,9 @@ app.OrderListView = Backbone.View.extend({
   'click .buttonJobDetails': 'viewOrder'
   },
 
+
     render: function() {
+
       app.getCurrentUser(this);
       $('#main').html('');
 
@@ -20,6 +22,7 @@ app.OrderListView = Backbone.View.extend({
       if (userType === 'Runner') {
           //clear #main
           $('#main').empty();
+
           //add list view button
           var toggleListDiv = document.createElement('button');
                toggleListDiv.setAttribute('id', 'toggleListBtn');
@@ -81,9 +84,10 @@ app.OrderListView = Backbone.View.extend({
                 }
             }
 
+
+            // Loops through the lineItems and pulls out and stores the ID, Name and Quantity of each item
             var lineIds = _(app.lineitems.attributes).map(function (i) { return i.order_id; });
             lineIds = _(lineIds).compact();
-
 
             var orderItemArr = [];
             var orderItemNameArr = [];
@@ -97,14 +101,17 @@ app.OrderListView = Backbone.View.extend({
               }
             }
 
+
+            // Loops through all the line items and prints out a new line.
             var lines = '';
             for (var n = 0; n < orderItemArr.length; n++ ){
               lines += '<p>' + orderItemNameArr[n] + ' x  ' + orderItemQuantityArr[n] + ' ' +'</p>';
             }
             order.allLines = lines;
 
+
             var orderElement = orderViewHTML(order);
-            if (app.orders.models[i].attributes.runner_id === null){
+            if (app.orders.models[i].attributes.runner_id === null && userType !== 'Store'){
                 $('#list-view').append(orderElement);
 
             }
@@ -114,6 +121,7 @@ app.OrderListView = Backbone.View.extend({
             else {
                 orderListViewTemplate = "";
             }
+
         }
 
       },

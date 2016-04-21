@@ -9,6 +9,7 @@
 #  total_price :money
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  status      :string
 #
 
 class Order < ActiveRecord::Base
