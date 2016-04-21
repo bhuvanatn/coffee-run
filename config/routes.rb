@@ -24,6 +24,5 @@ Rails.application.routes.draw do
   get '/current_user' => 'session#current_user'
   get '/stores_within' => 'users#stores_within'
   get '/orders_information' => 'orders#information'
-
-
+  get '/order_associations/:id' => 'orders#associations'
 end

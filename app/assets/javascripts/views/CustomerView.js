@@ -77,8 +77,9 @@ app.CustomerView = Backbone.View.extend({
 
   setAddress: function(){
     app.currentUser.set({address: $('#address-input')[0].value});
-    app.currentUser.save();
-    this.render();
+    app.currentUser.save().done( function() {
+      this.render();      
+    });
   },
 
   geolocateCustomer: function () {
