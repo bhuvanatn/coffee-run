@@ -26,6 +26,7 @@ app.OrderView = Backbone.View.extend({
         var storeName = app.store.get('name');
         var storeAddress = app.store.get('address');
         var total_price = app.order.get('total_price');
+        var status = app.order.get('status');
 
         var customerName = app.customer.get('name');
         var customerAddress = app.customer.get('address');

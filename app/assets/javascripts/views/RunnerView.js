@@ -60,7 +60,6 @@ app.RunnerView = Backbone.View.extend({
     app.router.navigate('orderlist', true);
   },
 
-
   resetType: function () {
     app.currentUser.set({type: null});
     app.currentUser.save();

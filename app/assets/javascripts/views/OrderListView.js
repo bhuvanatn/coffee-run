@@ -7,6 +7,7 @@ app.OrderListView = Backbone.View.extend({
   'click #toggleMapBtn': 'showMapView',
   'click .job-btn': 'takeJob',
   'click .pickup-btn': 'confirmPickUp',
+  'click .order-btn': 'showOrderDetails',
   'click .buttonJobDetails': 'viewOrder'
   },
 
@@ -175,10 +176,9 @@ app.OrderListView = Backbone.View.extend({
           }
       },
 
-      showOrderDetails: function(){
-        $(".buttonJobDetails").on('click', function(){
-          $(this).closest('div').children('.showJobDetails').toggle();
-        });
+
+      showOrderDetails: function(e){
+          $(e.target).closest('div').children('.showJobDetails').toggle();
       }
 
 
