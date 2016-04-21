@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     #   format.html {}
     #   format.json { render :json }
     # end
-    redirect_to user_path
+    redirect_to root_path
 
   end
 
