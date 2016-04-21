@@ -6,10 +6,12 @@ app.OrderListView = Backbone.View.extend({
   'click #toggleListBtn': 'showListView',
   'click #toggleMapBtn': 'showMapView',
   'click .job-btn': 'takeJob',
-  'click .order-btn': 'viewOrder'
+  'click .buttonJobDetails': 'viewOrder'
   },
 
+
     render: function() {
+
       app.getCurrentUser(this);
       $('#main').html('');
 
@@ -20,6 +22,7 @@ app.OrderListView = Backbone.View.extend({
       if (userType === 'Runner') {
           //clear #main
           $('#main').empty();
+
           //add list view button
           var toggleListDiv = document.createElement('button');
                toggleListDiv.setAttribute('id', 'toggleListBtn');
@@ -81,25 +84,50 @@ app.OrderListView = Backbone.View.extend({
                 }
             }
 
+
+            // Loops through the lineItems and pulls out and stores the ID, Name and Quantity of each item
             var lineIds = _(app.lineitems.attributes).map(function (i) { return i.order_id; });
             lineIds = _(lineIds).compact();
 
-            for (var l = 0; l < lineIds.length; l++){
-              var lineItemIds = lineIds[l];
+            var orderItemArr = [];
+            var orderItemNameArr = [];
+            var orderItemQuantityArr = [];
+            for (var m = 0; m < lineIds.length; m++){
+              var lineItemIds = lineIds[m];
               if (lineItemIds === app.orders.models[i].attributes.id){
+<<<<<<< HEAD
                   order.lineItemId = app.lineitems.attributes[l].order_id;
               }
             }
               
-            var orderElement = orderViewHTML(order);
-            if (app.orders.models[i].attributes.runner_id === null){
-                $('#list-view').append(orderElement);
+=======
+                  orderItemArr.push(app.lineitems.attributes[m].item_id)
+                  orderItemNameArr.push(app.lineitems.attributes[m].name);
+                  orderItemQuantityArr.push(app.lineitems.attributes[m].quantity);
+              }
             }
-            else if (app.current_user.attributes.id === order.store_id){
+
+
+            // Loops through all the line items and prints out a new line.
+            var lines = '';
+            for (var n = 0; n < orderItemArr.length; n++ ){
+              lines += '<p>' + orderItemNameArr[n] + ' : ' + orderItemQuantityArr[n] + ' ' +'</p>';
+            }
+            order.allLines = lines;
+
+
+>>>>>>> 530495e341a32ff9c4cb5d7b911ad43fb5084293
+            var orderElement = orderViewHTML(order);
+            if (app.orders.models[i].attributes.runner_id === null && userType !== 'Store'){
+                $('#list-view').append(orderElement);
+
+            }
+            else if (app.current_user.attributes.id === order.store_id && app.orders.models[i].attributes.runner_id !== null){
                 $('#main').append(orderElement);
             }
-            else {
-                orderListViewTemplate = "";
+            else if (app.current_user.attributes.id === order.customer_id){
+                $('#main').append(orderElement);
+
             }
         }
 
@@ -117,9 +145,24 @@ app.OrderListView = Backbone.View.extend({
           app.router.navigate('order/' + e.currentTarget.id.slice(5), true);
       },
       takeJob: function(e) {
-        console.log('takeJob');
-        console.log(e);
         this.showOrderDetails();
+          var orderID = parseInt($(e.target).parent().attr('id'));
+          var currentUserId = app.currentUser.attributes.id;
+            for (var i = 0; i < app.orders.length; i++){
+              if (app.orders.models[i].attributes.id === orderID){
+                if (app.orders.models[i].attributes.status === null){
+                  var confirmButton = confirm('Are you sure?');
+                  if (confirmButton === true){
+                    app.orders.models[i].save({'status': null})
+                    app.orders.models[i].save({'runner': null})
+                    app.router.navigate('order/' + orderID, true);
+                  }
+                }
+
+              }
+
+        }
+
       },
 
       showOrderDetails: function(){

@@ -24,10 +24,11 @@ app.CustomerView = Backbone.View.extend({
 
     var resetTypeButton = $('#resetTypeButtonTemplate').html();
 
-    if (app.currentUser.get('latitude') || app.currentUser.get('address')) {
+    if (app.currentUser.get('latitude')) {
       this.$el.find('#address-form').html('');
 
-      // fill map div.
+      var mapView = new app.MapView();
+      mapView.render(app.currentUser.attributes);
 
       this.$el.find('#nav-buttons').html(resetTypeButton);
       var button = $('<button>')
@@ -40,6 +41,7 @@ app.CustomerView = Backbone.View.extend({
         .attr('id', 'show-cafes-btn');
       this.$el.find('#nav-buttons').append(button);
     } else {
+      this.$el.find('#map').addClass("hide");
       var customerAddressNeed = $('#customerAddressNeed').text();
       this.$el.find('#message').append(customerAddressNeed);
       this.$el.find('#nav-buttons').html(resetTypeButton);
@@ -48,6 +50,7 @@ app.CustomerView = Backbone.View.extend({
   },
 
   setAddressFormWithFalse: function () {
+    this.$el.find('#map').addClass("hide");
     this.setAddressForm(false);
   },
 

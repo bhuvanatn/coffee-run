@@ -9,16 +9,33 @@ app.getCurrentUser = function (view) {
   }
 }
 
+app.showPrice = function (price) {
+  priceInCents = Math.round(price*100);
+  priceDollars = Math.floor(priceInCents / 100);
+  priceCents = priceInCents % 100;
+  centsString = priceCents.toString();
+  while (centsString.length < 2) {
+    centsString = 0 + centsString;
+  }
+  return priceDollars +'.'+ centsString;
+}
+
+var saveLocation = function () {
+  app.currentUser.save();
+}
+
+app.saveLocation = _.throttle(saveLocation, 15000);
+
 $(document).ready(function() {
 
     app.stores = new app.Stores();
-    app.stores.fetch();
+    // app.stores.fetch();
 
     app.orders = new app.Orders();
 
     app.line_items = new app.LineItems();
 
-    
+
     // app.users = new app.Users();
     // app.users.fetch();
 

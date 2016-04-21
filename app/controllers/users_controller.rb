@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = @current_user
+    respond_to do |format|
+      @user = @current_user
+      format.html {}
+      format.json { render :json => User.find(params[:id]) }
+    end
   end
 
   def edit
@@ -48,6 +52,14 @@ class UsersController < ApplicationController
     render :json => @customers
   end
 
+
+  def stores_within
+    @user = @current_user
+    ### get the stores near the customer
+    @range = 1
+    @stores = Store.near([@user.latitude,@user.longitude], @range, :units => :km )
+      render :json => @stores
+  end
 
   private
   def user_params

@@ -14,21 +14,10 @@
 </script>
 
 <script type="text/template" id='locationDiscussionTemplate'>
-
-  <div id="message">
-
-  </div>
-  <div id="map">
-
-  </div>
-  <div id="address-form">
-
-  </div>
-
-  <div id="nav-buttons">
-
-  </div>
-
+  <div id="message"></div>
+  <div id="map"></div>
+  <div id="address-form"></div>
+  <div id="nav-buttons"></div>
 </script>
 
 
@@ -77,7 +66,11 @@
 </script>
 
 <script type="text/template" id='changeAddressButtonTemplate'>
-  <button id="addButton">Change Your Address</button>
+  <button id="changeAddressButton">Change Your Address</button>
+</script>
+
+<script type="text/template" id='viewOrdersButtonTemplate'>
+  <button id="viewOrdersButton">View Orders</button>
 </script>
 
 
@@ -97,7 +90,7 @@
 </script>
 
 
-<!-- store menu view stuff -->
+<!-- store list view stuff -->
 
 <script type="text/template" id='StoreListViewTemplate'>
 
@@ -105,6 +98,7 @@
 
 </script>
 
+<!--  -->
 
 <script type="text/template" id='StoreViewTemplate'>
     <li class='store' id='<%%= id %>'>
@@ -114,8 +108,6 @@
     </li>
 
 </script>
-
-<!--  -->
 
 <script type="text/template" id='OrderViewTemplate'>
     <p> Store Name: <%%= StoreName %></p>
@@ -134,8 +126,9 @@
 <script type="text/template" id='StoreOrderListViewTemplate'>
   <div class="order-view-list-item" id="<%%= id %>">
     <p>Store Name: <%%= storeName %></p>
-    <p>Store ID: <%%= store_id %></p>
+    <p>Runner ID: <%%= runner_id %></p>
     <p>Customer Name: <%%= customerName %></p>
+    <p><%%= allLines %></p>
     <p>Total Price: $<%%= total_price %></p>
     <button>Confirm Orders</button>
   </div>
@@ -143,16 +136,29 @@
 
 <script type="text/template" id='RunnerOrderListViewTemplate'>
   <div class="order-view-list-item" id="<%%= id %>">
+    <p>Status: <%%= status %></p>
     <p>Store ID: <%%= storeName %></p>
     <p>Customer ID: <%%= customerName %></p>
+    <p><%%= allLines %></p>
     <p>Total Price: $<%%= total_price %></p>
 
     <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
     <button class='order-btn buttonJobDetails' id='order<%%= id %>'>Show Job Details</button>
 
     <div class="showJobDetails">
-      <p><%%= typeof lineItemId !== 'undefined' ? lineItemId : '' %><p>
+
     </div>
+
+  </div>
+</script>
+
+<script type="text/template" id='CustomerOrderListViewTemplate'>
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Status: <%%= status %></p>
+    <p>Store ID: <%%= storeName %></p>
+    <p>Customer ID: <%%= customerName %></p>
+    <p><%%= allLines %></p>
+    <p>Total Price: $<%%= total_price %></p>
 
   </div>
 </script>
@@ -164,7 +170,7 @@
         <h3>Store Name: <%%= name %></h3>
         <h3>Address: <%%= address %></h3>
 
-        <p>Total Price: $<span id='menu-total-price'>0.0</span></p>
+        <p>Total Price: $<span id='menu-total-price'>0.00</span></p>
 
         <ul id='items-list'></ul>
         <button id='submit-order-btn'>Submit</button>
@@ -181,7 +187,7 @@
         <button class='change-qty' id='-<%%= id %>'>-</button>
         <box class='item-qty' id='qty<%%= id %>'>0</box>
         <button class='change-qty' id='+<%%= id %>'>+</button>
-        <p>Total Price: $<span id='<%%= id %>-total-price'>0.0</span></p>
+        <p>Total Price: $<span id='<%%= id %>-total-price'>0.00</span></p>
         <ul id='item-submenu-<%%= id %>'></ul>
     </li>
 

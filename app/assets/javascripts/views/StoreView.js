@@ -8,7 +8,8 @@ app.StoreView = Backbone.View.extend({
     'click #resetTypeButton': 'resetType',
     'click #menuButton': 'showMenu',
     'click #changeAddressButton': 'changeAddress',
-    'click #address-btn': 'setAddress'
+    'click #address-btn': 'setAddress',
+    'click #viewOrdersButton': 'viewOrders'
   },
 
   render: function() {
@@ -23,13 +24,18 @@ app.StoreView = Backbone.View.extend({
     var resetTypeButton = $('#resetTypeButtonTemplate').html();
     var menuButton = $('#menuButtonTemplate').html();
     var changeAddressButton = $('#changeAddressButtonTemplate').html();
+    var viewOrdersButton = $('#viewOrdersButtonTemplate').html();
 
-    if (app.currentUser.get('address')) {
+    if (app.currentUser.get('longitude')) {
+      var mapView = new app.MapView();
+      mapView.render(app.currentUser.attributes);
       this.$el.find('#nav-buttons')
         .html(resetTypeButton)
         .append(changeAddressButton)
-        .append(menuButton);
+        .append(menuButton)
+        .append(viewOrdersButton);
     } else {
+      this.$el.find('#map').addClass("hide");
       var addressNeedMessage = $('#storeaddressNeed').html();
       this.$el.find('#message').append(addressNeedMessage);
 
@@ -43,21 +49,27 @@ app.StoreView = Backbone.View.extend({
   },
 
   changeAddress: function () {
+    this.$el.find('#map').addClass("hide");
     var manualForm = $('#manualAddressTemplate').text();
     $('#address-form')
       .html(manualForm);
-    $('#address-input').value(app.currentUser.get('address'));
+    $('#address-input')[0].value = app.currentUser.get('address');
   },
 
   setAddress: function(){
+    view = this;
     app.currentUser.set({address: $('#address-input')[0].value});
-    app.currentUser.save();
-    this.render();
+    app.currentUser.save().done( function () {
+      view.render();
+    });
   },
 
   resetType: function () {
     app.currentUser.set({type: null});
     app.currentUser.save();
     app.router.navigate('', true);
+  },
+  viewOrders: function () {
+    app.router.navigate('orderlist', true);
   }
 });

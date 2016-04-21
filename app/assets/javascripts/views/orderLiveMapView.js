@@ -3,24 +3,14 @@ var app = app || {};
 app.OrderLiveMapView = Backbone.View.extend({
     el: '#main',
 
-    render: function() {
+    render: function(customerAttributes, runnerAttributes, storeAttributes) {
         app.getCurrentUser(this);
-        
-        // set data for map
 
-        var runnerModel = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 149, balance: "1000.0", latitude: -33.8698442, longitude: 151.2061558};
-        var storeModel = {name:"metropole", latitude: -33.8717618, longitude: 151.2067029, id:152};
-        var customerModel = {name: "customer_1", latitude: -33.8699165, longitude: 151.2062495, id: 146};
-        var userModel = '';
-        var targetModel = '';
-        if (app.currentUser.attributes.type === 'Runner') {
-            userModel = runnerModel;
-            targetModel = customerModel;
-        }
-        if (app.currentUser.attributes.type === 'Customer') {
-            userModel = customerModel;
-            targetModel = runnerModel;
-        }
+        // set data for map
+        //this is test data
+        //var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 14, balance: "1000.0", latitude: -33.8705876749324, longitude: 151.206173915557};
+        //var storeAttributes = {name:"metropole", latitude: -33.8697396777886, longitude: 151.206305511437, id:17};
+        //var customerAttributes = {name: "customer_1", latitude: -33.8692285493332, longitude: 151.205858336902, id: 11};
 
         $('#main').empty();
 
@@ -30,11 +20,11 @@ app.OrderLiveMapView = Backbone.View.extend({
 
          ////should get access to direction features
          var directionsService = new google.maps.DirectionsService();
-         var directionsDisplay = new google.maps.DirectionsRenderer();
+         var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 
-        var userlatlng = new google.maps.LatLng(userModel.latitude, userModel.longitude);
-        var targetlatlng = new google.maps.LatLng(targetModel.latitude, targetModel.longitude);
-        var storelatlng = new google.maps.LatLng(storeModel.latitude, storeModel.longitude);
+        var runnerlatlng = new google.maps.LatLng(runnerAttributes.latitude, runnerAttributes.longitude);
+        var customerlatlng = new google.maps.LatLng(customerAttributes.latitude, customerAttributes.longitude);
+        var storelatlng = new google.maps.LatLng(storeAttributes.latitude, storeAttributes.longitude);
 
         var mapOptions = {
             center: storelatlng,
@@ -49,63 +39,66 @@ app.OrderLiveMapView = Backbone.View.extend({
         //loop through targets to add markers for each
         var markerLabels = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W'];
 
+        iconsURL = {store: 'http://4.bp.blogspot.com/_zjNFt9tN264/S_x6IrY3MGI/AAAAAAAAAxk/QuKnBvZxd1M/s400/htbyocupcoflidwh1c.png',
+                    runner: 'https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/running.png',
+                    customer: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Checkered_flags-fr.svg/2000px-Checkered_flags-fr.svg.png',
+                    live: 'http://www.wihsradio.org/images/clipart/footsteps.png'
+                };
+
         //add the markers for the targets
-        var addMarker = function(object) {
+        var addMarker = function(object, iconURL) {
             var marker = new google.maps.Marker({
                 id: object.id,
                 title: object.name,
                 position: new google.maps.LatLng(object.latitude, object.longitude),
                 cursor: 'pointer',
                 flat: false,
-                map: map
-                // icon: new google.maps.MarkerImage('/assets/coffee.png',
-                //                           new google.maps.Size(32, 35),
-                //                           new google.maps.Point(0, 0),
-                //                           new google.maps.Point(32 / 2, 35),
-                //                           new google.maps.Size(32, 35)),
+                map: map,
+                icon: new google.maps.MarkerImage(iconURL,
+                                          new google.maps.Size(32, 35),
+                                          new google.maps.Point(0, 0),
+                                          new google.maps.Point(32 / 2, 35),
+                                          new google.maps.Size(32, 35)),
              });
-            //  google.maps.event.addListener(marker, 'click', function() {
-            //        window.location.href = marker.url;
-            //  });
          };
+        //add specific markers
+        addMarker(runnerAttributes, iconsURL.runner);
+        addMarker(customerAttributes, iconsURL.customer);
+        addMarker(storeAttributes, iconsURL.store);
 
-        addMarker(targetModel);
-        addMarker(userModel);
-        addMarker(storeModel);
-
+        //this adds the directions to the map
         directionsDisplay.setMap(map);
 
         var request = {
-          origin: userlatlng,
-          destination: targetlatlng,
+          origin: runnerlatlng,
+          destination: customerlatlng,
           waypoints: [{location: storelatlng}],
           travelMode: google.maps.DirectionsTravelMode.WALKING
         };
         directionsService.route(request, function(response, status) {
           //Check if request is successful.
           if (status == google.maps.DirectionsStatus.OK) {
-            console.log(status);
             directionsDisplay.setDirections(response); //Display the directions result
           }
         });
 
+        /// this is for live views of the runner
+        if (app.currentUser.attributes.type === 'Customer') {
 
-         // add your location
-    //      var addUserMarker = function(object) {
-    //          var marker = new google.maps.Marker({
-    //              id: object.id,
-    //              title: object.name,
-    //              position: new google.maps.LatLng(object.latitude, object.longitude),
-    //              cursor: 'pointer',
-    //              flat: false,
-    //              label: object.name,
-    //              map: map,
-    //           });
-    //       };
-      //
-      //
-    //      addUserMarker(userModel);  //for the user home location
+            var locationNum = 0;
+            var runnerLiveLocation = [{'num': locationNum, 'longitude': runnerAttributes.longitude, 'latitude': runnerAttributes.latitude}];
+            var runnerModel = new app.Runner({id: runnerAttributes.id});
+            var runnerFetch = function() {
+                runnerModel.fetch().done(function(){
+                    locationNum += 1;
+                    runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
+                    addMarker(runnerLiveLocation[0], iconsURL.live);
+                });
+            };
+
+            var getRunnerLocation = window.setInterval(runnerFetch, 15000);
+        }
+
       }
-
 
 });

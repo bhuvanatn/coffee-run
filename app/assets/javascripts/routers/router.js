@@ -33,13 +33,12 @@ app.AppRouter = Backbone.Router.extend({
         storeView.render();
     },
 
-    showStoreList: function() {
-        app.stores = new app.Stores();
-        app.stores.fetch().done(function() {
-            var storeListView = new app.StoreListView();
-            storeListView.render();
-        });
-    },
+
+  showStoreList: function () {
+    var storeListView = new app.StoreListView();
+    storeListView.render();
+  },
+
 
     showMenu: function(id) {
         app.store = new app.Store({
@@ -55,26 +54,25 @@ app.AppRouter = Backbone.Router.extend({
         });
     },
 
-    showOrderList: function() {
-        app.orders = new app.Orders();
-        app.stores = new app.Stores();
-        app.customers = new app.Customer();
-        app.current_user = new app.Current_User();
-        app.lineitems = new app.LineItem();
 
-        app.orders.fetch().done(function() {
-            app.stores.fetch().done(function() {
-                app.customers.fetch().done(function() {
-                    app.current_user.fetch().done(function() {
-                        app.lineitems.fetch().done(function() {
-                            var orderListView = new app.OrderListView();
-                            orderListView.render();
-                        });
-                    });
-                });
-            });
+  showOrderList: function () {
+    app.orders = new app.Orders();
+    app.stores = new app.Stores();
+    app.customers = new app.Customer();
+    app.lineitems = new app.LineItem();
+    app.items = new app.LineItem  ();
+
+    app.orders.fetch().done( function () {
+      app.stores.fetch().done( function () {
+        app.customers.fetch().done( function() {
+          app.lineitems.fetch().done( function() {
+            var orderListView = new app.OrderListView();
+            orderListView.render();
+          });
         });
-    },
+      });
+    });
+  },
 
     showOrder: function(id) {
         app.orders = new app.Orders({
