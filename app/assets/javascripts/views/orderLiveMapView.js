@@ -93,6 +93,11 @@ app.OrderLiveMapView = Backbone.View.extend({
             //need to change the following line later to findWhere from collection
             var runnerModel = app.runner;
             var runnerFetch = function() {
+
+              console.log("runnerFetch")
+
+
+
                 runnerModel.fetch().done(function(){
                 locationNum += 1;
                 runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
