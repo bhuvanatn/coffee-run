@@ -130,7 +130,7 @@
     <p>Runner ID: <%%= runner_id %></p>
     <p>Customer Name: <%%= customerName %></p>
     <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
     <button class="pickup-btn">Ready for Pick Up</button>
   </div>
 </script>

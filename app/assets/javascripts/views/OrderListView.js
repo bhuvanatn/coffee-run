@@ -207,7 +207,7 @@ app.OrderListView = Backbone.View.extend({
             app.items = new app.Items(data.items);
             app.view.render();
           });
-        }), 15000);
+        }, 15000);
       }
     }
 });
