@@ -12,6 +12,14 @@ app.OrderView = Backbone.View.extend({
         app.getCurrentUser(this);
         var userType = app.currentUser.attributes.type;
 
+        if (userType === 'Customer' && app.order.attributes.status === 'pending') {
+            $('#main').empty();
+            var heading = document.createElement('h1');
+            heading.setAttribute('id', 'awaitingConfirmation');
+            $('#main').append(heading);
+            $('#awaitingConfirmation').html('Awaiting Confirmation');
+        }
+
         // var id = this.getId.get('id'); //gets order id
 
         // var store_id = this.getId.get("store_id"); // gets store id from order table
@@ -76,14 +84,14 @@ app.OrderView = Backbone.View.extend({
     polling: function() {
         if (!app.orderPolling) {
             app.orderPolling = window.setInterval(function(){
-                app.order.fetch().done(function(){
+                app.orders = new app.Orders(app.order);
+                app.orders.fetch().done(function(){
                     if (app.order.attributes.status === 'confirmed') {
                         window.clearInterval(app.orderPolling);
-                        // delete app['orderPolling'];
                         app.runner = new app.Runner({id: app.order.attributes.runner_id});
                         app.runner.fetch().done(function(){
                             var liveMap = new app.OrderLiveMapView();
-                            liveMap.render(runner, app.currentUser.attributes, app.store.attributes);
+                            liveMap.render(app.runner.attributes, app.currentUser.attributes, app.store.attributes);
                         });
                     }
                 });

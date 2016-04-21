@@ -102,6 +102,12 @@ app.OrderLiveMapView = Backbone.View.extend({
                     locationNum += 1;
                     runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
                     addMarker(runnerLiveLocation[0], iconsURL.live);
+                    app.orders.fetch().done(function(){
+                        if (app.order.attributes.status === 'delivered') {
+                            window.clearInterval(getRunnerLocation);
+                            app.router.navigate('', true);
+                        }
+                    });
                 });
             };
 
