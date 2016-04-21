@@ -5,7 +5,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
     render: function(customerAttributes, runnerAttributes, storeAttributes) {
         app.getCurrentUser(this);
-    
+        
 
         // set data for map
         //this is test data

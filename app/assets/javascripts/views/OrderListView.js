@@ -170,16 +170,22 @@ app.OrderListView = Backbone.View.extend({
                 if (app.orders.models[i].attributes.status === 'pending'){
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
-                    app.orders.models[i].save({'status': 'confirmed'});
-                    app.orders.models[i].save({'runner_id': app.currentUser.id});
-      
-                    var liveMap = new app.OrderLiveMapView();
+                    
                     app.order = app.orders.findWhere({id: orderID});
+                    app.order.set({'status': 'confirmed', runner_id: app.currentUser.id});
+                    app.order.save();
 
-                    liveMap.render(app.customers.findWhere({id: app.order.attributes.customer_id}).attributes,
-                                    app.currentUser.attributes,
-                                    app.stores.findWhere({id: app.order.attributes.store_id}).attributes
-                                  );
+                      var liveMap = new app.OrderLiveMapView();
+
+
+                      liveMap.render(app.customers.findWhere({id: app.order.attributes.customer_id}).attributes,
+                                      app.currentUser.attributes,
+                                      app.stores.findWhere({id: app.order.attributes.store_id}).attributes
+                                    );
+
+
+
+
                     // app.router.navigate('order/' + orderID, true);
 
                   } else {
