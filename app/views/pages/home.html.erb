@@ -1,4 +1,3 @@
-<h1>Welcome to Coffee Run</h1>
 
 <div id="main">
 </div>
@@ -33,6 +32,7 @@
 <script type="text/template" id='runnerLocationGreeting'>
   <p>Hello. We aim to help you earn some money by delivering coffees from local cafes to people
   nearby.</p>
+
 </script>
 
 <script type="text/template" id='runnerLocationFailure'>
@@ -116,6 +116,7 @@
     <p>Customer Name: <%%= CustomerName %></p>
     <p>Customer Address:  <%%= CustomerAddress  %></p>
 
+    <p> Total Price: <%%= TotalPrice %></p>
     <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
 </script>
 
@@ -126,11 +127,12 @@
 <script type="text/template" id='StoreOrderListViewTemplate'>
   <div class="order-view-list-item" id="<%%= id %>">
     <p>Store Name: <%%= storeName %></p>
+      <p>Status: <%%= status %></p>
     <p>Runner ID: <%%= runner_id %></p>
     <p>Customer Name: <%%= customerName %></p>
     <p><%%= allLines %></p>
     <p>Total Price: $<%%= total_price %></p>
-    <button>Confirm Orders</button>
+    <button class="pickup-btn">Ready for Pick Up</button>
   </div>
 </script>
 
