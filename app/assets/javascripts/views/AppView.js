@@ -27,6 +27,11 @@ app.AppView = Backbone.View.extend({
       var appViewTemplate = $('#appViewTemplate').html();
       view.$el.html(appViewTemplate);
     }
+
+    if ($('.navbar-right').children().eq(1).text() === "Login"){
+      var appHomeView = $('#appHomeView').html();
+      view.$el.html(appHomeView);
+    }
   },
 
   typeSetCustomer: function () {

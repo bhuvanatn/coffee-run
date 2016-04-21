@@ -5,86 +5,132 @@
 <!--  introduction to the site stuff below -->
 
 <script type="text/template" id='appViewTemplate'>
+    <div class="selection-type">
+      <h1 class="please-select">Please Select a User Type</h1>
+      <p><span class="glyphicon glyphicon-arrow-down"></span></p>
+    </div>
+    <div class="sign-up-btn-container">
+    <button class="clickButton" id='customer-btn'>I am a Customer</button>
+    <button class="clickButton" id='store-btn'>I am a Cafe</button>
+    <button class="clickButton"id='runner-btn'>I Deliver Coffee</button>
+  </div>
+</script>
 
-  <button id='customer-btn'>I am a Customer</button>
-  <button id='store-btn'>I am a Cafe</button>
-  <button id='runner-btn'>I Deliver Coffee</button>
-
+<script type="text/template" id='appHomeView'>
+  <div class="container">
+    <div class="homepage-images">
+      <div class="homepage-header">
+        <h1>Welcome To <br>
+            <span class="coffeerun-homepage-slogan">Cofffee Run</span></h1>
+      </div>
+      <img class="hl1" src="http://i.imgur.com/61YYH7Q.png" alt="">
+      <img class="hl2" src="http://i.imgur.com/Lng7UNJ.png" alt="">
+      <img class="hl3" src="http://i.imgur.com/mrksQ3m.png" alt="">
+      <img class="hl4" src="http://i.imgur.com/qfb06GZ.png" alt="">
+    </div>
+  </div>
 </script>
 
 <script type="text/template" id='locationDiscussionTemplate'>
-  <div id="message"></div>
-  <div id="map"></div>
-  <div id="address-form"></div>
-  <div id="nav-buttons"></div>
+  <div class="map-container">
+    <div id="message"></div>
+    <div id="map"></div>
+    <div id="address-form"></div>
+    <div id="nav-buttons"></div>
+  </div>
 </script>
 
 
 <script type="text/template" id='customerLocationGreeting'>
-  <p>Hello. We aim to help you get your favourite coffee delivered to you from cafes in your area.</p>
+  <div class="message-container">
+    <p>Hello. We aim to help you get your favourite coffee delivered to you from cafes in your area.</p>
+  </div>
 </script>
 
 <script type="text/template" id='customerAddressNeed'>
-  <p>To do this we need to work out where you are.</p>
+  <div class="message-container">
+    <p>To do this we need to work out where you are.</p>
+  </div>
 </script>
 
 
 <script type="text/template" id='runnerLocationGreeting'>
+  <div class="message-container">
   <p>Hello. We aim to help you earn some money by delivering coffees from local cafes to people
   nearby.</p>
-
+  </div>
 </script>
 
 <script type="text/template" id='runnerLocationFailure'>
-  <p>Unfortunately, your device isn't providing adequate position information. If you believe
-  your device has gps capability, you can change your privacy settings to allow our app to use
-  your location and try again or check that your hardware
-  isn't faulty.</p>
-  <p>If we can't get high precision location data from you, we can't let you be a runner, sorry.</p>
+  <div class="message-container">
+    <p>Unfortunately, your device isn't providing adequate position information. If you believe
+    your device has gps capability, you can change your privacy settings to allow our app to use
+    your location and try again or check that your hardware
+    isn't faulty.</p>
+    <p>If we can't get high precision location data from you, we can't let you be a runner, sorry.</p>
+  </div>
 </script>
 
 <script type="text/template" id='resetTypeButtonTemplate'>
-  <button id="resetTypeButton">Back</button>
+  <div class="btn-container">
+    <button class="clickButton" id="resetTypeButton">Back</button>
+  </div>
 </script>
 
 <script type="text/template" id='getOrdersButtonTemplate'>
-  <button id="getOrdersButton">Get Orders</button>
+  <div class="btn-container">
+    <button class="clickButton" id="getOrdersButton">Find a Run</button>
+  </div>
 </script>
 
 
 <script type="text/template" id='storeLocationGreetingTemplate'>
-  <p>Hello. We aim to connect your cafe to people who want coffee but don't have the time to come to you
-    and get it, and people who want to deliver coffee.</p>
+  <div class="container">
+    <p>Hello. We aim to connect your cafe to people who want coffee but don't have the time to come to you
+      and get it, and people who want to deliver coffee.</p>
+  </div>
 </script>
 
 <script type="text/template" id='storeAddressNeed'>
-  <p>To do this we need your address.</p>
+  <div class="container">
+    <p>To do this we need your address.</p>
+  </div>
 </script>
 
 <script type="text/template" id='menuButtonTemplate'>
-  <button id="menuButton">View Your Menu</button>
+  <div class="btn-container">
+    <button class="clickButton" id="menuButton">View Your Menu</button>
+  </div>
 </script>
 
 <script type="text/template" id='changeAddressButtonTemplate'>
-  <button id="changeAddressButton">Change Your Address</button>
+  <div class="btn-container">
+    <button class="clickButton" id="changeAddressButton">Change Your Address</button>
+  </div>
 </script>
 
 <script type="text/template" id='viewOrdersButtonTemplate'>
-  <button id="viewOrdersButton">View Orders</button>
+  <div class="btn-container">
+    <button class="clickButton" id="viewOrdersButton">View Orders</button>
+  </div>
 </script>
 
 
 <script type="text/template" id='manualAddressTemplate'>
+  <div>
   <div class="manual">
     <p>Manually enter your address (please be specific).</p>
-    <input id="address-input" type="text" placeholder="address">
-    <button id="address-btn">Submit</button>
+      <input id="address-input" type="text" placeholder="address">
+    <div class="btn-container">
+      <button class="clickButton" id="address-btn">Submit</button>
+    </div>
   </div>
+</div>
 </script>
 
 <script type="text/template" id='automaticAddressTemplate'>
   <div id="automatic">
-    <button id='auto-location-btn'>Auto Discover Location</button>
+    <button class="clickButton" id='auto-location-btn'>Auto Discover Location</button>
   </div>
   <div id="geoMessage"></div>
 </script>
@@ -110,67 +156,75 @@
 </script>
 
 <script type="text/template" id='OrderViewTemplate'>
+  <div class="container">
     <p> Store Name: <%%= StoreName %></p>
     <p>Store Address: <%%= StoreAddress %></p>
     <p>Status: <%%= Status %></p>
     <p>Customer Name: <%%= CustomerName %></p>
     <p>Customer Address:  <%%= CustomerAddress  %></p>
-
     <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
+  </div>
 </script>
 
 <script type="text/template" id='OrderListViewTemplate'>
+  <div class="container">
     <h2>This is the Order View</h2>
+  </div>
 </script>
 
 <script type="text/template" id='StoreOrderListViewTemplate'>
-  <div class="order-view-list-item" id="<%%= id %>">
-    <p>Store Name: <%%= storeName %></p>
-      <p>Status: <%%= status %></p>
-    <p>Runner ID: <%%= runner_id %></p>
-    <p>Customer Name: <%%= customerName %></p>
-    <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
-    <button class="pickup-btn">Ready for Pick Up</button>
+  <div class="map-container">
+    <div class="order-view-list-item" id="<%%= id %>">
+      <p>Store Name: <span class="order-item-value"><%%= storeName %></span></p>
+      <p>Status: <span class="order-item-value"><%%= status %></span></p>
+      <p>Runner ID: <span class="order-item-value"><%%= runner_id %></span></p>
+      <p>Customer Name: <span class="order-item-value"><%%= customerName %></span></p>
+      <p><%%= allLines %></p>
+      <p>Total Price: <span class="order-item-value">$<%%= total_price %></span></p>
+      <div class="btn-container">
+        <button class="clickButton" class="pickup-btn">Ready for Pick Up</button>
+      </div>
+    </div>
   </div>
 </script>
 
 <script type="text/template" id='RunnerOrderListViewTemplate'>
-  <div class="order-view-list-item" id="<%%= id %>">
-    <p>Status: <%%= status %></p>
-    <p>Store ID: <%%= storeName %></p>
-    <p>Customer ID: <%%= customerName %></p>
-    <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
+  <div class="container">
+    <div class="order-view-list-item" id="<%%= id %>">
+      <p>Status: <span class="order-item-value rb"><%%= status %></span></p>
+      <p>Store ID: <span class="order-item-value"><%%= storeName %></span></p>
+      <p>Customer ID: <span class="order-item-value"><%%= customerName %></span></p>
+      <p><%%= allLines %></p>
+      <p>Total Price: <span class="order-item-value">$<%%= total_price %></span></p>
 
-    <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
-    <button class='order-btn' id='order<%%= id %>'>Show Job Details</button>
+      <button class='job-btn takeJob orderClickButton' id='job<%%= id %>'>Take Job <span class="glyphicon glyphicon-chevron-right"></span></button>
+      <button class='order-btn orderClickButton' id='order<%%= id %>'>Job Details <span class="glyphicon glyphicon-chevron-right"></span></button>
 
-    <div class="showJobDetails">
-      <p> Store Name: <%%= storeName %></p>
-
-      <p>Customer Name: <%%= customerName %></p>
-
-
+      <div class="showJobDetails">
+        <p> Store Name: <%%= storeName %></p>
+        <p>Customer Name: <%%= customerName %></p>
+      </div>
     </div>
-
   </div>
 </script>
 
 <script type="text/template" id='CustomerOrderListViewTemplate'>
-  <div class="order-view-list-item" id="<%%= id %>">
-    <p>Status: <%%= status %></p>
-    <p>Store ID: <%%= storeName %></p>
-    <p>Customer ID: <%%= customerName %></p>
-    <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
-    <button class="customer-view-btn">Check My Order</button>
+  <div class="container">
+    <div class="order-view-list-item" id="<%%= id %>">
+      <p>Status: <%%= status %></p>
+      <p>Store ID: <%%= storeName %></p>
+      <p>Customer ID: <%%= customerName %></p>
+      <p><%%= allLines %></p>
+      <p>Total Price: $<%%= total_price %></p>
+      <button class="customer-view-btn clickButton">Check My Order</button>
+    </div>
   </div>
 </script>
 
 <!-- menu view templates -->
 
 <script type="text/template" id='MenuViewTemplate'>
+  <div class="container">
         <h1>Menu List View</h1>
         <h3>Store Name: <%%= name %></h3>
         <h3>Address: <%%= address %></h3>
@@ -178,28 +232,29 @@
         <p>Total Price: $<span id='menu-total-price'>0.00</span></p>
 
         <ul id='items-list'></ul>
-        <button id='submit-order-btn'>Submit</button>
-        <button id='cancel-order-btn'>Cancel</button>
+        <button class='clickButton' id='submit-order-btn'>Submit</button>
+        <button class='clickButton' id='cancel-order-btn'>Cancel</button>
+  </div>
 
 </script>
 
 <script type="text/template" id='ItemViewTemplate'>
-
+  <div class="container">
     <li class="item">
         <p>Name: <%%= name %></p>
         <p>Price: $<%%= price %></p>
         <p>Description: <%%= description %></p>
-        <button class='change-qty' id='-<%%= id %>'>-</button>
+        <button class='clickButton' class='change-qty' id='-<%%= id %>'>-</button>
         <box class='item-qty' id='qty<%%= id %>'>0</box>
-        <button class='change-qty' id='+<%%= id %>'>+</button>
+        <button class='clickButton' class='change-qty' id='+<%%= id %>'>+</button>
         <p>Total Price: $<span id='<%%= id %>-total-price'>0.00</span></p>
         <ul id='item-submenu-<%%= id %>'></ul>
     </li>
-
-
+  </div>
 </script>
 
 <script type="text/template" id='ItemSubmenuTemplate'>
+  <div class="container">
         <li class='submenu'>
             <span id='qty<%%= id %><%%= qty %>'><%%= qty %></span>:
             Specifications:
@@ -223,5 +278,5 @@
                 <option value="Almond">Almond</option>
             </select>
         </li>
-
+  </div>
 </script>

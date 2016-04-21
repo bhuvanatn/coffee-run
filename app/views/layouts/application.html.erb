@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>CoffeeRun</title>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,500italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
         <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyB_YfZyv08gdx-1gVq2CdBwiTdmi4uyO5I"%>
         <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -12,13 +14,13 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button id="nav-drop-button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <ul class="navbar-brand"><%= link_to 'Coffee-Run', root_path %></ul>
+                    <ul class="navbar-brand"><a href="/"><img class="nav-logo" src="http://i.imgur.com/EIIZyy5.png"><span class="nav-logo-slogan">Coffee Run</span></a></ul>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -46,4 +48,5 @@
         <% end %>
         <%= yield %>
     </body>
+    <footer></footer>
 </html>

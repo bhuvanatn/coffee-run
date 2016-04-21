@@ -27,15 +27,30 @@ app.OrderListView = Backbone.View.extend({
           $('#main').empty();
 
           //add list view button
-          var toggleListDiv = document.createElement('button');
-               toggleListDiv.setAttribute('id', 'toggleListBtn');
-               toggleListDiv.setAttribute('class', 'toggleBtn');
+          var toggleListDiv = $('<button/>');
+               toggleListDiv.attr('id', 'toggleListBtn');
+               toggleListDiv.attr({
+                 'class':'toggleBtn',
+                 'class':'clickButton',
+               }).css({
+                 'marginTop': '10px',
+                 'marginLeft': '-180px',
+                 'marginBottom': '21px'
+               });
                $('#main').append(toggleListDiv);
                $('#toggleListBtn').html('List View');
+
           //add map view button
-          var toggleMapDiv = document.createElement('button');
-              toggleMapDiv.setAttribute('id', 'toggleMapBtn');
-              toggleMapDiv.setAttribute('class', 'toggleBtn');
+          var toggleMapDiv = $('<button/>');
+              toggleMapDiv.attr('id', 'toggleMapBtn');
+              toggleMapDiv.attr({
+                'class':'toggleBtn',
+                'class':'clickButton',
+              }).css({
+                'marginTop': '10px',
+                'marginLeft': '20px',
+                'marginBottom': '21px'
+              });
               $('#main').append(toggleMapDiv);
               $('#toggleMapBtn').html('Map View');
             //add list view div
@@ -140,7 +155,6 @@ app.OrderListView = Backbone.View.extend({
           console.log(x);
       },
       takeJob: function(e) {
-        this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
 
@@ -169,7 +183,6 @@ app.OrderListView = Backbone.View.extend({
       },
 
       confirmPickUp: function(e) {
-        this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
 
@@ -190,7 +203,7 @@ app.OrderListView = Backbone.View.extend({
 
 
       showOrderDetails: function(e){
-          $(e.target).closest('div').children('.showJobDetails').toggle();
+          $(e.this).parent('div').children('.showJobDetails').toggle();
       }
 
 
