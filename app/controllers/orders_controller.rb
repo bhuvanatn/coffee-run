@@ -61,6 +61,32 @@ class OrdersController < ApplicationController
     end
   end
 
+  def information
+    if @current_user.type == "Store"
+      @orders = Order.where :store_id => @current_user.id, :status => "confirmed"
+      @stores = [@current_user]
+    elsif @current_user.type == "Runner"
+      @stores = Store.near([@current_user.latitude, @current_user.longitude], 1, :units => :km)
+      @orders = []
+      @stores.each do |s|
+        @orders += s.orders
+      end
+      @orders = @orders.select {|o| o.status == "pending"}
+    end
+
+    @line_items = @orders.map {|o| o.line_items}.flatten
+    @items = @line_items.map {|l| l.item}
+    @customers = @orders.map {|o| o.customer}
+
+    render :json => {
+      :orders => @orders,
+      :stores => @stores,
+      :line_items => @line_items,
+      :items => @items,
+      :customers => @customers
+    }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
