@@ -10,8 +10,8 @@ app.OrderLiveMapView = Backbone.View.extend({
         //this is test data
         var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 14, balance: "1000.0", latitude: -33.8705876749324, longitude: 151.206173915557};
         app.runner = new app.Runner({id: runnerAttributes.id});
-        var storeAttributes = {name:"metropole", latitude: -33.8697396777886, longitude: 151.206305511437, id:152};
-        var customerAttributes = {name: "customer_1", latitude: -33.8692285493332, longitude: 151.205858336902, id: 146};
+        var storeAttributes = {name:"metropole", latitude: -33.8697396777886, longitude: 151.206305511437, id:17};
+        var customerAttributes = {name: "customer_1", latitude: -33.8692285493332, longitude: 151.205858336902, id: 11};
 
         $('#main').empty();
 
@@ -93,10 +93,12 @@ app.OrderLiveMapView = Backbone.View.extend({
             //need to change the following line later to findWhere from collection
             var runnerModel = app.runner;
             var runnerFetch = function() {
+
+
                 runnerModel.fetch().done(function(){
                 locationNum += 1;
-                runnerLiveLocation.push({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
-                addMarker(runnerLiveLocation.pop(), iconsURL.live);
+                runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
+                addMarker(runnerLiveLocation[0], iconsURL.live);
                 });
             };
 

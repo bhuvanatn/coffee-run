@@ -29,7 +29,7 @@ app.saveLocation = _.throttle(saveLocation, 15000);
 $(document).ready(function() {
 
     app.stores = new app.Stores();
-    app.stores.fetch();
+    // app.stores.fetch();
 
     app.orders = new app.Orders();
 

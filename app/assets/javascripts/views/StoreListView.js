@@ -39,26 +39,29 @@ app.StoreListView = Backbone.View.extend({
       var storeViewTemplate = $('#StoreViewTemplate').html();
       var storeViewHTML = _.template(storeViewTemplate);
 
-      for (var i = 0; i < app.stores.length; i++) {
-            var store = app.stores.models[i].attributes;
-            var storeElement = storeViewHTML(store);
-            $('#store-list').append(storeElement);
-      }
-
       //render map div
       var addMapViewDiv = document.createElement('div');
            addMapViewDiv.setAttribute('id', 'map-view');
           //  addMapViewDiv.setAttribute('class', 'hide');
            $('#main').append(addMapViewDiv);
-
+           app.closeStores = true;
 
            app.stores.fetch().done(function(){
+              console.log(app.stores);
               var mapDiv = document.createElement('div');
               mapDiv.setAttribute('id', 'map');
               $('#map-view').append(mapDiv);
               var storeMap = new app.MapView();
               storeMap.render(app.currentUser.attributes, app.stores.models);
-           });
+
+              $('#store-list').empty();
+
+              for (var i = 0; i < app.stores.length; i++) {
+                    var store = app.stores.models[i].attributes;
+                    var storeElement = storeViewHTML(store);
+                    $('#store-list').append(storeElement);
+              }
+           }).error(function (stuff) {console.log(stuff)} );
   },
   showMenu: function(e) {
        app.router.navigate('menu/' + e.currentTarget.id, true);
