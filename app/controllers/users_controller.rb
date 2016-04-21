@@ -70,6 +70,11 @@ class UsersController < ApplicationController
     render :json => @customers
   end
 
+  def stores_within
+    @stores = Store.near([@current_user.latitude,@current_user.longitude], 1.to_f, :units => :km )
+    render :json => @stores
+  end
+
   private
   def user_params
     params.require(:user).permit(

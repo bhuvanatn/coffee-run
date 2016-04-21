@@ -94,9 +94,6 @@ app.OrderLiveMapView = Backbone.View.extend({
             var runnerModel = app.runner;
             var runnerFetch = function() {
 
-              console.log("runnerFetch")
-
-
 
                 runnerModel.fetch().done(function(){
                 locationNum += 1;

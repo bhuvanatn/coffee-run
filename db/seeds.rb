@@ -11,6 +11,7 @@ r3 = Runner.create name: 'runner_2', email: 'runner3@ga.co', password: 'chicken'
 s1 = Store.create name: 'metropole', email: 'metropole@ga.co', password: 'chicken', password_confirmation: 'chicken', address: '455 George st Sydney', balance: 1000
 s2 = Store.create name: 'Single Origin Coffee', email: 'SOC@ga.co', password: 'chicken', password_confirmation: 'chicken', address: '89 York st Sydney', balance: 1000
 s3 = Store.create name: 'Mecca', email: 'mecca@ga.co', password: 'chicken', password_confirmation: 'chicken', address: '67 King st Sydney', balance: 1000
+s4 = Store.create name: 'Bunker', email: 'bunker@ga.co', password: 'chicken', password_confirmation: 'chicken', address: '99 Mount st North Sydney', balance: 1000
 
 
 Order.destroy_all
