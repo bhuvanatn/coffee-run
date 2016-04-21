@@ -17,9 +17,15 @@ class UsersController < ApplicationController
   end
 
   def update
+    # raise
     user = @current_user
     user.update user_params
-    render :json => {}
+    # respond_to do |format|
+    #   format.html {}
+    #   format.json { render :json }
+    # end
+    redirect_to user_path
+
   end
 
   def index
@@ -63,7 +69,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(
+    params.require(@current_user.type.downcase.to_sym).permit(
       :email,
       :password,
       :password_confirmation,
