@@ -85,6 +85,7 @@ app.OrderView = Backbone.View.extend({
     },
 
     polling: function() {
+        console.log('polling');
         if (!app.orderPolling) {
             app.orderPolling = window.setInterval(function(){
                 app.orders = new app.Orders(app.order);
