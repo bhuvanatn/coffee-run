@@ -171,7 +171,8 @@ app.OrderListView = Backbone.View.extend({
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
                     app.orders.models[i].save({'status': 'confirmed'});
-                    app.orders.models[i].save({'runner': currentUserId});
+                    app.orders.models[i].save({'runner_id': app.currentUser.id});
+      
                     var liveMap = new app.OrderLiveMapView();
                     app.order = app.orders.findWhere({id: orderID});
 
