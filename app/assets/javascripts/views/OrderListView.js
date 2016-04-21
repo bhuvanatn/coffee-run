@@ -6,7 +6,8 @@ app.OrderListView = Backbone.View.extend({
   'click #toggleListBtn': 'showListView',
   'click #toggleMapBtn': 'showMapView',
   'click .job-btn': 'takeJob',
-  'click .buttonJobDetails': 'viewOrder'
+  'click .buttonJobDetails': 'viewOrder',
+  'click .customer-view-btn': 'viewOrder'
   },
 
 
@@ -130,20 +131,22 @@ app.OrderListView = Backbone.View.extend({
         $('#map-view').removeClass('hide');
       },
       viewOrder: function(e) {
-          app.router.navigate('order/' + e.currentTarget.id.slice(5), true);
+        var orderID = parseInt($(e.target).parent().attr('id'));
+          var x = app.router.navigate('order/' + orderID, true);
+          console.log(x);
       },
       takeJob: function(e) {
         this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
-          console.log(currentUserId)
+          console.log(currentUserId);
             for (var i = 0; i < app.orders.length; i++){
               if (app.orders.models[i].attributes.id === orderID){
                 if (app.orders.models[i].attributes.status === null){
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
-                    app.orders.models[i].set({'status': null})
-                    app.orders.models[i].set({'runner': null})
+                    app.orders.models[i].set({'status': null});
+                    app.orders.models[i].set({'runner': null});
                     app.router.navigate('order/' + orderID, true);
                   }
                 }
