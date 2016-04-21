@@ -49,7 +49,11 @@ app.OrderView = Backbone.View.extend({
           id: app.order.get('id')
         });
 
-        this.$el.html(orderElement);
+        var orderViewDiv = document.createElement('div');
+        orderViewDiv.setAttribute('id', 'orderView');
+        $('#main').append(orderViewDiv);
+
+        $('#orderView').html(orderElement);
 
         if (app.currentUser.attributes.type === 'Customer') {
             this.polling();
@@ -60,14 +64,14 @@ app.OrderView = Backbone.View.extend({
 
     polling: function() {
         if (!app.orderPolling) {
-            app.orderPolling = setInterval(function(){
+            app.orderPolling = window.setInterval(function(){
                 app.order.fetch().done(function(){
                     if (app.order.attributes.status === 'confirmed') {
-                        app.orderPolling.clearInterval();
-                        delete app['orderPolling'];
-                        var liveMap = new app.OrderLiveMapView();
+                        window.clearInterval(app.orderPolling);
+                        // delete app['orderPolling'];
                         app.runner = new app.Runner({id: app.order.attributes.runner_id});
                         app.runner.fetch().done(function(){
+                            var liveMap = new app.OrderLiveMapView();
                             liveMap.render(runner, app.currentUser.attributes, app.store.attributes);
                         });
                     }
@@ -75,7 +79,9 @@ app.OrderView = Backbone.View.extend({
             }, 10000);
         }
     },
+
     takeJob: function(e) {
+          window.clearInterval(app.ordersPolling);
           app.getCurrentUser(this);
           var orderID = parseInt(e.target.id.slice(3));
           var currentUserId = app.currentUser.id;
@@ -92,6 +98,7 @@ app.OrderView = Backbone.View.extend({
                     app.order.save().done(function(){
                     });
                     var liveMap = new app.OrderLiveMapView();
+                    console.log('takejob');
                     // var order = app.orders.findWhere({id: orderID});
                     liveMap.render(app.customers.findWhere({id: app.order.attributes.customer_id}).attributes,
                                     app.currentUser.attributes,

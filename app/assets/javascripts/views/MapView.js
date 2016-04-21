@@ -59,7 +59,6 @@ app.MapView = Backbone.View.extend({
            if (app.currentUser.attributes.type === 'Customer') {
                urlPath = '#menu/' + result.id;
            } else if (app.currentUser.attributes.type === 'Runner') {
-               
                urlPath = '#order/' + result.order_id; //order_id was added on orderListView page
            }
 

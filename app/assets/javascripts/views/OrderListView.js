@@ -13,6 +13,7 @@ app.OrderListView = Backbone.View.extend({
 
 
     render: function() {
+
       app.view = this;
       app.getCurrentUser(this);
       $('#main').html('');
@@ -141,6 +142,7 @@ app.OrderListView = Backbone.View.extend({
 
       },
       takeJob: function(e) {
+        window.clearInterval(app.ordersPolling);
         this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
@@ -198,7 +200,7 @@ app.OrderListView = Backbone.View.extend({
 
     polling: function () {
       if (!app.ordersPolling) {
-        app.ordersPolling = setInterval(function(){
+        app.ordersPolling = window.setInterval(function(){
           $.get('/orders_information').done( function (data){
             app.orders = new app.Orders(data.orders);
             app.stores = new app.Stores(data.stores);
@@ -207,7 +209,7 @@ app.OrderListView = Backbone.View.extend({
             app.items = new app.Items(data.items);
             app.view.render();
           });
-        }), 15000);
+        }, 15000);
       }
     }
 });

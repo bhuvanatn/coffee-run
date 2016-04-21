@@ -19,11 +19,12 @@ app.OrderLiveMapView = Backbone.View.extend({
          mapDiv.setAttribute('id', 'map');
          $('#main').append(mapDiv);
 
-         var orderDiv = document.createElement('div');
-          orderDiv.setAttribute('id', 'order');
-          $('#main').append(orderDiv);
+        //  var orderDiv = document.createElement('div');
+        //   orderDiv.setAttribute('id', 'order');
+        //   $('#main').append(orderDiv);
 
-          console.log(app.order);
+          var orderView = new app.OrderView();
+          orderView.render();
 
 
          ////should get access to direction features
