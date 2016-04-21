@@ -31,7 +31,7 @@ app.OrderListView = Backbone.View.extend({
                toggleListDiv.setAttribute('id', 'toggleListBtn');
                toggleListDiv.setAttribute('class', 'toggleBtn');
                $('#main').append(toggleListDiv);
-               $('#toggleListBtn').html('List View');
+               $('#toggleListBtn').text('List View');
           //add map view button
           var toggleMapDiv = document.createElement('button');
               toggleMapDiv.setAttribute('id', 'toggleMapBtn');

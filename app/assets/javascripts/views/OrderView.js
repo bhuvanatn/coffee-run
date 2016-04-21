@@ -3,23 +3,11 @@ var app = app || {};
 app.OrderView = Backbone.View.extend({
     el: '#main',
     events: {
-        'click .job-btn': 'takeJob'
+        'click .job-btn': 'takeJob',
+        'click .pickUp-btn': 'confirmPickUp',
+        'click .delivered-btn': 'confirmDelivered'
     },
-    // Customer
-    //
-    // 1. Store list (#stores)
-    // 2. Store Menu (menu/:id)
-    // 3. Order (
-    //
-    // Store: The Store that the order was made at
-    // Customer Name: Who made the order
-    // Items: All items they requested (quantity)
-    // Price: Total price of the items
-    //need to show store details, customer details and order details
-    // )
-    // initialize: function (options) {
-    //     this.getId = options.getId;
-    // },
+
     render: function() {
         app.getCurrentUser(this);
         var userType = app.currentUser.attributes.type;
@@ -54,6 +42,29 @@ app.OrderView = Backbone.View.extend({
         $('#main').append(orderViewDiv);
 
         $('#orderView').html(orderElement);
+
+        if (app.currentUser.attributes.type === 'Runner' && app.order.attributes.status === 'pending') {
+            var takeJobButton = document.createElement('button');
+            takeJobButton.setAttribute('id', 'job' + app.order.get('id'));
+            takeJobButton.setAttribute('class', 'btn takeJob job-btn');
+            // takeJobButton.setAttribute('class', 'takeJob') ;
+            $('#orderView').append(takeJobButton);
+            $('.takeJob').html('Take Job');
+        }
+        if (app.currentUser.attributes.type === 'Runner' && app.order.attributes.status === 'confirmed') {
+            var pickedUpButton = document.createElement('button');
+            pickedUpButton.setAttribute('id', 'pick-up-' + app.order.get('id'));
+            pickedUpButton.setAttribute('class', 'btn pickedUp pickUp-btn');
+            $('#orderView').append(pickedUpButton);
+            $('.pickedUp').html('Picked Up');
+        }
+        if (app.currentUser.attributes.type === 'Runner' && app.order.attributes.status === 'pickedUp') {
+            var deliveredButton = document.createElement('button');
+            deliveredButton.setAttribute('id', 'delivered-' + app.order.get('id'));
+            deliveredButton.setAttribute('class', 'btn delivered delivered-btn');
+            $('#orderView').append(deliveredButton);
+            $('.delivered').html('Delivered');
+        }
 
         if (app.currentUser.attributes.type === 'Customer') {
             this.polling();
@@ -98,7 +109,7 @@ app.OrderView = Backbone.View.extend({
                     app.order.save().done(function(){
                     });
                     var liveMap = new app.OrderLiveMapView();
-                    console.log('takejob');
+
                     // var order = app.orders.findWhere({id: orderID});
                     liveMap.render(app.customers.findWhere({id: app.order.attributes.customer_id}).attributes,
                                     app.currentUser.attributes,
@@ -113,5 +124,20 @@ app.OrderView = Backbone.View.extend({
               }
             }
          }
+    },
+
+    confirmPickUp: function() {
+        app.order.attributes.status = 'pickedUp';
+        app.order.save().done(function(){
+            $('#orderView').remove();
+            var pickUpOrderView = new app.OrderView();
+            pickUpOrderView.render();
+        });
+    },
+
+    confirmDelivered: function() {
+        app.order.attributes.status = 'delivered';
+        app.order.save();
+        app.router.navigate('orderlist', true);
     }
 });
