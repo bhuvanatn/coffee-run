@@ -39,6 +39,27 @@ app.OrderView = Backbone.View.extend({
         var orderElement = orderViewHTML({StoreName: storeName, StoreAddress: storeAddress, CustomerName: customerName, CustomerAddress: customerAddress, TotalPrice: total_price });
         this.$el.html(orderElement);
 
+        if (app.currentUser.attributes.type === 'Customer') {
+            this.polling();
+        }
 
+
+    },
+
+    polling: function() {
+        if (!app.orderPolling) {
+            app.orderPolling = setInterval(function(){
+                app.order.fetch().done(function(){
+                    if (app.order.attributes.status === 'confirmed') {
+                        app.orderPolling.clearInterval();
+                        var liveMap = new app.OrderLiveMapView();
+                        app.runner = new app.Runner({id: app.order.attributes.runner_id});
+                        app.runner.fetch().done(function(){
+                            liveMap.render(runner, app.currentUser.attributes, app.store.attributes);
+                        });
+                    }
+                });
+            }, 10000);
+        }
     }
 });
