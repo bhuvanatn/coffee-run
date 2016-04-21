@@ -160,7 +160,8 @@ app.OrderListView = Backbone.View.extend({
       },
       takeJob: function(e) {
         window.clearInterval(app.ordersPolling);
-        this.showOrderDetails();
+        app.ordersPolling = null;
+        // this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
 
@@ -171,12 +172,12 @@ app.OrderListView = Backbone.View.extend({
                   if (confirmButton === true){
                     app.orders.models[i].save({'status': 'confirmed'});
                     app.orders.models[i].save({'runner': currentUserId});
-
                     var liveMap = new app.OrderLiveMapView();
-                    var order = app.orders.findWhere({id: orderID});
-                    liveMap.render(app.customers.findWhere({id: order.attributes.customer_id}).attributes,
+                    app.order = app.orders.findWhere({id: orderID});
+
+                    liveMap.render(app.customers.findWhere({id: app.order.attributes.customer_id}).attributes,
                                     app.currentUser.attributes,
-                                    app.stores.findWhere({id: order.attributes.store_id}).attributes
+                                    app.stores.findWhere({id: app.order.attributes.store_id}).attributes
                                   );
                     // app.router.navigate('order/' + orderID, true);
 
