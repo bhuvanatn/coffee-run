@@ -87,10 +87,10 @@ app.OrderListView = Backbone.View.extend({
             for (var l = 0; l < lineIds.length; l++){
               var lineItemIds = lineIds[l];
               if (lineItemIds === app.orders.models[i].attributes.id){
-                  order.lineItemId = app.lineitems.attributes[l].order_id
+                  order.lineItemId = app.lineitems.attributes[l].order_id;
               }
             }
-
+              
             var orderElement = orderViewHTML(order);
             if (app.orders.models[i].attributes.runner_id === null){
                 $('#list-view').append(orderElement);
