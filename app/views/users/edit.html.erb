@@ -1,17 +1,23 @@
 <div class="container">
-  <%= form_for @user do |f| %>
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.label :image%>
-      <%= f.url_field :image %>
-
-      <%= f.submit %>
-  <% end %>
-  </div>
+    <%= form_for @user, :url => user_path(@user) do |f| %>
+    <p class="space">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control'%>
+    </p>
+    <p class="space">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+    </p>
+    <p class="space">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </p>
+    <p class="space">
+        <%= f.label :image%>
+        <%= f.url_field :image, class: 'form-control'%>
+    </p>
+    <p class="space">
+        <%= f.submit "Save", :class => "btn btn-info" %>
+    </p>
+    <% end %>
+</div>
