@@ -6,7 +6,8 @@ app.RunnerView = Backbone.View.extend({
   el: '#main',
   events: {
     'click #resetTypeButton': 'resetType',
-    'click #getOrdersButton': 'showOrders'
+    'click #getOrdersButton': 'showOrders',
+    'click #findCoffeeRun': 'showOrders'
   },
 
   render: function() {
@@ -58,6 +59,7 @@ app.RunnerView = Backbone.View.extend({
   showOrders: function () {
     app.router.navigate('orderlist', true);
   },
+
 
   resetType: function () {
     app.currentUser.set({type: null});

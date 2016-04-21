@@ -6,12 +6,13 @@ app.OrderListView = Backbone.View.extend({
   'click #toggleListBtn': 'showListView',
   'click #toggleMapBtn': 'showMapView',
   'click .job-btn': 'takeJob',
+  'click .pickup-btn': 'confirmPickUp',
   'click .buttonJobDetails': 'viewOrder'
   },
 
 
     render: function() {
-
+      app.view = this;
       app.getCurrentUser(this);
       $('#main').html('');
 
@@ -66,7 +67,8 @@ app.OrderListView = Backbone.View.extend({
       }
 
 
-
+      //Loop to show all the orders and add in necessary information like
+      // Storename, Customer name etc
       var orderViewHTML = _.template(orderListViewTemplate);
       console.log(app.orders);
         for (var i = 0; i < app.orders.length; i++){
@@ -136,22 +138,41 @@ app.OrderListView = Backbone.View.extend({
         this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
-          console.log(currentUserId)
+
             for (var i = 0; i < app.orders.length; i++){
               if (app.orders.models[i].attributes.id === orderID){
-                if (app.orders.models[i].attributes.status === null){
+                if (app.orders.models[i].attributes.status === 'pending'){
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
-                    app.orders.models[i].set({'status': null})
-                    app.orders.models[i].set({'runner': null})
+                    app.orders.models[i].save({'status': 'confirmed'})
+                    app.orders.models[i].save({'runner': currentUserId})
                     app.router.navigate('order/' + orderID, true);
+                  } else {
+                    break;
                   }
-                }
-
               }
+            }
+          }
+      },
 
-        }
+      confirmPickUp: function(e) {
+        this.showOrderDetails();
+          var orderID = parseInt($(e.target).parent().attr('id'));
+          var currentUserId = app.currentUser.attributes.id;
 
+            for (var i = 0; i < app.orders.length; i++){
+              if (app.orders.models[i].attributes.id === orderID){
+                if (app.orders.models[i].attributes.status === 'confirmed'){
+                  var confirmButton = confirm('Are you sure?');
+                  if (confirmButton === true){
+                    app.orders.models[i].save({'status': 'pickedUp'})
+                    $('#' + orderID).hide();
+                  } else {
+                    break;
+                  }
+              }
+            }
+          }
       },
 
       showOrderDetails: function(){
