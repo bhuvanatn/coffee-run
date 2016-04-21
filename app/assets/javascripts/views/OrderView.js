@@ -41,7 +41,7 @@ app.OrderView = Backbone.View.extend({
           CustomerName: customerName,
           CustomerAddress: customerAddress,
           TotalPrice: total_price,
-          Status: app.order.get("status");
+          Status: app.order.get("status")
         });
         this.$el.html(orderElement);
 
