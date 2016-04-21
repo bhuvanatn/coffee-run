@@ -60,7 +60,7 @@ app.AppRouter = Backbone.Router.extend({
         app.orders = new app.Orders(data.orders);
         app.stores = new app.Stores(data.stores);
         app.customers = new app.Customers(data.customers);
-        app.lineitems = new app.LineItems(data.lineitems);
+        app.lineitems = new app.LineItems(data.line_items);
         app.items = new app.Items(data.items);
 
        var orderListView = new app.OrderListView();
@@ -71,31 +71,25 @@ app.AppRouter = Backbone.Router.extend({
 
     showOrder: function(id) {
         // if (app.currentUser === 'Customer') {
+            id = parseInt(id);
             $.get('/orders_information').done (function (data) {
-
+              console.log(data);
               app.orders = new app.Orders(data.orders);
               app.stores = new app.Stores(data.stores);
               app.customers = new app.Customers(data.customers);
-              app.lineitems = new app.LineItems(data.lineitems);
+              app.lineitems = new app.LineItems(data.line_items);
               app.items = new app.Items(data.items);
 
-              for (var i = 0; i < app.orders.length; i++) {
-                if  (app.orders[i].id === id) {
-                  app.order = app.orders[i];
-                }
-              }
-              console.log(app.order);
-
-              app.order = app.orders.findWhere({'id': id});
-              app.store = new app.Store(app.stores.findWhere({'id': app.order.store_id}));
-              app.customer = new app.Customer(app.customers.findWhere({'id': app.order.customer_id}));
-              app.orderlineitems = new app.LineItems(app.lineitems.where({'id': id}));
+              app.order = new app.Order(app.orders.findWhere({'id': id}).attributes);
+              app.store = new app.Store(app.stores.findWhere({'id': app.order.attributes.store_id}).attributes);
+              app.customer = new app.Customer(app.customers.findWhere({'id': app.order.attributes.customer_id}).attributes);
+              app.orderlineitems = new app.LineItems(app.lineitems.where({'order_id': id}));
               app.orderitems = new app.Items();
               for (var i = 0; i < app.orderlineitems.length; i++) {
-                  app.orderitems += app.items.findWhere({'id': app.orderlineitems[i].item_id});
+                  app.orderitems.push(app.items.findWhere({'id': app.orderlineitems.models[i].attributes.item_id}));
               }
-              var orderView = new app.OrderView();
 
+              var orderView = new app.OrderView();
               orderView.render();
             });
         // }
