@@ -85,14 +85,15 @@ app.OrderView = Backbone.View.extend({
     },
 
     polling: function() {
-        console.log('polling');
         if (!app.orderPolling) {
             app.orderPolling = window.setInterval(function(){
                 app.orders = new app.Orders(app.order);
                 app.orders.fetch().done(function(){
                     if (app.order.attributes.status === 'confirmed') {
                         window.clearInterval(app.orderPolling);
+                        console.log(app.order);
                         app.runner = new app.Runner({id: app.order.attributes.runner_id});
+                        console.log(app.runner);
                         app.runner.fetch().done(function(){
                             var liveMap = new app.OrderLiveMapView();
                             liveMap.render(app.runner.attributes, app.currentUser.attributes, app.store.attributes);
