@@ -8,12 +8,12 @@ app.OrderListView = Backbone.View.extend({
   'click .job-btn': 'takeJob',
   'click .customer-view-btn': 'viewOrder',
   'click .pickup-btn': 'confirmPickUp',
-  'click .buttonJobDetails': 'viewOrder'
+  'click .buttonJobDetails': 'viewOrder',
+  'click .ready-pickup-btn': 'orderMade'
   },
 
 
     render: function() {
-
       app.view = this;
       app.getCurrentUser(this);
       $('#main').html('');
@@ -207,9 +207,17 @@ app.OrderListView = Backbone.View.extend({
             app.customers = new app.Customers(data.customers);
             app.lineitems = new app.LineItems(data.line_items);
             app.items = new app.Items(data.items);
-            app.view.render();
+            app.view.render();  //do we need this??
           });
         }, 15000);
       }
+    },
+
+    orderMade: function(e) {
+      var orderId = e.currentTarget.id.slice(7);
+      $('#' + orderId).remove();
+      app.order = app.orders.findWhere({id: parseInt(e.currentTarget.id.slice(7))});
+      app.order.attributes.status = 'made';
+      app.order.save();
     }
 });
