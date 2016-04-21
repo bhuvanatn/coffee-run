@@ -184,6 +184,16 @@
 </script>
 
 <script type="text/template" id='StoreOrderListViewTemplate'>
+<<<<<<< HEAD
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Store Name: <%%= storeName %></p>
+      <p>Status: <%%= status %></p>
+    <p>Runner ID: <%%= runner_id %></p>
+    <p>Customer Name: <%%= customerName %></p>
+    <p><%%= allLines %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
+    <button class="pickup-btn">Ready for Pick Up</button>
+=======
   <div class="map-container">
     <div class="order-view-list-item" id="<%%= id %>">
       <p>Store Name: <span class="order-item-value"><%%= storeName %></span></p>
@@ -196,6 +206,7 @@
         <button class="clickButton" class="pickup-btn">Ready for Pick Up</button>
       </div>
     </div>
+>>>>>>> 05fbcc6a5b8b20996f2dfb03e6f722dbe027935b
   </div>
 </script>
 
