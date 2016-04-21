@@ -19,13 +19,13 @@ app.OrderView = Backbone.View.extend({
     // },
     render: function() {
         app.getCurrentUser(this);
-        
+
         // var id = this.getId.get('id'); //gets order id
 
         // var store_id = this.getId.get("store_id"); // gets store id from order table
         var storeName = app.store.get('name');
         var storeAddress = app.store.get('address');
-        var total_price = app.store.get('total_price');
+        var total_price = app.order.get('total_price');
 
         var customerName = app.customer.get('name');
         var customerAddress = app.customer.get('address');
