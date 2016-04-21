@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     render :json => @customers
   end
 
+
   def stores_within
     @user = @current_user
     ### get the stores near the customer

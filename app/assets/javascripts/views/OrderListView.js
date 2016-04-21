@@ -95,6 +95,12 @@ app.OrderListView = Backbone.View.extend({
             for (var m = 0; m < lineIds.length; m++){
               var lineItemIds = lineIds[m];
               if (lineItemIds === app.orders.models[i].attributes.id){
+<<<<<<< HEAD
+                  order.lineItemId = app.lineitems.attributes[l].order_id;
+              }
+            }
+              
+=======
                   orderItemArr.push(app.lineitems.attributes[m].item_id)
                   orderItemNameArr.push(app.lineitems.attributes[m].name);
                   orderItemQuantityArr.push(app.lineitems.attributes[m].quantity);
@@ -110,6 +116,7 @@ app.OrderListView = Backbone.View.extend({
             order.allLines = lines;
 
 
+>>>>>>> 530495e341a32ff9c4cb5d7b911ad43fb5084293
             var orderElement = orderViewHTML(order);
             if (app.orders.models[i].attributes.runner_id === null && userType !== 'Store'){
                 $('#list-view').append(orderElement);

@@ -71,6 +71,6 @@ c1.orders << o1 << o4 << o7 << o8
 c2.orders << o2 << o5
 c3.orders << o3 << o6
 
-s1.orders << o1 << o3 << o4 << o5 << o6 << o7 << o8
+s1.orders << o1 << o2 << o3 << o4 << o5 << o6 << o7 << o8
 
 r1.orders << o4 << o5 << o6 << o7 << o8
