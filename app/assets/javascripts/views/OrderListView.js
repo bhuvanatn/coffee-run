@@ -8,13 +8,9 @@ app.OrderListView = Backbone.View.extend({
   'click .job-btn': 'takeJob',
   'click .customer-view-btn': 'viewOrder',
   'click .pickup-btn': 'confirmPickUp',
-<<<<<<< HEAD
   'click .order-btn': 'showOrderDetails',
-  'click .buttonJobDetails': 'viewOrder'
-=======
   'click .buttonJobDetails': 'viewOrder',
   'click .ready-pickup-btn': 'orderMade'
->>>>>>> 32d90261fa88822413cb07c72fcb95d2ba409af1
   },
 
 
@@ -214,7 +210,7 @@ app.OrderListView = Backbone.View.extend({
 
       showOrderDetails: function(e){
           $(e.this).parent('div').children('.showJobDetails').toggle();
-      }
+      },
 
 
 

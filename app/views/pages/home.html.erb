@@ -105,7 +105,7 @@
 
 <script type="text/template" id='changeAddressButtonTemplate'>
   <div class="btn-container">
-    <button class="clickButton" id="changeAddressButton">Change Your Address</button>
+    <button class="clickButton" id="changeAddressButton">Change Address</button>
   </div>
 </script>
 
@@ -249,6 +249,7 @@
 
 <script type="text/template" id='MenuViewTemplate'>
   <div class="container">
+    <div class="menu-container">
         <h1>Menu List View</h1>
         <h3>Store Name: <%%= name %></h3>
         <h3>Address: <%%= address %></h3>
@@ -256,8 +257,9 @@
         <p>Total Price: $<span id='menu-total-price'>0.00</span></p>
 
         <ul id='items-list'></ul>
-        <button class='clickButton' id='submit-order-btn'>Submit</button>
-        <button class='clickButton' id='cancel-order-btn'>Cancel</button>
+        <button class='orderClickButton' id='submit-order-btn'>Submit</button>
+        <button class='orderClickButton' id='cancel-order-btn'>Cancel</button>
+      </div>
   </div>
 
 </script>
@@ -268,9 +270,9 @@
         <p>Name: <%%= name %></p>
         <p>Price: $<%%= price %></p>
         <p>Description: <%%= description %></p>
-        <button class='clickButton' class='change-qty' id='-<%%= id %>'>-</button>
+        <button class='quantity-button' class='change-qty' id='-<%%= id %>'>-</button>
         <box class='item-qty' id='qty<%%= id %>'>0</box>
-        <button class='clickButton' class='change-qty' id='+<%%= id %>'>+</button>
+        <button class='quantity-button' class='change-qty' id='+<%%= id %>'>+</button>
         <p>Total Price: $<span id='<%%= id %>-total-price'>0.00</span></p>
         <ul id='item-submenu-<%%= id %>'></ul>
     </li>
