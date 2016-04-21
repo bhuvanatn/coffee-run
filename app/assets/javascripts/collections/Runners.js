@@ -1,8 +1,8 @@
-// var app = app || {};
-//
-// app.Runners = Backbone.Collection.extend({
-//   model: app.Store,
-//   url: "/stores"
-//
-//
-// });
+var app = app || {};
+
+app.Runners = Backbone.Collection.extend({
+  model: app.Store,
+  url: "/runners"
+
+
+});

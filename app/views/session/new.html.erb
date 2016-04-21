@@ -1,4 +1,5 @@
 <div class="container">
+  <div class="login-form">
     <%= form_tag(login_path, :class => "loginClass") do %>
     <p class = "space">
         <%= label_tag :email %>
@@ -12,4 +13,5 @@
         <%= submit_tag "Login", :class => "btn btn-info" %>
     </p>
     <% end %>
+  </div>
 </div>

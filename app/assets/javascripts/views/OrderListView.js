@@ -8,7 +8,9 @@ app.OrderListView = Backbone.View.extend({
   'click .job-btn': 'takeJob',
   'click .customer-view-btn': 'viewOrder',
   'click .pickup-btn': 'confirmPickUp',
-  'click .buttonJobDetails': 'viewOrder'
+  'click .order-btn': 'showOrderDetails',
+  'click .buttonJobDetails': 'viewOrder',
+  'click .ready-pickup-btn': 'orderMade'
   },
 
 
@@ -26,15 +28,31 @@ app.OrderListView = Backbone.View.extend({
           $('#main').empty();
 
           //add list view button
-          var toggleListDiv = document.createElement('button');
-               toggleListDiv.setAttribute('id', 'toggleListBtn');
-               toggleListDiv.setAttribute('class', 'toggleBtn');
+          var toggleListDiv = $('<button/>');
+               toggleListDiv.attr('id', 'toggleListBtn');
+               toggleListDiv.attr({
+                 'class':'toggleBtn',
+                 'class':'clickButton',
+               }).css({
+                 'marginTop': '10px',
+                 'marginLeft': '-180px',
+                 'marginBottom': '21px'
+               });
                $('#main').append(toggleListDiv);
                $('#toggleListBtn').html('List View');
+
+
           //add map view button
-          var toggleMapDiv = document.createElement('button');
-              toggleMapDiv.setAttribute('id', 'toggleMapBtn');
-              toggleMapDiv.setAttribute('class', 'toggleBtn');
+          var toggleMapDiv = $('<button/>');
+              toggleMapDiv.attr('id', 'toggleMapBtn');
+              toggleMapDiv.attr({
+                'class':'toggleBtn',
+                'class':'clickButton',
+              }).css({
+                'marginTop': '10px',
+                'marginLeft': '20px',
+                'marginBottom': '21px'
+              });
               $('#main').append(toggleMapDiv);
               $('#toggleMapBtn').html('Map View');
             //add list view div
@@ -137,10 +155,11 @@ app.OrderListView = Backbone.View.extend({
       },
       viewOrder: function(e) {
         var orderID = parseInt($(e.target).parent().attr('id'));
-          var x = app.router.navigate('order/' + orderID, true);
-          console.log(x);
+        app.router.navigate('order/' + orderID, true);
+
       },
       takeJob: function(e) {
+        window.clearInterval(app.ordersPolling);
         this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
@@ -170,7 +189,6 @@ app.OrderListView = Backbone.View.extend({
       },
 
       confirmPickUp: function(e) {
-        this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
 
@@ -189,25 +207,33 @@ app.OrderListView = Backbone.View.extend({
           }
       },
 
-      showOrderDetails: function(){
-        $(".buttonJobDetails").on('click', function(){
-          $(this).closest('div').children('.showJobDetails').toggle();
-        });
+
+      showOrderDetails: function(e){
+          $(e.this).parent('div').children('.showJobDetails').toggle();
       },
+
 
 
     polling: function () {
       if (!app.ordersPolling) {
-        app.ordersPolling = setInterval(function(){
+        app.ordersPolling = window.setInterval(function(){
           $.get('/orders_information').done( function (data){
             app.orders = new app.Orders(data.orders);
             app.stores = new app.Stores(data.stores);
             app.customers = new app.Customers(data.customers);
             app.lineitems = new app.LineItems(data.line_items);
             app.items = new app.Items(data.items);
-            app.view.render();
+            app.view.render();  //do we need this??
           });
         }, 15000);
       }
+    },
+
+    orderMade: function(e) {
+      var orderId = e.currentTarget.id.slice(7);
+      $('#' + orderId).remove();
+      app.order = app.orders.findWhere({id: parseInt(e.currentTarget.id.slice(7))});
+      app.order.attributes.status = 'made';
+      app.order.save();
     }
 });

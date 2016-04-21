@@ -7,7 +7,7 @@ app.getCurrentUser = function (view) {
       view.render();
     });
   }
-}
+};
 
 app.showPrice = function (price) {
   priceInCents = Math.round(price*100);
@@ -18,11 +18,11 @@ app.showPrice = function (price) {
     centsString = 0 + centsString;
   }
   return priceDollars +'.'+ centsString;
-}
+};
 
 var saveLocation = function () {
   app.currentUser.save();
-}
+};
 
 app.saveLocation = _.throttle(saveLocation, 15000);
 

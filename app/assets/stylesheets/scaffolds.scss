@@ -1,9 +1,18 @@
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  color: #4CAF50;
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
   line-height: 18px;
+  background-color: white;
+  background-position: center;
+  background-attachment:fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+button {
+  outline: none;
 }
 
 p, ol, ul, td {
@@ -20,15 +29,6 @@ pre {
 
 a {
   color: #000;
-
-  &:visited {
-    color: #666;
-  }
-
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
 }
 
 div {

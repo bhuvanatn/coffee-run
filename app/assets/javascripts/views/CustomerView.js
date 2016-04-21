@@ -34,12 +34,20 @@ app.CustomerView = Backbone.View.extend({
       this.$el.find('#nav-buttons').html(resetTypeButton);
       var button = $('<button>')
         .text('Change Location')
-        .attr('id', 'change-location-btn');
+        .attr({
+          'id':'change-location-btn',
+          'class': 'clickButton'
+        });
       this.$el.find('#nav-buttons').append(button);
 
       button = $('<button>')
-        .text('Find Cafes in my Area')
-        .attr('id', 'show-cafes-btn');
+        .text('Cafes Near Me')
+        .attr({
+          'id': 'show-cafes-btn',
+          'class': 'clickButton'
+        }).css({
+          'marginLeft': '3px'
+        });
       this.$el.find('#nav-buttons').append(button);
     } else {
       this.$el.find('#map').addClass("hide");
@@ -81,7 +89,7 @@ app.CustomerView = Backbone.View.extend({
     app.currentUser.set({address: $('#address-input')[0].value});
     this.$el.find('#message').append($('<p/>').text("Please wait."))
     app.currentUser.save().done( function() {
-      view.render();
+      this.render();
     });
   },
 
