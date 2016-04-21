@@ -34,6 +34,7 @@ app.AppRouter = Backbone.Router.extend({
   },
 
   showStoreList: function () {
+    var storeListView = new app.StoreListView();
     storeListView.render();
   },
 
@@ -48,18 +49,22 @@ app.AppRouter = Backbone.Router.extend({
   },
 
   showOrderList: function () {
+    app.orders = new app.Orders();
+    app.stores = new app.Stores();
+    app.customers = new app.Customer();
+    app.lineitems = new app.LineItem();
+    app.items = new app.LineItem  ();
 
-    $.get('/orders_information').done( function (data){
-      app.orders = new app.Orders(data.orders);
-      app.stores = new app.Stores(data.stores);
-      app.customers = new app.Customers(data.customers);
-      app.lineitems = new app.LineItems(data.lineitems);
-      app.items = new app.Items(data.items);
-
-      var orderListView = new app.OrderListView();
-      orderListView.render();
+    app.orders.fetch().done( function () {
+      app.stores.fetch().done( function () {
+        app.customers.fetch().done( function() {
+          app.lineitems.fetch().done( function() {
+            var orderListView = new app.OrderListView();
+            orderListView.render();
+          });
+        });
+      });
     });
-
   },
 
   showOrder: function (id) {
