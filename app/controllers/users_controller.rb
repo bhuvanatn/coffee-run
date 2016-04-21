@@ -7,6 +7,24 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       @user = @current_user
+
+      ### get the stores near the customer
+      @range = 1
+      if @user.type == 'Customer'
+        @store_locations = Store.near([@user.latitude,@user.longitude], @range, :units => :km )
+      end
+
+      ### get the stores with orders near the runner
+      if @user.type == 'Runner'
+          @order = []  ##empty array to add stores
+          Order.each do |order|  ## loop to get all stores with a pending order
+              if order.status == 'pending'
+                  @order.push(Store.find( 'id' => order.store_id))
+              end
+          end   ## fitler the stores with pending order by distance from runner
+          @order_locations = @order.near([@user.latitude,@user.longitude], @range, :units => :km )
+      end
+
       format.html {}
       format.json { render :json => User.find(params[:id]) }
     end
