@@ -70,8 +70,7 @@ app.AppRouter = Backbone.Router.extend({
     },
 
     showOrder: function(id) {
-      id = parseInt(id)
-
+      id = parseInt(id);
       $.get('/order_associations/'+id).done (function (data) {
         app.order = new app.Order(data.order);
         app.store = new app.Store(data.store);
@@ -82,33 +81,6 @@ app.AppRouter = Backbone.Router.extend({
         orderView.render();
       });
     },
-
-    // showOrder: function(id) {
-    //     app.orders = new app.Orders({
-    //         id: id
-    //     });
-    //     app.stores = new app.Stores();
-    //     app.customers = new app.Customers();
-    //     app.order = app.order || {};
-    //     app.order.id = id;
-    //     app.lineitems = new app.LineItems();
-    //
-    //         app.customers.fetch().done(function() {
-    //             app.lineitems.fetch().done(function() {
-    //               app.stores.fetch().done(function() {
-    //                 app.orders.fetch().done(function() {
-    //                     var orderView = new app.OrderView({
-    //                         model: app.orders,
-    //                         getId: app.orders.get(id)
-    //                     });
-    //                     orderView.render();
-    //                 }).error(function() {
-    //                     console.log('wtf');
-    //                 });
-    //             });
-    //         });
-    //     });
-    // },
 
     showMap: function() {
         var mapView = new app.OrderLiveMapView();

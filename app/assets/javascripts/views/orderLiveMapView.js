@@ -14,9 +14,17 @@ app.OrderLiveMapView = Backbone.View.extend({
 
         $('#main').empty();
 
+
         var mapDiv = document.createElement('div');
          mapDiv.setAttribute('id', 'map');
          $('#main').append(mapDiv);
+
+         var orderDiv = document.createElement('div');
+          orderDiv.setAttribute('id', 'order');
+          $('#main').append(orderDiv);
+
+          console.log(app.order);
+
 
          ////should get access to direction features
          var directionsService = new google.maps.DirectionsService();

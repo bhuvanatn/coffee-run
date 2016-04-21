@@ -2,6 +2,9 @@ var app = app || {};
 
 app.OrderView = Backbone.View.extend({
     el: '#main',
+    events: {
+        'click .job-btn': 'takeJob'
+    },
     // Customer
     //
     // 1. Store list (#stores)
@@ -19,6 +22,7 @@ app.OrderView = Backbone.View.extend({
     // },
     render: function() {
         app.getCurrentUser(this);
+        var userType = app.currentUser.attributes.type;
 
         // var id = this.getId.get('id'); //gets order id
 
@@ -32,7 +36,7 @@ app.OrderView = Backbone.View.extend({
 
         // var line_item = app.lineitems.get()
 
-        orderViewTemplate = $('#OrderViewTemplate').html();
+        orderViewTemplate = $('#' + userType + 'OrderViewTemplate').html();
         var orderViewHTML = _.template(orderViewTemplate);
 
         var orderElement = orderViewHTML({
@@ -41,8 +45,10 @@ app.OrderView = Backbone.View.extend({
           CustomerName: customerName,
           CustomerAddress: customerAddress,
           TotalPrice: total_price,
-          Status: app.order.get("status")
+          Status: app.order.get("status"),
+          id: app.order.get('id')
         });
+
         this.$el.html(orderElement);
 
         if (app.currentUser.attributes.type === 'Customer') {
@@ -67,5 +73,37 @@ app.OrderView = Backbone.View.extend({
                 });
             }, 10000);
         }
+    },
+    takeJob: function(e) {
+          app.getCurrentUser(this);
+          var orderID = parseInt(e.target.id.slice(3));
+          var currentUserId = app.currentUser.id;
+            for (var i = 0; i < app.orders.length; i++){
+              if (app.orders.models[i].attributes.id === orderID){
+                if (app.orders.models[i].attributes.status === 'pending'){
+
+                  var confirmButton = confirm('Are you sure?');
+                  if (confirmButton === true){
+                    app.orders.models[i].attributes.status = 'confirmed';
+                    app.orders.models[i].attributes.runner_id = currentUserId;
+                    app.order = app.orders.models[i];
+
+                    app.order.save().done(function(){
+                    });
+                    var liveMap = new app.OrderLiveMapView();
+                    // var order = app.orders.findWhere({id: orderID});
+                    liveMap.render(app.customers.findWhere({id: app.order.attributes.customer_id}).attributes,
+                                    app.currentUser.attributes,
+                                    app.stores.findWhere({id: app.order.attributes.store_id}).attributes
+                                  );
+
+
+
+                  } else {
+                    break;
+                  }
+              }
+            }
+         }
     }
 });

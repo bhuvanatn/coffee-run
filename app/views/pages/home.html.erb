@@ -109,7 +109,30 @@
 
 </script>
 
-<script type="text/template" id='OrderViewTemplate'>
+<script type="text/template" id='CustomerOrderViewTemplate'>
+    <p> Store Name: <%%= StoreName %></p>
+    <p>Store Address: <%%= StoreAddress %></p>
+    <p>Status: <%%= Status %></p>
+    <p>Customer Name: <%%= CustomerName %></p>
+    <p>Customer Address:  <%%= CustomerAddress  %></p>
+
+    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
+</script>
+
+<script type="text/template" id='RunnerOrderViewTemplate'>
+    <p> Store Name: <%%= StoreName %></p>
+    <p>Store Address: <%%= StoreAddress %></p>
+    <p>Status: <%%= Status %></p>
+    <p>Customer Name: <%%= CustomerName %></p>
+    <p>Customer Address:  <%%= CustomerAddress  %></p>
+
+    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
+
+    <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
+
+</script>
+
+<script type="text/template" id='StoreOrderViewTemplate'>
     <p> Store Name: <%%= StoreName %></p>
     <p>Store Address: <%%= StoreAddress %></p>
     <p>Status: <%%= Status %></p>
@@ -130,7 +153,7 @@
     <p>Runner ID: <%%= runner_id %></p>
     <p>Customer Name: <%%= customerName %></p>
     <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
     <button class="pickup-btn">Ready for Pick Up</button>
   </div>
 </script>
@@ -141,7 +164,7 @@
     <p>Store ID: <%%= storeName %></p>
     <p>Customer ID: <%%= customerName %></p>
     <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
 
     <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
     <button class='order-btn buttonJobDetails' id='order<%%= id %>'>Show Job Details</button>
@@ -159,7 +182,7 @@
     <p>Store ID: <%%= storeName %></p>
     <p>Customer ID: <%%= customerName %></p>
     <p><%%= allLines %></p>
-    <p>Total Price: $<%%= total_price %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
     <button class="customer-view-btn">Check My Order</button>
   </div>
 </script>

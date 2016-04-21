@@ -135,8 +135,8 @@ app.OrderListView = Backbone.View.extend({
       },
       viewOrder: function(e) {
         var orderID = parseInt($(e.target).parent().attr('id'));
-          var x = app.router.navigate('order/' + orderID, true);
-          console.log(x);
+        app.router.navigate('order/' + orderID, true);
+
       },
       takeJob: function(e) {
         this.showOrderDetails();
