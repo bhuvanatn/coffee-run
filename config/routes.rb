@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   delete '/login' => 'session#destroy'
 
   get '/stores' => 'users#stores'
+  get '/runners' => 'users#runners'
   get '/customers' => 'users#customers'
   get '/store/:id' => 'users#store'
   get '/storeitems/:id' => 'items#store'

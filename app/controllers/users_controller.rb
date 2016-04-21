@@ -58,6 +58,10 @@ class UsersController < ApplicationController
     render :json => @customers
   end
 
+  def runners
+    @runners = User.where :type => "Runner"
+    render :json => @customers
+  end
 
   def stores_within
     @user = @current_user

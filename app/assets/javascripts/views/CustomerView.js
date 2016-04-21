@@ -15,6 +15,7 @@ app.CustomerView = Backbone.View.extend({
   },
 
   render: function() {
+    var view = this;
     app.getCurrentUser(this);
 
     var locationDiscussionTemplate = $('#locationDiscussionTemplate').text();
@@ -84,7 +85,9 @@ app.CustomerView = Backbone.View.extend({
   },
 
   setAddress: function(){
+    console.log("blah");
     app.currentUser.set({address: $('#address-input')[0].value});
+    this.$el.find('#message').append($('<p/>').text("Please wait."))
     app.currentUser.save().done( function() {
       this.render();
     });
@@ -93,7 +96,6 @@ app.CustomerView = Backbone.View.extend({
   geolocateCustomer: function () {
     this.$el.find('#geoMessage').html("<p>Please wait</p>");
 
-    var view = this;
     if (!navigator.geolocation) {
       alert("Sorry, your device doesn't support finding your address automatically.");
       setAddressForm(true);

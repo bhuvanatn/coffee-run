@@ -155,8 +155,33 @@
 
 </script>
 
+<<<<<<< HEAD
 <script type="text/template" id='OrderViewTemplate'>
   <div class="container">
+=======
+<script type="text/template" id='CustomerOrderViewTemplate'>
+    <p> Store Name: <%%= StoreName %></p>
+    <p>Store Address: <%%= StoreAddress %></p>
+    <p>Status: <%%= Status %></p>
+    <p>Customer Name: <%%= CustomerName %></p>
+    <p>Customer Address:  <%%= CustomerAddress  %></p>
+
+    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
+</script>
+
+<script type="text/template" id='RunnerOrderViewTemplate'>
+    <p> Store Name: <%%= StoreName %></p>
+    <p>Store Address: <%%= StoreAddress %></p>
+    <p>Status: <%%= Status %></p>
+    <p>Customer Name: <%%= CustomerName %></p>
+    <p>Customer Address:  <%%= CustomerAddress  %></p>
+
+    <p> Total Price: $<%%= app.showPrice(TotalPrice) %></p>
+
+</script>
+
+<script type="text/template" id='StoreOrderViewTemplate'>
+>>>>>>> 32d90261fa88822413cb07c72fcb95d2ba409af1
     <p> Store Name: <%%= StoreName %></p>
     <p>Store Address: <%%= StoreAddress %></p>
     <p>Status: <%%= Status %></p>
@@ -173,6 +198,7 @@
 </script>
 
 <script type="text/template" id='StoreOrderListViewTemplate'>
+<<<<<<< HEAD
   <div class="map-container">
     <div class="order-view-list-item" id="<%%= id %>">
       <p>Store Name: <span class="order-item-value"><%%= storeName %></span></p>
@@ -185,10 +211,21 @@
         <button class="clickButton" class="pickup-btn">Ready for Pick Up</button>
       </div>
     </div>
+=======
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Store Name: <%%= storeName %></p>
+      <p>Status: <%%= status %></p>
+    <p>Runner ID: <%%= runner_id %></p>
+    <p>Customer Name: <%%= customerName %></p>
+    <p><%%= allLines %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
+    <button class="ready-pickup-btn" id='pickup-<%%= id %>'>Ready for Pick Up</button>
+>>>>>>> 32d90261fa88822413cb07c72fcb95d2ba409af1
   </div>
 </script>
 
 <script type="text/template" id='RunnerOrderListViewTemplate'>
+<<<<<<< HEAD
   <div class="container">
     <div class="order-view-list-item" id="<%%= id %>">
       <p>Status: <span class="order-item-value rb"><%%= status %></span></p>
@@ -204,11 +241,26 @@
         <p> Store Name: <%%= storeName %></p>
         <p>Customer Name: <%%= customerName %></p>
       </div>
+=======
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Status: <%%= status %></p>
+    <p>Store ID: <%%= storeName %></p>
+    <p>Customer ID: <%%= customerName %></p>
+    <p><%%= allLines %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
+
+    <button class='job-btn takeJob' id='job<%%= id %>'>Take Job</button>
+    <button class='order-btn buttonJobDetails' id='order<%%= id %>'>Show Job Details</button>
+
+    <div class="showJobDetails">
+
+>>>>>>> 32d90261fa88822413cb07c72fcb95d2ba409af1
     </div>
   </div>
 </script>
 
 <script type="text/template" id='CustomerOrderListViewTemplate'>
+<<<<<<< HEAD
   <div class="container">
     <div class="order-view-list-item" id="<%%= id %>">
       <p>Status: <%%= status %></p>
@@ -218,6 +270,15 @@
       <p>Total Price: $<%%= total_price %></p>
       <button class="customer-view-btn clickButton">Check My Order</button>
     </div>
+=======
+  <div class="order-view-list-item" id="<%%= id %>">
+    <p>Status: <%%= status %></p>
+    <p>Store ID: <%%= storeName %></p>
+    <p>Customer ID: <%%= customerName %></p>
+    <p><%%= allLines %></p>
+    <p>Total Price: $<%%= app.showPrice(total_price) %></p>
+    <button class="customer-view-btn">Check My Order</button>
+>>>>>>> 32d90261fa88822413cb07c72fcb95d2ba409af1
   </div>
 </script>
 

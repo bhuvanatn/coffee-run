@@ -14,9 +14,18 @@ app.OrderLiveMapView = Backbone.View.extend({
 
         $('#main').empty();
 
+
         var mapDiv = document.createElement('div');
          mapDiv.setAttribute('id', 'map');
          $('#main').append(mapDiv);
+
+        //  var orderDiv = document.createElement('div');
+        //   orderDiv.setAttribute('id', 'order');
+        //   $('#main').append(orderDiv);
+
+          var orderView = new app.OrderView();
+          orderView.render();
+
 
          ////should get access to direction features
          var directionsService = new google.maps.DirectionsService();
@@ -93,6 +102,12 @@ app.OrderLiveMapView = Backbone.View.extend({
                     locationNum += 1;
                     runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
                     addMarker(runnerLiveLocation[0], iconsURL.live);
+                    app.orders.fetch().done(function(){
+                        if (app.order.attributes.status === 'delivered') {
+                            window.clearInterval(getRunnerLocation);
+                            app.router.navigate('', true);
+                        }
+                    });
                 });
             };
 

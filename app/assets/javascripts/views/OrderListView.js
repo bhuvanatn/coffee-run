@@ -8,8 +8,13 @@ app.OrderListView = Backbone.View.extend({
   'click .job-btn': 'takeJob',
   'click .customer-view-btn': 'viewOrder',
   'click .pickup-btn': 'confirmPickUp',
+<<<<<<< HEAD
   'click .order-btn': 'showOrderDetails',
   'click .buttonJobDetails': 'viewOrder'
+=======
+  'click .buttonJobDetails': 'viewOrder',
+  'click .ready-pickup-btn': 'orderMade'
+>>>>>>> 32d90261fa88822413cb07c72fcb95d2ba409af1
   },
 
 
@@ -39,6 +44,7 @@ app.OrderListView = Backbone.View.extend({
                });
                $('#main').append(toggleListDiv);
                $('#toggleListBtn').html('List View');
+
 
           //add map view button
           var toggleMapDiv = $('<button/>');
@@ -139,6 +145,8 @@ app.OrderListView = Backbone.View.extend({
             }
         }
 
+      this.polling();
+
       },
 
       showListView: function() {
@@ -151,10 +159,12 @@ app.OrderListView = Backbone.View.extend({
       },
       viewOrder: function(e) {
         var orderID = parseInt($(e.target).parent().attr('id'));
-          var x = app.router.navigate('order/' + orderID, true);
-          console.log(x);
+        app.router.navigate('order/' + orderID, true);
+
       },
       takeJob: function(e) {
+        window.clearInterval(app.ordersPolling);
+        this.showOrderDetails();
           var orderID = parseInt($(e.target).parent().attr('id'));
           var currentUserId = app.currentUser.attributes.id;
 
@@ -207,4 +217,27 @@ app.OrderListView = Backbone.View.extend({
       }
 
 
-  });
+
+    polling: function () {
+      if (!app.ordersPolling) {
+        app.ordersPolling = window.setInterval(function(){
+          $.get('/orders_information').done( function (data){
+            app.orders = new app.Orders(data.orders);
+            app.stores = new app.Stores(data.stores);
+            app.customers = new app.Customers(data.customers);
+            app.lineitems = new app.LineItems(data.line_items);
+            app.items = new app.Items(data.items);
+            app.view.render();  //do we need this??
+          });
+        }, 15000);
+      }
+    },
+
+    orderMade: function(e) {
+      var orderId = e.currentTarget.id.slice(7);
+      $('#' + orderId).remove();
+      app.order = app.orders.findWhere({id: parseInt(e.currentTarget.id.slice(7))});
+      app.order.attributes.status = 'made';
+      app.order.save();
+    }
+});
