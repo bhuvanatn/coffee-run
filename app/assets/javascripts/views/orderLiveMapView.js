@@ -5,6 +5,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
     render: function(customerAttributes, runnerAttributes, storeAttributes) {
         app.getCurrentUser(this);
+        console.log('here');
 
         // set data for map
         //this is test data
@@ -24,7 +25,17 @@ app.OrderLiveMapView = Backbone.View.extend({
         //   $('#main').append(orderDiv);
 
           var orderView = new app.OrderView();
-          orderView.render();
+          $.get('/order_associations/'+ app.order.id).done (function (data) {
+              app.order = new app.Order(data.order);
+              app.store = new app.Store(data.store);
+              app.customer = new app.Customer(data.customer);
+              app.orderlineitems = new app.LineItems(data.lineItems);
+              app.orderitems = new app.Items(data.items);
+              var orderView = new app.OrderView();
+              orderView.render();
+          });
+
+
 
 
          ////should get access to direction features

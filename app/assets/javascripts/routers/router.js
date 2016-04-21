@@ -72,6 +72,7 @@ app.AppRouter = Backbone.Router.extend({
     showOrder: function(id) {
       id = parseInt(id);
       $.get('/order_associations/'+id).done (function (data) {
+        console.log(data);
         app.order = new app.Order(data.order);
         app.store = new app.Store(data.store);
         app.customer = new app.Customer(data.customer);
