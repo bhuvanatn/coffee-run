@@ -27,7 +27,7 @@ app.RunnerView = Backbone.View.extend({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           });
-          app.saveLocation();  
+          app.saveLocation();
         },
         null,
         {
@@ -36,7 +36,6 @@ app.RunnerView = Backbone.View.extend({
           timeout: 27000
         });
         var mapView = new app.MapView();
-        console.log(app.currentUser.attributes);
         mapView.render(app.currentUser.attributes);
         app.currentUser.save();
         view.$el.find('#nav-buttons')
@@ -57,7 +56,6 @@ app.RunnerView = Backbone.View.extend({
   },
 
   showOrders: function () {
-    console.log("wat")
     app.router.navigate('orderlist', true);
   },
 

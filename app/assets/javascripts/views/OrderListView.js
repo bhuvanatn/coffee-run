@@ -107,8 +107,6 @@ app.OrderListView = Backbone.View.extend({
             }
             order.allLines = lines;
 
-
-
             var orderElement = orderViewHTML(order);
             if ( userType === 'Runner' && app.orders.models[i].attributes.runner_id === null){
                 $('#list-view').append(orderElement);

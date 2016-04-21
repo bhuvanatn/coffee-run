@@ -4,4 +4,5 @@ app.Customers = Backbone.Collection.extend({
   url: '/customers',
   model: app.Customer
 
+
 });

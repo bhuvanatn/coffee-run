@@ -71,7 +71,7 @@ class OrdersController < ApplicationController
       @stores.each do |s|
         @orders += s.orders
       end
-      @orders = @orders.select {|o| o.status == "pending"}
+      @orders = @orders.select {|o| o[:status] == "pending"}
     end
 
     @line_items = @orders.map {|o| o.line_items}.flatten

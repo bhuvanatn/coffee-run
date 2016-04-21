@@ -8,12 +8,12 @@ app.StoreView = Backbone.View.extend({
     'click #resetTypeButton': 'resetType',
     'click #menuButton': 'showMenu',
     'click #changeAddressButton': 'changeAddress',
-    'click #address-btn': 'setAddress'
+    'click #address-btn': 'setAddress',
+    'click #viewOrdersButton': 'viewOrders'
   },
 
   render: function() {
     app.getCurrentUser(this);
-    console.log(app.currentUser);
 
     var locationDiscussionTemplate = $('#locationDiscussionTemplate').text();
     this.$el.html(locationDiscussionTemplate);
@@ -24,6 +24,7 @@ app.StoreView = Backbone.View.extend({
     var resetTypeButton = $('#resetTypeButtonTemplate').html();
     var menuButton = $('#menuButtonTemplate').html();
     var changeAddressButton = $('#changeAddressButtonTemplate').html();
+    var viewOrdersButton = $('#viewOrdersButtonTemplate').html();
 
     if (app.currentUser.get('longitude')) {
       var mapView = new app.MapView();
@@ -31,7 +32,8 @@ app.StoreView = Backbone.View.extend({
       this.$el.find('#nav-buttons')
         .html(resetTypeButton)
         .append(changeAddressButton)
-        .append(menuButton);
+        .append(menuButton)
+        .append(viewOrdersButton);
     } else {
       this.$el.find('#map').addClass("hide");
       var addressNeedMessage = $('#storeaddressNeed').html();
@@ -66,5 +68,8 @@ app.StoreView = Backbone.View.extend({
     app.currentUser.set({type: null});
     app.currentUser.save();
     app.router.navigate('', true);
+  },
+  viewOrders: function () {
+    app.router.navigate('orderlist', true);
   }
 });
