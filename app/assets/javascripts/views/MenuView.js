@@ -18,7 +18,7 @@ app.MenuView = Backbone.View.extend({
         var menuViewHTML = _.template(menuViewTemplate);
         this.$el.html(menuViewHTML(store));
 
-        app.order = new app.Order({store_id: store.id});
+        app.order = new app.Order({store_id: store.id, customer_id: app.currentUser.id});
 
         app.items = new app.Items();
         app.items.fetch().done( function() {
@@ -94,9 +94,14 @@ app.MenuView = Backbone.View.extend({
                 app.line_items.models[i].save();
             }
             app.order.attributes.total_price = orderTotalPrice;
-            app.order.save();
-        });
-    },
+            app.order.attributes.status = 'pending';
+
+            app.order.save().done(function(){
+            });
+            app.router.navigate('order/' + app.order.id, true);
+            });
+        },
+
     cancelOrder: function() {
         app.order = undefined;
         app.router.navigate('');
