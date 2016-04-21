@@ -115,8 +115,9 @@ app.OrderView = Backbone.View.extend({
 
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
-                    app.orders.models[i].attributes.status = 'confirmed';
-                    app.orders.models[i].attributes.runner_id = currentUserId;
+                    app.orders.models[i].set({status: 'confirmed'});
+                    app.orders.models[i].set({runner_id: app.currentUser.id});
+                    console.log(app.orders.models[i]);
                     app.order = app.orders.models[i];
 
                     app.order.save().done(function(){
