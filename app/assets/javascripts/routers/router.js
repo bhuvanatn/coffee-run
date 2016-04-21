@@ -60,7 +60,7 @@ app.AppRouter = Backbone.Router.extend({
         app.orders = new app.Orders(data.orders);
         app.stores = new app.Stores(data.stores);
         app.customers = new app.Customers(data.customers);
-        app.lineitems = new app.LineItems(data.lineitems);
+        app.lineitems = new app.LineItems(data.line_items);
         app.items = new app.Items(data.items);
 
        var orderListView = new app.OrderListView();
@@ -70,31 +70,69 @@ app.AppRouter = Backbone.Router.extend({
     },
 
     showOrder: function(id) {
-        app.orders = new app.Orders({
-            id: id
-        });
-        app.stores = new app.Stores();
-        app.customers = new app.Customers();
-        app.order = app.order || {};
-        app.order.id = id;
-        app.lineitems = new app.LineItems();
+        // if (app.currentUser === 'Customer') {
+            id = parseInt(id);
+            $.get('/orders_information').done (function (data) {
+              console.log(data);
+              app.orders = new app.Orders(data.orders);
+              app.stores = new app.Stores(data.stores);
+              app.customers = new app.Customers(data.customers);
+              app.lineitems = new app.LineItems(data.line_items);
+              app.items = new app.Items(data.items);
 
-            app.customers.fetch().done(function() {
-                app.lineitems.fetch().done(function() {
-                  app.stores.fetch().done(function() {
-                    app.orders.fetch().done(function() {
-                        var orderView = new app.OrderView({
-                            model: app.orders,
-                            getId: app.orders.get(id)
-                        });
-                        orderView.render();
-                    }).error(function() {
-                        console.log('wtf');
-                    });
-                });
+              app.order = new app.Order(app.orders.findWhere({'id': id}).attributes);
+              app.store = new app.Store(app.stores.findWhere({'id': app.order.attributes.store_id}).attributes);
+              app.customer = new app.Customer(app.customers.findWhere({'id': app.order.attributes.customer_id}).attributes);
+              app.orderlineitems = new app.LineItems(app.lineitems.where({'order_id': id}));
+              app.orderitems = new app.Items();
+              for (var i = 0; i < app.orderlineitems.length; i++) {
+                  app.orderitems.push(app.items.findWhere({'id': app.orderlineitems.models[i].attributes.item_id}));
+              }
+
+              var orderView = new app.OrderView();
+              orderView.render();
             });
-        });
+        // }
+        // else {
+        //       app.order = new app.Order(app.orders.findWhere({'id': id}));
+        //       app.store = new app.Store(app.stores.findWhere({'id': app.order.store_id}));
+        //       app.customer = new app.Customer(app.customers.findWhere({'id': app.order.customer_id}));
+        //       app.orderlineitems = new app.LineItems(app.lineitems.where({'id': id}));
+        //       app.orderitems = new app.Items();
+        //       for (var i = 0; i < orderlineitems.length; i++) {
+        //           app.orderitems += app.items.findWhere({'id': app.orderlineitems[i].item_id});
+        //       }
+        // }
+
+
     },
+
+    // showOrder: function(id) {
+    //     app.orders = new app.Orders({
+    //         id: id
+    //     });
+    //     app.stores = new app.Stores();
+    //     app.customers = new app.Customers();
+    //     app.order = app.order || {};
+    //     app.order.id = id;
+    //     app.lineitems = new app.LineItems();
+    //
+    //         app.customers.fetch().done(function() {
+    //             app.lineitems.fetch().done(function() {
+    //               app.stores.fetch().done(function() {
+    //                 app.orders.fetch().done(function() {
+    //                     var orderView = new app.OrderView({
+    //                         model: app.orders,
+    //                         getId: app.orders.get(id)
+    //                     });
+    //                     orderView.render();
+    //                 }).error(function() {
+    //                     console.log('wtf');
+    //                 });
+    //             });
+    //         });
+    //     });
+    // },
 
     showMap: function() {
         var mapView = new app.OrderLiveMapView();
