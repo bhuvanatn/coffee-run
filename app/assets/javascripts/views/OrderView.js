@@ -95,6 +95,7 @@ app.OrderView = Backbone.View.extend({
                         app.runner = new app.Runner({id: app.order.attributes.runner_id});
                         console.log(app.runner);
                         app.runner.fetch().done(function(){
+                            console.log(app.runner.attributes);
                             var liveMap = new app.OrderLiveMapView();
                             liveMap.render(app.runner.attributes, app.currentUser.attributes, app.store.attributes);
                         });
