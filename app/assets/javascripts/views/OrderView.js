@@ -97,7 +97,7 @@ app.OrderView = Backbone.View.extend({
                         app.runner.fetch().done(function(){
                             console.log(app.runner.attributes);
                             var liveMap = new app.OrderLiveMapView();
-                            liveMap.render(app.runner.attributes, app.currentUser.attributes, app.store.attributes);
+                            liveMap.render(app.currentUser.attributes, app.runner.attributes, app.store.attributes);
                         });
                     }
                 });
