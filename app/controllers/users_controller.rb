@@ -46,8 +46,9 @@ class UsersController < ApplicationController
     @user = @current_user
     @range = 1
     @stores = Store.near([@user.latitude, @user.longitude], @range, :units => :km)
+    render :json => @stores
   end
-  
+
   def store
     @store = User.find params[:id]
     render :json => @store
