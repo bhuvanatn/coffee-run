@@ -5,7 +5,7 @@ app.OrderLiveMapView = Backbone.View.extend({
 
     render: function(customerAttributes, runnerAttributes, storeAttributes) {
         app.getCurrentUser(this);
-        
+
 
         // set data for map
         //this is test data
@@ -111,6 +111,7 @@ app.OrderLiveMapView = Backbone.View.extend({
             var runnerModel = new app.Runner({id: runnerAttributes.id});
             var runnerFetch = function() {
                 runnerModel.fetch().done(function(){
+                    console.log(runnerModel);
                     locationNum += 1;
                     runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
                     if (locationNum % 2 === 0) {
