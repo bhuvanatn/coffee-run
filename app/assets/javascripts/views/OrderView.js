@@ -90,7 +90,7 @@ app.OrderView = Backbone.View.extend({
                 app.orders = new app.Orders(app.order);
                 app.orders.fetch().done(function(){
                     if (app.order.attributes.status === 'confirmed') {
-                        window.clearInterval(app.orderPolling);
+                        // window.clearInterval(app.orderPolling);
                         console.log(app.order);
                         app.runner = new app.Runner({id: app.order.attributes.runner_id});
                         console.log(app.runner);
