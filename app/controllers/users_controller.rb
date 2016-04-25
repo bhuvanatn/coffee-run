@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(@current_user.type.downcase.to_sym).permit(
+    params.require(:user).permit(
       :email,
       :password,
       :password_confirmation,
