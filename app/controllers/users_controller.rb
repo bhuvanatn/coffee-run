@@ -17,15 +17,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    # raise
     user = @current_user
     user.update user_params
-    # respond_to do |format|
-    #   format.html {}
-    #   format.json { render :json }
-    # end
-    redirect_to root_path
-
+    render :json => {}
   end
 
   def index
@@ -48,6 +42,13 @@ class UsersController < ApplicationController
     render :json => @stores
   end
 
+  def stores_within
+    @user = @current_user
+    @range = 1
+    @stores = Store.near([@user.latitude, @user.longitude], @range, :units => :km)
+    render :json => @stores
+  end
+
   def store
     @store = User.find params[:id]
     render :json => @store
@@ -56,19 +57,6 @@ class UsersController < ApplicationController
   def customers
     @customers = User.where :type => "Customer"
     render :json => @customers
-  end
-
-  def runners
-    @runners = User.where :type => "Runner"
-    render :json => @customers
-  end
-
-  def stores_within
-    @user = @current_user
-    ### get the stores near the customer
-    @range = 1
-    @stores = Store.near([@user.latitude,@user.longitude], @range, :units => :km )
-      render :json => @stores
   end
 
   private

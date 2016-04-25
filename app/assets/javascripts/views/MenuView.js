@@ -97,9 +97,11 @@ app.MenuView = Backbone.View.extend({
             app.order.attributes.status = 'pending';
 
             app.order.save().done(function(){
+                $('#main').empty();
+                app.router.navigate('order/' + app.order.id, true);
             });
-            app.router.navigate('order/' + app.order.id, true);
             });
+
         },
 
     cancelOrder: function() {

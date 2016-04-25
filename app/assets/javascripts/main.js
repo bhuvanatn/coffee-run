@@ -21,6 +21,7 @@ app.showPrice = function (price) {
 };
 
 var saveLocation = function () {
+  console.log('saved location');
   app.currentUser.save();
 };
 

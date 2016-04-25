@@ -6,6 +6,7 @@ app.OrderLiveMapView = Backbone.View.extend({
     render: function(customerAttributes, runnerAttributes, storeAttributes) {
         app.getCurrentUser(this);
 
+
         // set data for map
         //this is test data
         //var runnerAttributes = {email: "runner1@ga.co", address: "56 York st Sydney", name: "runner_1", id: 14, balance: "1000.0", latitude: -33.8705876749324, longitude: 151.206173915557};
@@ -24,7 +25,17 @@ app.OrderLiveMapView = Backbone.View.extend({
         //   $('#main').append(orderDiv);
 
           var orderView = new app.OrderView();
-          orderView.render();
+          $.get('/order_associations/'+ app.order.id).done (function (data) {
+              app.order = new app.Order(data.order);
+              app.store = new app.Store(data.store);
+              app.customer = new app.Customer(data.customer);
+              app.orderlineitems = new app.LineItems(data.lineItems);
+              app.orderitems = new app.Items(data.items);
+              var orderView = new app.OrderView();
+              orderView.render();
+          });
+
+
 
 
          ////should get access to direction features
@@ -100,6 +111,7 @@ app.OrderLiveMapView = Backbone.View.extend({
             var runnerModel = new app.Runner({id: runnerAttributes.id});
             var runnerFetch = function() {
                 runnerModel.fetch().done(function(){
+                    console.log(runnerModel);
                     locationNum += 1;
                     runnerLiveLocation.unshift({'num': locationNum, 'longitude': runnerModel.attributes.longitude, 'latitude': runnerModel.attributes.latitude});
                     if (locationNum % 2 === 0) {

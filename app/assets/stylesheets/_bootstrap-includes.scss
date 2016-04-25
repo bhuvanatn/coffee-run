@@ -240,6 +240,33 @@ div#main{
 
 }
 
+#toggleMapBtn {
+  text-transform: none;
+  width: 180px;
+  height: 69px;
+  background: white;
+  border: 1px #fff;
+  box-shadow: 0 6px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 12px 0 rgba(0, 0, 0, 0.12);
+  font-size: 16pt;
+}
+
+#toggleListBtn {
+  text-transform: none;
+  width: 180px;
+  height: 69px;
+  background: white;
+  border: 1px #fff;
+  box-shadow: 0 6px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 12px 0 rgba(0, 0, 0, 0.12);
+  font-size: 16pt;
+  margin: 20px;
+  margin-left: -150px;
+}
+
+.store {
+  padding: 20px;
+  list-style-type: none;
+}
+
 .quantity-button {
   text-transform: none;
   width: 60px;
@@ -300,11 +327,11 @@ div#main{
 }
 
 .homepage-header > h1 {
-  font-size: 60pt;
+  font-size: 2em;
 }
 
 .coffeerun-homepage-slogan{
-  font-size: 120pt;
+  font-size: 2em;
   color: #744C28;
 }
 
