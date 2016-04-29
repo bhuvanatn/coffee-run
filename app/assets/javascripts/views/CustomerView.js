@@ -89,7 +89,7 @@ app.CustomerView = Backbone.View.extend({
     app.currentUser.set({address: $('#address-input')[0].value});
     this.$el.find('#message').append($('<p/>').text("Please wait."))
     app.currentUser.save().done( function() {
-      this.render();
+      view.render();
     });
   },
 
