@@ -28,6 +28,8 @@ app.CustomerView = Backbone.View.extend({
     if (app.currentUser.get('latitude')) {
       this.$el.find('#address-form').html('');
 
+      
+
       var mapView = new app.MapView();
       mapView.render(app.currentUser.attributes);
 

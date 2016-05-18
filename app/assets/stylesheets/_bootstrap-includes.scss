@@ -267,6 +267,19 @@ div#main{
   list-style-type: none;
 }
 
+#orderView {
+
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 5px;
+  border: 1px solid #fff;
+  box-shadow: 0 6px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  border-radius: 4px;
+
+}
+
+
 .quantity-button {
   text-transform: none;
   width: 60px;
