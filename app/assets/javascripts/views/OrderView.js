@@ -91,10 +91,13 @@ app.OrderView = Backbone.View.extend({
                 app.orders.fetch().done(function(){
                     if (app.order.attributes.status === 'confirmed') {
                         window.clearInterval(app.orderPolling);
+                        console.log(app.order);
                         app.runner = new app.Runner({id: app.order.attributes.runner_id});
+                        console.log(app.runner);
                         app.runner.fetch().done(function(){
+                            console.log(app.runner.attributes);
                             var liveMap = new app.OrderLiveMapView();
-                            liveMap.render(app.runner.attributes, app.currentUser.attributes, app.store.attributes);
+                            liveMap.render(app.currentUser.attributes, app.runner.attributes, app.store.attributes);
                         });
                     }
                 });
@@ -110,11 +113,14 @@ app.OrderView = Backbone.View.extend({
             for (var i = 0; i < app.orders.length; i++){
               if (app.orders.models[i].attributes.id === orderID){
                 if (app.orders.models[i].attributes.status === 'pending'){
-
+                    console.log('test');
+                    console.log('1', app.orders.models[i]);
                   var confirmButton = confirm('Are you sure?');
                   if (confirmButton === true){
-                    app.orders.models[i].attributes.status = 'confirmed';
-                    app.orders.models[i].attributes.runner_id = currentUserId;
+                    app.orders.models[i].set({status: 'confirmed'});
+                    console.log('2', app.orders.models[i]);
+                    app.orders.models[i].set({runner_id: app.currentUser.id});
+                    console.log('3', app.orders.models[i]);
                     app.order = app.orders.models[i];
 
                     app.order.save().done(function(){
@@ -126,9 +132,6 @@ app.OrderView = Backbone.View.extend({
                                     app.currentUser.attributes,
                                     app.stores.findWhere({id: app.order.attributes.store_id}).attributes
                                   );
-
-
-
                   } else {
                     break;
                   }

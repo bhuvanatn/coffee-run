@@ -35,6 +35,7 @@ app.AppRouter = Backbone.Router.extend({
 
 
   showStoreList: function () {
+    console.log('showstorelist');
     var storeListView = new app.StoreListView();
     storeListView.render();
   },

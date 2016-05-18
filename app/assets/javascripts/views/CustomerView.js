@@ -15,7 +15,7 @@ app.CustomerView = Backbone.View.extend({
   },
 
   render: function() {
-    var view = this;
+    app.view = this;
     app.getCurrentUser(this);
 
     var locationDiscussionTemplate = $('#locationDiscussionTemplate').text();
@@ -87,11 +87,10 @@ app.CustomerView = Backbone.View.extend({
   },
 
   setAddress: function(){
-    console.log("blah");
     app.currentUser.set({address: $('#address-input')[0].value});
     this.$el.find('#message').append($('<p/>').text("Please wait."))
     app.currentUser.save().done( function() {
-      this.render();
+      app.view.render();
     });
   },
 
@@ -108,9 +107,10 @@ app.CustomerView = Backbone.View.extend({
       app.currentUser.set({longitude: position.coords.longitude});
       console.log(app.currentUser);
       app.currentUser.save();
-      view.render();
+      app.view.render();
     },
     function () { //executes on error
+      alert("Sorry, your device hasn't provided your address. Please input your address manually.");
       setAddressForm(true);
     });
   },

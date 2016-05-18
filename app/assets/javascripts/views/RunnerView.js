@@ -36,9 +36,16 @@ app.RunnerView = Backbone.View.extend({
           enableHighAccuracy: true,
           timeout: 27000
         });
+
+        app.currentUser.set({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+        app.currentUser.save();
+
         var mapView = new app.MapView();
         mapView.render(app.currentUser.attributes);
-        app.currentUser.save();
+
         view.$el.find('#nav-buttons')
           .html(resetTypeButton)
           .append(getOrdersButton);
